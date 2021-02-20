@@ -32,7 +32,7 @@
     "contentHash": "79b0ef2d919dc4b6024f4b34e476f575",
     "dependencies": {
         "@gi-types/gio": "^2.66.9",
-        "@gi-types/gobject": "^2.66.8"
+        "@gi-types/gobject": "^2.66.9"
     },
     "typeScriptVersion": "4.1",
     "gitHead": null

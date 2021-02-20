@@ -13,6 +13,6 @@
     "pub": "lerna publish",
     "pub:package": "lerna publish from-package",
     "generate": "gi-ts generate docs.json",
-    "configure": "XDG_DATA_DIRS=~/jhbuild/install/share/:~/jhbuild/install/share/gnome-shell/:~/jhbuild/install/lib/mutter-8/ gi-ts config --lock"
+    "configure": "XDG_DATA_DIRS=/usr/share/:/home/$USER/jhbuild/install/share/:/home/$USER/jhbuild/install/share/gnome-shell/:/home/$USER/jhbuild/install/lib/mutter-8/ gi-ts config --lock"
   }
 }

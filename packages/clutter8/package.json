@@ -1,11 +1,11 @@
 {
-    "name": "@gi-types/shew",
+    "name": "@gi-types/clutter",
     "publishConfig": {
         "access": "public",
         "tag": "latest"
     },
-    "version": "0.0.2",
-    "description": "TypeScript definitions for Shew",
+    "version": "7.0.6",
+    "description": "TypeScript definitions for Clutter",
     "license": "MIT",
     "contributors": [
         {
@@ -26,15 +26,24 @@
     "repository": {
         "type": "git",
         "url": "https://gitlab.gnome.org/ewlsh/packages.gi.ts.git",
-        "directory": "packages/shew0"
+        "directory": "packages/clutter8"
     },
     "scripts": {},
-    "contentHash": "c858710892fb0ab3aefe48c041dbf168",
+    "contentHash": "7bb9b0277623d5a837dd7000514a34dd",
     "dependencies": {
-        "@gi-types/gdk": "^4.0.0",
+        "@gi-types/atk": "^2.36.7",
+        "@gi-types/cairo": "^1.0.3",
+        "@gi-types/cogl": "^8.0.0",
+        "@gi-types/coglpango": "^8.0.0",
         "@gi-types/gio": "^2.66.9",
+        "@gi-types/glib": "^2.66.10",
         "@gi-types/gobject": "^2.66.9",
-        "@gi-types/gtk": "^4.0.0"
+        "@gi-types/graphene": "^1.0.0",
+        "@gi-types/json": "^1.6.6",
+        "@gi-types/pango": "^1.0.5"
+    },
+    "peerDependencies": {
+        "@gi-types/gl": "*"
     },
     "typeScriptVersion": "4.1",
     "gitHead": null

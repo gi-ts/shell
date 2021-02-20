@@ -31,8 +31,8 @@ export class ExternalWindow extends GObject.Object {
     // Members
 
     get_display(): Gdk.Display;
-    set_parent_of(child_window: Gdk.Window): void;
-    vfunc_set_parent_of(child_window: Gdk.Window): void;
+    set_parent_of(child_surface: Gdk.Surface): void;
+    vfunc_set_parent_of(child_surface: Gdk.Surface): void;
 }
 export module WindowExporter {
     export interface ConstructorProperties extends GObject.Object.ConstructorProperties {

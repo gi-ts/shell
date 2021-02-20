@@ -334,38 +334,23 @@ export class EmbeddedWindow extends Gtk.Window implements Atk.ImplementorIface, 
     // Constructors
 
     static ["new"](): EmbeddedWindow;
-    static ["new"](...args: never[]): never;
 
     // Implemented Members
 
-    add_child(builder: Gtk.Builder, child: GObject.Object, type?: string | null): void;
-    construct_child<T = GObject.Object>(builder: Gtk.Builder, name: string): T;
-    custom_finished(builder: Gtk.Builder, child: GObject.Object | null, tagname: string, data?: any | null): void;
-    custom_tag_end(builder: Gtk.Builder, child: GObject.Object | null, tagname: string, data?: any | null): void;
-    custom_tag_start(
-        builder: Gtk.Builder,
-        child: GObject.Object | null,
-        tagname: string
-    ): [boolean, GLib.MarkupParser, any | null];
-    get_internal_child<T = GObject.Object>(builder: Gtk.Builder, childname: string): T;
-    get_name(): string;
-    parser_finished(builder: Gtk.Builder): void;
-    set_buildable_property(builder: Gtk.Builder, name: string, value: any): void;
-    set_name(name: string): void;
+    get_buildable_id(): string;
     vfunc_add_child(builder: Gtk.Builder, child: GObject.Object, type?: string | null): void;
-    vfunc_construct_child<T = GObject.Object>(builder: Gtk.Builder, name: string): T;
     vfunc_custom_finished(builder: Gtk.Builder, child: GObject.Object | null, tagname: string, data?: any | null): void;
     vfunc_custom_tag_end(builder: Gtk.Builder, child: GObject.Object | null, tagname: string, data?: any | null): void;
     vfunc_custom_tag_start(
         builder: Gtk.Builder,
         child: GObject.Object | null,
         tagname: string
-    ): [boolean, GLib.MarkupParser, any | null];
+    ): [boolean, Gtk.BuildableParser, any | null];
+    vfunc_get_id(): string;
     vfunc_get_internal_child<T = GObject.Object>(builder: Gtk.Builder, childname: string): T;
-    vfunc_get_name(): string;
     vfunc_parser_finished(builder: Gtk.Builder): void;
     vfunc_set_buildable_property(builder: Gtk.Builder, name: string, value: any): void;
-    vfunc_set_name(name: string): void;
+    vfunc_set_id(id: string): void;
 }
 export module GLSLEffect {
     export interface ConstructorProperties extends Clutter.OffscreenEffect.ConstructorProperties {
@@ -908,6 +893,15 @@ export class Screenshot extends GObject.Object {
 
     constructor(properties?: Partial<Screenshot.ConstructorProperties>, ...args: any[]);
     _init(properties?: Partial<Screenshot.ConstructorProperties>, ...args: any[]): void;
+
+    // Signals
+
+    connect(id: string, callback: (...args: any[]) => any): number;
+    connect_after(id: string, callback: (...args: any[]) => any): number;
+    emit(id: string, ...args: any[]): void;
+    connect(signal: "screenshot-taken", callback: (_source: this, object: Meta.Rectangle) => void): number;
+    connect_after(signal: "screenshot-taken", callback: (_source: this, object: Meta.Rectangle) => void): number;
+    emit(signal: "screenshot-taken", object: Meta.Rectangle): void;
 
     // Constructors
 

@@ -1030,11 +1030,11 @@ export class ImageContent extends Clutter.Image implements Clutter.Content, Gio.
     vfunc_invalidate_size(): void;
     vfunc_paint_content(actor: Clutter.Actor, node: Clutter.PaintNode, paint_context: Clutter.PaintContext): void;
     equal(icon2?: Gio.Icon | null): boolean;
-    serialize(): GLib.Variant;
+    serialize(): GLib.Variant | null;
     to_string(): string | null;
     vfunc_equal(icon2?: Gio.Icon | null): boolean;
     vfunc_hash(): number;
-    vfunc_serialize(): GLib.Variant;
+    vfunc_serialize(): GLib.Variant | null;
     load(size: number, cancellable?: Gio.Cancellable | null): [Gio.InputStream, string | null];
     load_async(size: number, cancellable?: Gio.Cancellable | null): Promise<[Gio.InputStream, string | null]>;
     load_async(size: number, cancellable: Gio.Cancellable | null, callback: Gio.AsyncReadyCallback<this> | null): void;
