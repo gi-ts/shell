@@ -1,0 +1,54 @@
+{
+    "name": "@gi-types/meta",
+    "publishConfig": {
+        "access": "public",
+        "tag": "latest"
+    },
+    "version": "3.38.5",
+    "description": "TypeScript definitions for Meta",
+    "license": "MIT",
+    "contributors": [
+        {
+            "name": "Evan Welsh",
+            "url": "https://gitlab.gnome.org/ewlsh/",
+            "githubUsername": "ewlsh"
+        }
+    ],
+    "main": "",
+    "files": [
+        "index.d.ts",
+        "doc.json",
+        "package.json",
+        "README.md",
+        "LICENSE"
+    ],
+    "types": "index.d.ts",
+    "repository": {
+        "type": "git",
+        "url": "https://gitlab.gnome.org/ewlsh/packages.gi.ts.git",
+        "directory": "packages/meta7"
+    },
+    "scripts": {},
+    "contentHash": "8fe25828bac32805f72f433310be6d77",
+    "dependencies": {
+        "@gi-types/atk": "^2.36.7",
+        "@gi-types/cairo": "^1.0.3",
+        "@gi-types/clutter": "^7.0.6",
+        "@gi-types/cogl": "^7.0.3",
+        "@gi-types/coglpango": "^7.0.2",
+        "@gi-types/gdesktopenums": "^3.0.3",
+        "@gi-types/gdk": "^3.24.7",
+        "@gi-types/gio": "^2.66.9",
+        "@gi-types/glib": "^2.66.9",
+        "@gi-types/gobject": "^2.66.8",
+        "@gi-types/gtk": "^3.24.8",
+        "@gi-types/json": "^1.6.5",
+        "@gi-types/pango": "^1.0.5"
+    },
+    "peerDependencies": {
+        "@gi-types/xfixes": "*",
+        "@gi-types/xlib": "*"
+    },
+    "typeScriptVersion": "4.1",
+    "gitHead": null
+}

@@ -1,0 +1,42 @@
+{
+    "options": {
+        "outputFormat": "folder",
+        "versionedOutput": true,
+        "propertyCase": "both",
+        "out": "./packages",
+        "versionedImports": false,
+        "importPrefix": "@gi-types/",
+        "emitMetadata": true,
+        "inferGenerics": true,
+        "promisify": true
+    },
+    "libraries": {
+        "Clutter": "8",
+        "ClutterX11": "8",
+        "Cally": "8",
+        "CoglPango": "8",
+        "Cogl": "8",
+        "Meta": "8",
+        "St": "1.0",
+        "Gvc": "1.0",
+        "Shew": "0",
+        "Shell": "0.1"
+    },
+    "dependencies": {
+        "Atspi": "2.0",
+        "cairo": "1.0",
+        "Atk": "1.0",
+        "NM": "1.0",
+        "Rsvg": "2.0",
+        "Gtk": "3.0",
+        "Gdk": "3.0",
+        "GdkPixbuf": "2.0",
+        "Graphene": "1.0",
+        "Gio": "2.0",
+        "GLib": "2.0",
+        "GObject": "2.0",
+        "Polkit": "1.0",
+        "PolkitAgent": "1.0",
+        "Pango": "1.0"
+    }
+}

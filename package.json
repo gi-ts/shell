@@ -1,0 +1,18 @@
+{
+  "name": "packages-shell",
+  "private": true,
+  "devDependencies": {
+    "lerna": "^3.22.1",
+    "npm-api": "^1.0.0",
+    "semver": "^7.3.4"
+  },
+  "workspaces": [
+    "packages/**"
+  ],
+  "scripts": {
+    "pub": "lerna publish",
+    "pub:package": "lerna publish from-package",
+    "generate": "gi-ts generate docs.json",
+    "configure": "XDG_DATA_DIRS=~/jhbuild/install/share/:~/jhbuild/install/share/gnome-shell/:~/jhbuild/install/lib/mutter-8/ gi-ts config --lock"
+  }
+}

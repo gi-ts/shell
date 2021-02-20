@@ -1,0 +1,50 @@
+{
+    "name": "@gi-types/clutter",
+    "publishConfig": {
+        "access": "public",
+        "tag": "latest"
+    },
+    "version": "7.0.6",
+    "description": "TypeScript definitions for Clutter",
+    "license": "MIT",
+    "contributors": [
+        {
+            "name": "Evan Welsh",
+            "url": "https://gitlab.gnome.org/ewlsh/",
+            "githubUsername": "ewlsh"
+        }
+    ],
+    "main": "",
+    "files": [
+        "index.d.ts",
+        "doc.json",
+        "package.json",
+        "README.md",
+        "LICENSE"
+    ],
+    "types": "index.d.ts",
+    "repository": {
+        "type": "git",
+        "url": "https://gitlab.gnome.org/ewlsh/packages.gi.ts.git",
+        "directory": "packages/clutter7"
+    },
+    "scripts": {},
+    "contentHash": "c0913dc0b8cde87c27156354bb9f51e2",
+    "dependencies": {
+        "@gi-types/atk": "^2.36.7",
+        "@gi-types/cairo": "^1.0.3",
+        "@gi-types/cogl": "^7.0.3",
+        "@gi-types/coglpango": "^7.0.2",
+        "@gi-types/gio": "^2.66.9",
+        "@gi-types/glib": "^2.66.9",
+        "@gi-types/gobject": "^2.66.8",
+        "@gi-types/graphene": "^1.0.0",
+        "@gi-types/json": "^1.6.5",
+        "@gi-types/pango": "^1.0.5"
+    },
+    "peerDependencies": {
+        "@gi-types/gl": "*"
+    },
+    "typeScriptVersion": "4.1",
+    "gitHead": null
+}

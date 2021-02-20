@@ -1,0 +1,53 @@
+{
+    "name": "@gi-types/shell",
+    "publishConfig": {
+        "access": "public",
+        "tag": "latest"
+    },
+    "version": "0.1.6",
+    "description": "TypeScript definitions for Shell",
+    "license": "MIT",
+    "contributors": [
+        {
+            "name": "Evan Welsh",
+            "url": "https://gitlab.gnome.org/ewlsh/",
+            "githubUsername": "ewlsh"
+        }
+    ],
+    "main": "",
+    "files": [
+        "index.d.ts",
+        "doc.json",
+        "package.json",
+        "README.md",
+        "LICENSE"
+    ],
+    "types": "index.d.ts",
+    "repository": {
+        "type": "git",
+        "url": "https://gitlab.gnome.org/ewlsh/packages.gi.ts.git",
+        "directory": "packages/shell0"
+    },
+    "scripts": {},
+    "contentHash": "a07a1523d2334669be9ea6964f285f78",
+    "dependencies": {
+        "@gi-types/atk": "^2.36.7",
+        "@gi-types/cairo": "^1.0.3",
+        "@gi-types/clutter": "^7.0.6",
+        "@gi-types/clutterx11": "^7.0.2",
+        "@gi-types/gcr": "^3.38.7",
+        "@gi-types/gdkpixbuf": "^2.0.5",
+        "@gi-types/gio": "^2.66.9",
+        "@gi-types/glib": "^2.66.9",
+        "@gi-types/gobject": "^2.66.8",
+        "@gi-types/gtk": "^3.24.8",
+        "@gi-types/gvc": "^1.0.2",
+        "@gi-types/json": "^1.6.5",
+        "@gi-types/meta": "^3.38.5",
+        "@gi-types/nm": "^1.28.9",
+        "@gi-types/polkitagent": "^1.0.3",
+        "@gi-types/st": "^1.0.6"
+    },
+    "typeScriptVersion": "4.1",
+    "gitHead": null
+}

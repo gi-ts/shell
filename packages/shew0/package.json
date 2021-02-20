@@ -1,0 +1,41 @@
+{
+    "name": "@gi-types/shew",
+    "publishConfig": {
+        "access": "public",
+        "tag": "latest"
+    },
+    "version": "0.0.2",
+    "description": "TypeScript definitions for Shew",
+    "license": "MIT",
+    "contributors": [
+        {
+            "name": "Evan Welsh",
+            "url": "https://gitlab.gnome.org/ewlsh/",
+            "githubUsername": "ewlsh"
+        }
+    ],
+    "main": "",
+    "files": [
+        "index.d.ts",
+        "doc.json",
+        "package.json",
+        "README.md",
+        "LICENSE"
+    ],
+    "types": "index.d.ts",
+    "repository": {
+        "type": "git",
+        "url": "https://gitlab.gnome.org/ewlsh/packages.gi.ts.git",
+        "directory": "packages/shew0"
+    },
+    "scripts": {},
+    "contentHash": "c858710892fb0ab3aefe48c041dbf168",
+    "dependencies": {
+        "@gi-types/gdk": "^3.24.7",
+        "@gi-types/gio": "^2.66.9",
+        "@gi-types/gobject": "^2.66.8",
+        "@gi-types/gtk": "^3.24.8"
+    },
+    "typeScriptVersion": "4.1",
+    "gitHead": null
+}

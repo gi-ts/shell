@@ -1,0 +1,11 @@
+{
+    "name": "Shew",
+    "api_version": "0",
+    "package_version": "0.0",
+    "imports": {
+        "Gdk": "3.0",
+        "Gtk": "3.0",
+        "GObject": "2.0",
+        "Gio": "2.0"
+    }
+}
