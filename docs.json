@@ -1,9 +1,9 @@
 {
     "options": {
         "outputFormat": "folder",
-        "versionedOutput": true,
+        "versionedOutput": false,
         "propertyCase": "both",
-        "out": "./packages",
+        "out": "./packages/@gi-types/",
         "versionedImports": false,
         "importPrefix": "@gi-types/",
         "emitMetadata": true,
@@ -19,7 +19,6 @@
         "Meta": "8",
         "St": "1.0",
         "Gvc": "1.0",
-        "Shew": "0",
         "Shell": "0.1",
         "xfixes": "4.0",
         "xlib": "2.0"
