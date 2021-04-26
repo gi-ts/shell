@@ -1,13 +1,11 @@
 {
-  "name": "packages-shell",
+  "name": "@gi.ts/packages-shell8",
   "private": true,
   "devDependencies": {
-    "lerna": "^3.22.1",
-    "npm-api": "^1.0.0",
-    "semver": "^7.3.4"
+    "lerna": "^3.22.1"
   },
   "workspaces": [
-    "packages/**"
+    "packages/@gi-types/**"
   ],
   "scripts": {
     "pub": "lerna publish",
