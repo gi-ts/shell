@@ -1,5 +1,5 @@
-# Shew 0
+# xfixes 4.0
 
-TypeScript definitions for Shew. Generated from version 0.0.
+TypeScript definitions for xfixes. Generated from version 4.0.
 
 Generated with [gi.ts](https://gitlab.gnome.org/ewlsh/gi.ts) and tracked in [gi-ts](https://github.com/gi-ts).

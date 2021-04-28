@@ -61,9 +61,6 @@ export class ChannelMap extends GObject.Object {
     constructor(properties?: Partial<ChannelMap.ConstructorProperties>, ...args: any[]);
     _init(properties?: Partial<ChannelMap.ConstructorProperties>, ...args: any[]): void;
 
-    // Fields
-    priv: ChannelMapPrivate;
-
     // Signals
 
     connect(id: string, callback: (...args: any[]) => any): number;
@@ -108,19 +105,20 @@ export class MixerCard extends GObject.Object {
     _init(properties?: Partial<MixerCard.ConstructorProperties>, ...args: any[]): void;
 
     // Properties
-    human_profile: string;
-    humanProfile: string;
-    icon_name: string;
-    iconName: string;
-    id: number;
-    index: number;
-    name: string;
-    pa_context: any;
-    paContext: any;
-    profile: string;
-
-    // Fields
-    priv: MixerCardPrivate;
+    get human_profile(): string;
+    get humanProfile(): string;
+    get icon_name(): string;
+    set icon_name(val: string);
+    get iconName(): string;
+    set iconName(val: string);
+    get id(): number;
+    get index(): number;
+    get name(): string;
+    set name(val: string);
+    get pa_context(): any;
+    get paContext(): any;
+    get profile(): string;
+    set profile(val: string);
 
     // Members
 
@@ -151,10 +149,7 @@ export class MixerControl extends GObject.Object {
     _init(properties?: Partial<MixerControl.ConstructorProperties>, ...args: any[]): void;
 
     // Properties
-    name: string;
-
-    // Fields
-    priv: MixerControlPrivate;
+    get name(): string;
 
     // Signals
 
@@ -274,10 +269,8 @@ export class MixerEventRole extends MixerStream {
     _init(properties?: Partial<MixerEventRole.ConstructorProperties>, ...args: any[]): void;
 
     // Properties
-    device: string;
-
-    // Fields
-    priv: MixerEventRolePrivate | any;
+    get device(): string;
+    set device(val: string);
 }
 export module MixerSink {
     export interface ConstructorProperties extends MixerStream.ConstructorProperties {
@@ -289,9 +282,6 @@ export class MixerSink extends MixerStream {
 
     constructor(properties?: Partial<MixerSink.ConstructorProperties>, ...args: any[]);
     _init(properties?: Partial<MixerSink.ConstructorProperties>, ...args: any[]): void;
-
-    // Fields
-    priv: MixerSinkPrivate | any;
 }
 export module MixerSinkInput {
     export interface ConstructorProperties extends MixerStream.ConstructorProperties {
@@ -303,9 +293,6 @@ export class MixerSinkInput extends MixerStream {
 
     constructor(properties?: Partial<MixerSinkInput.ConstructorProperties>, ...args: any[]);
     _init(properties?: Partial<MixerSinkInput.ConstructorProperties>, ...args: any[]): void;
-
-    // Fields
-    priv: MixerSinkInputPrivate | any;
 }
 export module MixerSource {
     export interface ConstructorProperties extends MixerStream.ConstructorProperties {
@@ -317,9 +304,6 @@ export class MixerSource extends MixerStream {
 
     constructor(properties?: Partial<MixerSource.ConstructorProperties>, ...args: any[]);
     _init(properties?: Partial<MixerSource.ConstructorProperties>, ...args: any[]): void;
-
-    // Fields
-    priv: MixerSourcePrivate | any;
 }
 export module MixerSourceOutput {
     export interface ConstructorProperties extends MixerStream.ConstructorProperties {
@@ -331,9 +315,6 @@ export class MixerSourceOutput extends MixerStream {
 
     constructor(properties?: Partial<MixerSourceOutput.ConstructorProperties>, ...args: any[]);
     _init(properties?: Partial<MixerSourceOutput.ConstructorProperties>, ...args: any[]): void;
-
-    // Fields
-    priv: MixerSourceOutputPrivate | any;
 }
 export module MixerStream {
     export interface ConstructorProperties extends GObject.Object.ConstructorProperties {
@@ -377,39 +358,62 @@ export abstract class MixerStream extends GObject.Object {
     _init(properties?: Partial<MixerStream.ConstructorProperties>, ...args: any[]): void;
 
     // Properties
-    application_id: string;
-    applicationId: string;
-    can_decibel: boolean;
-    canDecibel: boolean;
-    card_index: number;
-    cardIndex: number;
-    channel_map: ChannelMap;
-    channelMap: ChannelMap;
-    decibel: number;
-    description: string;
-    form_factor: string;
-    formFactor: string;
-    icon_name: string;
-    iconName: string;
-    id: number;
-    index: number;
-    is_event_stream: boolean;
-    isEventStream: boolean;
-    is_muted: boolean;
-    isMuted: boolean;
-    is_virtual: boolean;
-    isVirtual: boolean;
-    name: string;
-    pa_context: any;
-    paContext: any;
-    port: string;
-    state: MixerStreamState;
-    sysfs_path: string;
-    sysfsPath: string;
-    volume: number;
-
-    // Fields
-    priv: MixerStreamPrivate;
+    get application_id(): string;
+    set application_id(val: string);
+    get applicationId(): string;
+    set applicationId(val: string);
+    get can_decibel(): boolean;
+    set can_decibel(val: boolean);
+    get canDecibel(): boolean;
+    set canDecibel(val: boolean);
+    get card_index(): number;
+    set card_index(val: number);
+    get cardIndex(): number;
+    set cardIndex(val: number);
+    get channel_map(): ChannelMap;
+    set channel_map(val: ChannelMap);
+    get channelMap(): ChannelMap;
+    set channelMap(val: ChannelMap);
+    get decibel(): number;
+    set decibel(val: number);
+    get description(): string;
+    set description(val: string);
+    get form_factor(): string;
+    set form_factor(val: string);
+    get formFactor(): string;
+    set formFactor(val: string);
+    get icon_name(): string;
+    set icon_name(val: string);
+    get iconName(): string;
+    set iconName(val: string);
+    get id(): number;
+    get index(): number;
+    get is_event_stream(): boolean;
+    set is_event_stream(val: boolean);
+    get isEventStream(): boolean;
+    set isEventStream(val: boolean);
+    get is_muted(): boolean;
+    set is_muted(val: boolean);
+    get isMuted(): boolean;
+    set isMuted(val: boolean);
+    get is_virtual(): boolean;
+    set is_virtual(val: boolean);
+    get isVirtual(): boolean;
+    set isVirtual(val: boolean);
+    get name(): string;
+    set name(val: string);
+    get pa_context(): any;
+    get paContext(): any;
+    get port(): string;
+    set port(val: string);
+    get state(): MixerStreamState;
+    set state(val: MixerStreamState);
+    get sysfs_path(): string;
+    set sysfs_path(val: string);
+    get sysfsPath(): string;
+    set sysfsPath(val: string);
+    get volume(): number;
+    set volume(val: number);
 
     // Members
 
@@ -481,21 +485,30 @@ export class MixerUIDevice extends GObject.Object {
     _init(properties?: Partial<MixerUIDevice.ConstructorProperties>, ...args: any[]): void;
 
     // Properties
-    card: any;
-    description: string;
-    icon_name: string;
-    iconName: string;
-    origin: string;
-    port_available: boolean;
-    portAvailable: boolean;
-    port_name: string;
-    portName: string;
-    stream_id: number;
-    streamId: number;
-    type: number;
-
-    // Fields
-    priv: MixerUIDevicePrivate;
+    get card(): any;
+    set card(val: any);
+    get description(): string;
+    set description(val: string);
+    get icon_name(): string;
+    set icon_name(val: string);
+    get iconName(): string;
+    set iconName(val: string);
+    get origin(): string;
+    set origin(val: string);
+    get port_available(): boolean;
+    set port_available(val: boolean);
+    get portAvailable(): boolean;
+    set portAvailable(val: boolean);
+    get port_name(): string;
+    set port_name(val: string);
+    get portName(): string;
+    set portName(val: string);
+    get stream_id(): number;
+    set stream_id(val: number);
+    get streamId(): number;
+    set streamId(val: number);
+    get type(): number;
+    set type(val: number);
 
     // Members
 
@@ -530,6 +543,16 @@ export class ChannelMapPrivate {
 export class MixerCardPort {
     static $gtype: GObject.GType<MixerCardPort>;
 
+    constructor(
+        properties?: Partial<{
+            port?: string;
+            human_port?: string;
+            icon_name?: string;
+            priority?: number;
+            available?: number;
+            direction?: number;
+        }>
+    );
     constructor(copy: MixerCardPort);
 
     // Fields
@@ -539,7 +562,6 @@ export class MixerCardPort {
     priority: number;
     available: number;
     direction: number;
-    profiles: any[];
 }
 
 export class MixerCardPrivate {

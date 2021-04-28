@@ -4,10 +4,8 @@
  * Generated from 8.0
  */
 
-import * as Clutter from "@gi-types/clutter";
-import * as Cogl from "@gi-types/cogl";
-import * as CoglPango from "@gi-types/coglpango";
 import * as xlib from "@gi-types/xlib";
+import * as Clutter from "@gi-types/clutter";
 import * as GObject from "@gi-types/gobject";
 
 export function get_default_display(): xlib.Display;

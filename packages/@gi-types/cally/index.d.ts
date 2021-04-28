@@ -4,10 +4,8 @@
  * Generated from 8.0
  */
 
-import * as Clutter from "@gi-types/clutter";
-import * as Cogl from "@gi-types/cogl";
-import * as CoglPango from "@gi-types/coglpango";
 import * as Atk from "@gi-types/atk";
+import * as Clutter from "@gi-types/clutter";
 import * as GObject from "@gi-types/gobject";
 
 export function accessibility_init(): boolean;
@@ -44,24 +42,30 @@ export class Actor extends Atk.GObjectAccessible implements Atk.Action, Atk.Comp
 
     do_action(i: number): boolean;
     get_description(i: number): string | null;
-    get_description(...args: never[]): never;
+    // Conflicted with Atk.Object.get_description
+    get_description(...args: never[]): any;
     get_keybinding(i: number): string | null;
     get_localized_name(i: number): string | null;
     get_n_actions(): number;
     get_name(i: number): string | null;
-    get_name(...args: never[]): never;
+    // Conflicted with Atk.Object.get_name
+    get_name(...args: never[]): any;
     set_description(i: number, desc: string): boolean;
-    set_description(...args: never[]): never;
+    // Conflicted with Atk.Object.set_description
+    set_description(...args: never[]): any;
     vfunc_do_action(i: number): boolean;
     vfunc_get_description(i: number): string | null;
-    vfunc_get_description(...args: never[]): never;
+    // Conflicted with Atk.Object.vfunc_get_description
+    vfunc_get_description(...args: never[]): any;
     vfunc_get_keybinding(i: number): string | null;
     vfunc_get_localized_name(i: number): string | null;
     vfunc_get_n_actions(): number;
     vfunc_get_name(i: number): string | null;
-    vfunc_get_name(...args: never[]): never;
+    // Conflicted with Atk.Object.vfunc_get_name
+    vfunc_get_name(...args: never[]): any;
     vfunc_set_description(i: number, desc: string): boolean;
-    vfunc_set_description(...args: never[]): never;
+    // Conflicted with Atk.Object.vfunc_set_description
+    vfunc_set_description(...args: never[]): any;
     contains(x: number, y: number, coord_type: Atk.CoordType): boolean;
     get_alpha(): number;
     get_extents(coord_type: Atk.CoordType): [number | null, number | null, number | null, number | null];
@@ -113,24 +117,30 @@ export class Clone extends Actor implements Atk.Action, Atk.Component {
 
     do_action(i: number): boolean;
     get_description(i: number): string | null;
-    get_description(...args: never[]): never;
+    // Conflicted with Atk.Object.get_description
+    get_description(...args: never[]): any;
     get_keybinding(i: number): string | null;
     get_localized_name(i: number): string | null;
     get_n_actions(): number;
     get_name(i: number): string | null;
-    get_name(...args: never[]): never;
+    // Conflicted with Atk.Object.get_name
+    get_name(...args: never[]): any;
     set_description(i: number, desc: string): boolean;
-    set_description(...args: never[]): never;
+    // Conflicted with Atk.Object.set_description
+    set_description(...args: never[]): any;
     vfunc_do_action(i: number): boolean;
     vfunc_get_description(i: number): string | null;
-    vfunc_get_description(...args: never[]): never;
+    // Conflicted with Atk.Object.vfunc_get_description
+    vfunc_get_description(...args: never[]): any;
     vfunc_get_keybinding(i: number): string | null;
     vfunc_get_localized_name(i: number): string | null;
     vfunc_get_n_actions(): number;
     vfunc_get_name(i: number): string | null;
-    vfunc_get_name(...args: never[]): never;
+    // Conflicted with Atk.Object.vfunc_get_name
+    vfunc_get_name(...args: never[]): any;
     vfunc_set_description(i: number, desc: string): boolean;
-    vfunc_set_description(...args: never[]): never;
+    // Conflicted with Atk.Object.vfunc_set_description
+    vfunc_set_description(...args: never[]): any;
     contains(x: number, y: number, coord_type: Atk.CoordType): boolean;
     get_alpha(): number;
     get_extents(coord_type: Atk.CoordType): [number | null, number | null, number | null, number | null];
@@ -197,24 +207,30 @@ export class Stage extends Actor implements Atk.Action, Atk.Component, Atk.Windo
 
     do_action(i: number): boolean;
     get_description(i: number): string | null;
-    get_description(...args: never[]): never;
+    // Conflicted with Atk.Object.get_description
+    get_description(...args: never[]): any;
     get_keybinding(i: number): string | null;
     get_localized_name(i: number): string | null;
     get_n_actions(): number;
     get_name(i: number): string | null;
-    get_name(...args: never[]): never;
+    // Conflicted with Atk.Object.get_name
+    get_name(...args: never[]): any;
     set_description(i: number, desc: string): boolean;
-    set_description(...args: never[]): never;
+    // Conflicted with Atk.Object.set_description
+    set_description(...args: never[]): any;
     vfunc_do_action(i: number): boolean;
     vfunc_get_description(i: number): string | null;
-    vfunc_get_description(...args: never[]): never;
+    // Conflicted with Atk.Object.vfunc_get_description
+    vfunc_get_description(...args: never[]): any;
     vfunc_get_keybinding(i: number): string | null;
     vfunc_get_localized_name(i: number): string | null;
     vfunc_get_n_actions(): number;
     vfunc_get_name(i: number): string | null;
-    vfunc_get_name(...args: never[]): never;
+    // Conflicted with Atk.Object.vfunc_get_name
+    vfunc_get_name(...args: never[]): any;
     vfunc_set_description(i: number, desc: string): boolean;
-    vfunc_set_description(...args: never[]): never;
+    // Conflicted with Atk.Object.vfunc_set_description
+    vfunc_set_description(...args: never[]): any;
     contains(x: number, y: number, coord_type: Atk.CoordType): boolean;
     get_alpha(): number;
     get_extents(coord_type: Atk.CoordType): [number | null, number | null, number | null, number | null];
@@ -266,24 +282,30 @@ export class Text extends Actor implements Atk.Action, Atk.Component, Atk.Editab
 
     do_action(i: number): boolean;
     get_description(i: number): string | null;
-    get_description(...args: never[]): never;
+    // Conflicted with Atk.Object.get_description
+    get_description(...args: never[]): any;
     get_keybinding(i: number): string | null;
     get_localized_name(i: number): string | null;
     get_n_actions(): number;
     get_name(i: number): string | null;
-    get_name(...args: never[]): never;
+    // Conflicted with Atk.Object.get_name
+    get_name(...args: never[]): any;
     set_description(i: number, desc: string): boolean;
-    set_description(...args: never[]): never;
+    // Conflicted with Atk.Object.set_description
+    set_description(...args: never[]): any;
     vfunc_do_action(i: number): boolean;
     vfunc_get_description(i: number): string | null;
-    vfunc_get_description(...args: never[]): never;
+    // Conflicted with Atk.Object.vfunc_get_description
+    vfunc_get_description(...args: never[]): any;
     vfunc_get_keybinding(i: number): string | null;
     vfunc_get_localized_name(i: number): string | null;
     vfunc_get_n_actions(): number;
     vfunc_get_name(i: number): string | null;
-    vfunc_get_name(...args: never[]): never;
+    // Conflicted with Atk.Object.vfunc_get_name
+    vfunc_get_name(...args: never[]): any;
     vfunc_set_description(i: number, desc: string): boolean;
-    vfunc_set_description(...args: never[]): never;
+    // Conflicted with Atk.Object.vfunc_set_description
+    vfunc_set_description(...args: never[]): any;
     contains(x: number, y: number, coord_type: Atk.CoordType): boolean;
     get_alpha(): number;
     get_extents(coord_type: Atk.CoordType): [number | null, number | null, number | null, number | null];

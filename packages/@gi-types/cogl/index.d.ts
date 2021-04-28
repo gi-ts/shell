@@ -4,11 +4,10 @@
  * Generated from 8.0
  */
 
-import * as GL from "@gi-types/gl";
 import * as GObject from "@gi-types/gobject";
+import * as GLib from "@gi-types/glib";
 import * as Graphene from "@gi-types/graphene";
 import * as cairo from "@gi-types/cairo";
-import * as GLib from "@gi-types/glib";
 
 export const AFIRST_BIT: number;
 export const A_BIT: number;
@@ -39,7 +38,6 @@ export function debug_object_print_instances(): void;
 export function flush(): void;
 export function foreach_feature(context: Context, callback: FeatureCallback): void;
 export function get_backface_culling_enabled(): boolean;
-export function get_clock_time(context: Context): number;
 export function get_depth_test_enabled(): boolean;
 export function get_graphics_reset_status(context: Context): GraphicsResetStatus;
 export function get_option_group(): GLib.OptionGroup;
@@ -85,9 +83,9 @@ export function program_set_uniform_matrix(
 export function scanout_error_quark(): GLib.Quark;
 export function set_backface_culling_enabled(setting: boolean): void;
 export function set_depth_test_enabled(setting: boolean): void;
-export function set_tracing_disabled_on_thread(main_context: GLib.MainContext): void;
-export function set_tracing_enabled_on_thread(main_context: GLib.MainContext, group: string, filename: string): void;
-export function set_tracing_enabled_on_thread_with_fd(main_context: GLib.MainContext, group: string, fd: number): void;
+export function set_tracing_disabled_on_thread(data?: any | null): void;
+export function set_tracing_enabled_on_thread(data: any | null, group: string, filename: string): void;
+export function set_tracing_enabled_on_thread_with_fd(data: any | null, group: string, fd: number): void;
 export function shader_get_type(handle: Handle): ShaderType;
 export function shader_source(shader: Handle, source: string): void;
 export function texture_error_quark(): number;
@@ -108,7 +106,6 @@ export function texture_new_with_size(
     flags: TextureFlags,
     internal_format: PixelFormat
 ): Texture;
-export function trace_end(head: TraceHead): void;
 export type DebugObjectForeachTypeCallback = (info: DebugObjectTypeInfo) => void;
 export type FeatureCallback = (feature: FeatureID) => void;
 export type FrameCallback = (onscreen: Onscreen, event: FrameEvent, info: FrameInfo) => void;
@@ -330,7 +327,7 @@ export class ScanoutError extends GLib.Error {
     constructor(options: { message: string; code: number });
     constructor(copy: ScanoutError);
 
-    // Properties
+    // Fields
     static SCANOUT_ERROR_INHIBITED: number;
 }
 
@@ -574,8 +571,12 @@ export class FrameInfo extends Object {
 
     get_frame_counter(): number;
     get_is_symbolic(): boolean;
-    get_presentation_time(): number;
+    get_presentation_time_us(): number;
     get_refresh_rate(): number;
+    get_sequence(): number;
+    is_hw_clock(): boolean;
+    is_vsync(): boolean;
+    is_zero_copy(): boolean;
 }
 export module Framebuffer {
     export interface ConstructorProperties extends GObject.Object.ConstructorProperties {
@@ -593,10 +594,12 @@ export abstract class Framebuffer extends GObject.Object {
     _init(properties?: Partial<Framebuffer.ConstructorProperties>, ...args: any[]): void;
 
     // Properties
-    driver_config: any;
-    driverConfig: any;
-    height: number;
-    width: number;
+    get driver_config(): any;
+    get driverConfig(): any;
+    get height(): number;
+    set height(val: number);
+    get width(): number;
+    set width(val: number);
 
     // Signals
 
@@ -827,7 +830,8 @@ export class Texture2D extends Object implements Texture {
     // Constructors
 
     static new_from_bitmap(bitmap: Bitmap): Texture2D;
-    static new_from_bitmap(...args: never[]): never;
+    // Conflicted with Cogl.Texture.new_from_bitmap
+    static new_from_bitmap(...args: never[]): any;
 
     // Members
 
@@ -886,7 +890,8 @@ export class Texture2DSliced extends Object implements Texture {
     // Constructors
 
     static new_from_bitmap(bmp: Bitmap, max_waste: number): Texture2DSliced;
-    static new_from_bitmap(...args: never[]): never;
+    // Conflicted with Cogl.Texture.new_from_bitmap
+    static new_from_bitmap(...args: never[]): any;
 
     // Implemented Members
 
@@ -1097,7 +1102,6 @@ export class TextureVertex {
             z?: number;
             tx?: number;
             ty?: number;
-            color?: Color;
         }>
     );
     constructor(copy: TextureVertex);
@@ -1108,29 +1112,6 @@ export class TextureVertex {
     z: number;
     tx: number;
     ty: number;
-    color: Color;
-}
-
-export class TraceContext {
-    static $gtype: GObject.GType<TraceContext>;
-
-    constructor(copy: TraceContext);
-}
-
-export class TraceHead {
-    static $gtype: GObject.GType<TraceHead>;
-
-    constructor(
-        properties?: Partial<{
-            begin_time?: number;
-            name?: string;
-        }>
-    );
-    constructor(copy: TraceHead);
-
-    // Fields
-    begin_time: number;
-    name: string;
 }
 
 export class UserDataKey {
@@ -1145,6 +1126,18 @@ export class UserDataKey {
 
     // Fields
     unused: number;
+}
+
+export class _ColorSizeCheck {
+    static $gtype: GObject.GType<_ColorSizeCheck>;
+
+    constructor(copy: _ColorSizeCheck);
+}
+
+export class _TextureVertexSizeCheck {
+    static $gtype: GObject.GType<_TextureVertexSizeCheck>;
+
+    constructor(copy: _TextureVertexSizeCheck);
 }
 
 export interface TextureNamespace {

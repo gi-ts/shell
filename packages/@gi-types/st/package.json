@@ -4,13 +4,13 @@
         "access": "public",
         "tag": "latest"
     },
-    "version": "1.0.6",
+    "version": "1.0.7",
     "description": "TypeScript definitions for St",
     "license": "MIT",
     "contributors": [
         {
             "name": "Evan Welsh",
-            "url": "https://gitlab.gnome.org/ewlsh/",
+            "url": "https://github.com/ewlsh/",
             "githubUsername": "ewlsh"
         }
     ],
@@ -25,23 +25,20 @@
     "types": "index.d.ts",
     "repository": {
         "type": "git",
-        "url": "https://gitlab.gnome.org/ewlsh/packages.gi.ts.git",
-        "directory": "packages/st1"
+        "url": "https://github.com/gi-ts/./_working/gi-ts/shell8/packages/@gi-types/",
+        "directory": "packages/@gi-types/st"
     },
     "scripts": {},
-    "contentHash": "1d72f889c4434ebae8c0ef4b4aa32ae6",
     "dependencies": {
         "@gi-types/atk": "^2.36.7",
         "@gi-types/cairo": "^1.0.3",
-        "@gi-types/cally": "^8.0.0",
-        "@gi-types/clutter": "^8.0.0",
-        "@gi-types/cogl": "^8.0.0",
+        "@gi-types/cally": "^8.0.4",
+        "@gi-types/clutter": "^8.0.7",
+        "@gi-types/cogl": "^8.0.4",
         "@gi-types/gio": "^2.66.9",
         "@gi-types/glib": "^2.66.10",
         "@gi-types/gobject": "^2.66.9",
-        "@gi-types/gtk": "^3.24.9",
         "@gi-types/json": "^1.6.6",
-        "@gi-types/meta": "^8.0.0",
         "@gi-types/pango": "^1.0.5"
     },
     "typeScriptVersion": "4.1",
