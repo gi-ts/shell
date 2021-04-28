@@ -3,17 +3,15 @@
     "api_version": "1.0",
     "package_version": "1.0",
     "imports": {
-        "Cally": "8",
-        "Clutter": "8",
-        "Gtk": "3.0",
-        "Meta": "8",
         "Atk": "1.0",
         "Gio": "2.0",
         "GObject": "2.0",
+        "Clutter": "8",
+        "Cogl": "8",
+        "Cally": "8",
         "GLib": "2.0",
-        "Json": "1.0",
         "cairo": "1.0",
         "Pango": "1.0",
-        "Cogl": "8"
+        "Json": "1.0"
     }
 }

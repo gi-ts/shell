@@ -4,18 +4,16 @@
  * Generated from 1.0
  */
 
-import * as Cally from "@gi-types/cally";
-import * as Clutter from "@gi-types/clutter";
-import * as Gtk from "@gi-types/gtk";
-import * as Meta from "@gi-types/meta";
 import * as Atk from "@gi-types/atk";
 import * as Gio from "@gi-types/gio";
 import * as GObject from "@gi-types/gobject";
+import * as Clutter from "@gi-types/clutter";
+import * as Cogl from "@gi-types/cogl";
+import * as Cally from "@gi-types/cally";
 import * as GLib from "@gi-types/glib";
-import * as Json from "@gi-types/json";
 import * as cairo from "@gi-types/cairo";
 import * as Pango from "@gi-types/pango";
-import * as Cogl from "@gi-types/cogl";
+import * as Json from "@gi-types/json";
 
 export function describe_actor(actor: Clutter.Actor): string;
 export type ClipboardCallbackFunc = (clipboard: Clipboard, text: string) => void;
@@ -181,16 +179,26 @@ export class Adjustment extends GObject.Object implements Clutter.Animatable {
     _init(properties?: Partial<Adjustment.ConstructorProperties>, ...args: any[]): void;
 
     // Properties
-    actor: Clutter.Actor;
-    lower: number;
-    page_increment: number;
-    pageIncrement: number;
-    page_size: number;
-    pageSize: number;
-    step_increment: number;
-    stepIncrement: number;
-    upper: number;
-    value: number;
+    get actor(): Clutter.Actor;
+    set actor(val: Clutter.Actor);
+    get lower(): number;
+    set lower(val: number);
+    get page_increment(): number;
+    set page_increment(val: number);
+    get pageIncrement(): number;
+    set pageIncrement(val: number);
+    get page_size(): number;
+    set page_size(val: number);
+    get pageSize(): number;
+    set pageSize(val: number);
+    get step_increment(): number;
+    set step_increment(val: number);
+    get stepIncrement(): number;
+    set stepIncrement(val: number);
+    get upper(): number;
+    set upper(val: number);
+    get value(): number;
+    set value(val: number);
 
     // Signals
 
@@ -237,14 +245,14 @@ export class Adjustment extends GObject.Object implements Clutter.Animatable {
 
     find_property(property_name: string): GObject.ParamSpec;
     get_actor(): Clutter.Actor;
-    get_initial_state(property_name: string, value: any): void;
+    get_initial_state(property_name: string, value: GObject.Value | any): void;
     interpolate_value(property_name: string, interval: Clutter.Interval, progress: number): [boolean, unknown];
-    set_final_state(property_name: string, value: any): void;
+    set_final_state(property_name: string, value: GObject.Value | any): void;
     vfunc_find_property(property_name: string): GObject.ParamSpec;
     vfunc_get_actor(): Clutter.Actor;
-    vfunc_get_initial_state(property_name: string, value: any): void;
+    vfunc_get_initial_state(property_name: string, value: GObject.Value | any): void;
     vfunc_interpolate_value(property_name: string, interval: Clutter.Interval, progress: number): [boolean, unknown];
-    vfunc_set_final_state(property_name: string, value: any): void;
+    vfunc_set_final_state(property_name: string, value: GObject.Value | any): void;
 }
 export module Bin {
     export interface ConstructorProperties<A extends Clutter.Actor = Clutter.Actor>
@@ -262,7 +270,8 @@ export class Bin<A extends Clutter.Actor = Clutter.Actor>
     _init(properties?: Partial<Bin.ConstructorProperties<A>>, ...args: any[]): void;
 
     // Properties
-    child: A;
+    get child(): A;
+    set child(val: A);
 
     // Constructors
 
@@ -275,26 +284,17 @@ export class Bin<A extends Clutter.Actor = Clutter.Actor>
 
     // Implemented Members
 
-    find_property(property_name: string): GObject.ParamSpec;
-    get_actor(): Clutter.Actor;
-    get_initial_state(property_name: string, value: any): void;
-    interpolate_value(property_name: string, interval: Clutter.Interval, progress: number): [boolean, unknown];
-    set_final_state(property_name: string, value: any): void;
-    vfunc_find_property(property_name: string): GObject.ParamSpec;
-    vfunc_get_actor(): Clutter.Actor;
-    vfunc_get_initial_state(property_name: string, value: any): void;
-    vfunc_interpolate_value(property_name: string, interval: Clutter.Interval, progress: number): [boolean, unknown];
-    vfunc_set_final_state(property_name: string, value: any): void;
     add_actor(actor: A): void;
-    child_get_property(child: A, property: string, value: any): void;
+    child_get_property(child: A, property: string, value: GObject.Value | any): void;
     child_notify(child: A, pspec: GObject.ParamSpec): void;
-    child_set_property(child: A, property: string, value: any): void;
+    child_set_property(child: A, property: string, value: GObject.Value | any): void;
     create_child_meta(actor: A): void;
     destroy_child_meta(actor: A): void;
     find_child_by_name(child_name: string): A;
     get_child_meta(actor: A): Clutter.ChildMeta;
     get_children(): A[];
-    get_children(...args: never[]): never;
+    // Conflicted with Clutter.Actor.get_children
+    get_children(...args: never[]): any;
     lower_child(actor: A, sibling?: A | null): void;
     raise_child(actor: A, sibling?: A | null): void;
     remove_actor(actor: A): void;
@@ -310,14 +310,6 @@ export class Bin<A extends Clutter.Actor = Clutter.Actor>
     vfunc_raise(actor: A, sibling?: A | null): void;
     vfunc_remove(actor: A): void;
     vfunc_sort_depth_order(): void;
-    get_id(): string;
-    parse_custom_node(script: Clutter.Script, value: any, name: string, node: Json.Node): boolean;
-    set_custom_property(script: Clutter.Script, name: string, value: any): void;
-    set_id(id_: string): void;
-    vfunc_get_id(): string;
-    vfunc_parse_custom_node(script: Clutter.Script, value: any, name: string, node: Json.Node): boolean;
-    vfunc_set_custom_property(script: Clutter.Script, name: string, value: any): void;
-    vfunc_set_id(id_: string): void;
 }
 export module BorderImage {
     export interface ConstructorProperties extends GObject.Object.ConstructorProperties {
@@ -365,14 +357,19 @@ export class BoxLayout<A extends Clutter.Actor = Clutter.Actor>
     _init(properties?: Partial<BoxLayout.ConstructorProperties<A>>, ...args: any[]): void;
 
     // Properties
-    pack_start: boolean;
-    packStart: boolean;
-    vertical: boolean;
+    get pack_start(): boolean;
+    set pack_start(val: boolean);
+    get packStart(): boolean;
+    set packStart(val: boolean);
+    get vertical(): boolean;
+    set vertical(val: boolean);
 
     // Implemented Properties
 
-    hadjustment: Adjustment;
-    vadjustment: Adjustment;
+    get hadjustment(): Adjustment;
+    set hadjustment(val: Adjustment);
+    get vadjustment(): Adjustment;
+    set vadjustment(val: Adjustment);
 
     // Constructors
 
@@ -387,26 +384,17 @@ export class BoxLayout<A extends Clutter.Actor = Clutter.Actor>
 
     // Implemented Members
 
-    find_property(property_name: string): GObject.ParamSpec;
-    get_actor(): Clutter.Actor;
-    get_initial_state(property_name: string, value: any): void;
-    interpolate_value(property_name: string, interval: Clutter.Interval, progress: number): [boolean, unknown];
-    set_final_state(property_name: string, value: any): void;
-    vfunc_find_property(property_name: string): GObject.ParamSpec;
-    vfunc_get_actor(): Clutter.Actor;
-    vfunc_get_initial_state(property_name: string, value: any): void;
-    vfunc_interpolate_value(property_name: string, interval: Clutter.Interval, progress: number): [boolean, unknown];
-    vfunc_set_final_state(property_name: string, value: any): void;
     add_actor(actor: A): void;
-    child_get_property(child: A, property: string, value: any): void;
+    child_get_property(child: A, property: string, value: GObject.Value | any): void;
     child_notify(child: A, pspec: GObject.ParamSpec): void;
-    child_set_property(child: A, property: string, value: any): void;
+    child_set_property(child: A, property: string, value: GObject.Value | any): void;
     create_child_meta(actor: A): void;
     destroy_child_meta(actor: A): void;
     find_child_by_name(child_name: string): A;
     get_child_meta(actor: A): Clutter.ChildMeta;
     get_children(): A[];
-    get_children(...args: never[]): never;
+    // Conflicted with Clutter.Actor.get_children
+    get_children(...args: never[]): any;
     lower_child(actor: A, sibling?: A | null): void;
     raise_child(actor: A, sibling?: A | null): void;
     remove_actor(actor: A): void;
@@ -422,14 +410,6 @@ export class BoxLayout<A extends Clutter.Actor = Clutter.Actor>
     vfunc_raise(actor: A, sibling?: A | null): void;
     vfunc_remove(actor: A): void;
     vfunc_sort_depth_order(): void;
-    get_id(): string;
-    parse_custom_node(script: Clutter.Script, value: any, name: string, node: Json.Node): boolean;
-    set_custom_property(script: Clutter.Script, name: string, value: any): void;
-    set_id(id_: string): void;
-    vfunc_get_id(): string;
-    vfunc_parse_custom_node(script: Clutter.Script, value: any, name: string, node: Json.Node): boolean;
-    vfunc_set_custom_property(script: Clutter.Script, name: string, value: any): void;
-    vfunc_set_id(id_: string): void;
     get_adjustments(hadjustment: Adjustment, vadjustment: Adjustment): void;
     set_adjustments(hadjustment: Adjustment, vadjustment: Adjustment): void;
     vfunc_get_adjustments(hadjustment: Adjustment, vadjustment: Adjustment): void;
@@ -457,13 +437,19 @@ export class Button<A extends Clutter.Actor = Clutter.Actor>
     _init(properties?: Partial<Button.ConstructorProperties<A>>, ...args: any[]): void;
 
     // Properties
-    button_mask: ButtonMask;
-    buttonMask: ButtonMask;
-    checked: boolean;
-    label: string;
-    pressed: boolean;
-    toggle_mode: boolean;
-    toggleMode: boolean;
+    get button_mask(): ButtonMask;
+    set button_mask(val: ButtonMask);
+    get buttonMask(): ButtonMask;
+    set buttonMask(val: ButtonMask);
+    get checked(): boolean;
+    set checked(val: boolean);
+    get label(): string;
+    set label(val: string);
+    get pressed(): boolean;
+    get toggle_mode(): boolean;
+    set toggle_mode(val: boolean);
+    get toggleMode(): boolean;
+    set toggleMode(val: boolean);
 
     // Signals
 
@@ -495,26 +481,17 @@ export class Button<A extends Clutter.Actor = Clutter.Actor>
 
     // Implemented Members
 
-    find_property(property_name: string): GObject.ParamSpec;
-    get_actor(): Clutter.Actor;
-    get_initial_state(property_name: string, value: any): void;
-    interpolate_value(property_name: string, interval: Clutter.Interval, progress: number): [boolean, unknown];
-    set_final_state(property_name: string, value: any): void;
-    vfunc_find_property(property_name: string): GObject.ParamSpec;
-    vfunc_get_actor(): Clutter.Actor;
-    vfunc_get_initial_state(property_name: string, value: any): void;
-    vfunc_interpolate_value(property_name: string, interval: Clutter.Interval, progress: number): [boolean, unknown];
-    vfunc_set_final_state(property_name: string, value: any): void;
     add_actor(actor: A): void;
-    child_get_property(child: A, property: string, value: any): void;
+    child_get_property(child: A, property: string, value: GObject.Value | any): void;
     child_notify(child: A, pspec: GObject.ParamSpec): void;
-    child_set_property(child: A, property: string, value: any): void;
+    child_set_property(child: A, property: string, value: GObject.Value | any): void;
     create_child_meta(actor: A): void;
     destroy_child_meta(actor: A): void;
     find_child_by_name(child_name: string): A;
     get_child_meta(actor: A): Clutter.ChildMeta;
     get_children(): A[];
-    get_children(...args: never[]): never;
+    // Conflicted with Clutter.Actor.get_children
+    get_children(...args: never[]): any;
     lower_child(actor: A, sibling?: A | null): void;
     raise_child(actor: A, sibling?: A | null): void;
     remove_actor(actor: A): void;
@@ -530,14 +507,6 @@ export class Button<A extends Clutter.Actor = Clutter.Actor>
     vfunc_raise(actor: A, sibling?: A | null): void;
     vfunc_remove(actor: A): void;
     vfunc_sort_depth_order(): void;
-    get_id(): string;
-    parse_custom_node(script: Clutter.Script, value: any, name: string, node: Json.Node): boolean;
-    set_custom_property(script: Clutter.Script, name: string, value: any): void;
-    set_id(id_: string): void;
-    vfunc_get_id(): string;
-    vfunc_parse_custom_node(script: Clutter.Script, value: any, name: string, node: Json.Node): boolean;
-    vfunc_set_custom_property(script: Clutter.Script, name: string, value: any): void;
-    vfunc_set_id(id_: string): void;
 }
 export module Clipboard {
     export interface ConstructorProperties extends GObject.Object.ConstructorProperties {
@@ -591,26 +560,17 @@ export class DrawingArea<A extends Clutter.Actor = Clutter.Actor>
 
     // Implemented Members
 
-    find_property(property_name: string): GObject.ParamSpec;
-    get_actor(): Clutter.Actor;
-    get_initial_state(property_name: string, value: any): void;
-    interpolate_value(property_name: string, interval: Clutter.Interval, progress: number): [boolean, unknown];
-    set_final_state(property_name: string, value: any): void;
-    vfunc_find_property(property_name: string): GObject.ParamSpec;
-    vfunc_get_actor(): Clutter.Actor;
-    vfunc_get_initial_state(property_name: string, value: any): void;
-    vfunc_interpolate_value(property_name: string, interval: Clutter.Interval, progress: number): [boolean, unknown];
-    vfunc_set_final_state(property_name: string, value: any): void;
     add_actor(actor: A): void;
-    child_get_property(child: A, property: string, value: any): void;
+    child_get_property(child: A, property: string, value: GObject.Value | any): void;
     child_notify(child: A, pspec: GObject.ParamSpec): void;
-    child_set_property(child: A, property: string, value: any): void;
+    child_set_property(child: A, property: string, value: GObject.Value | any): void;
     create_child_meta(actor: A): void;
     destroy_child_meta(actor: A): void;
     find_child_by_name(child_name: string): A;
     get_child_meta(actor: A): Clutter.ChildMeta;
     get_children(): A[];
-    get_children(...args: never[]): never;
+    // Conflicted with Clutter.Actor.get_children
+    get_children(...args: never[]): any;
     lower_child(actor: A, sibling?: A | null): void;
     raise_child(actor: A, sibling?: A | null): void;
     remove_actor(actor: A): void;
@@ -626,14 +586,6 @@ export class DrawingArea<A extends Clutter.Actor = Clutter.Actor>
     vfunc_raise(actor: A, sibling?: A | null): void;
     vfunc_remove(actor: A): void;
     vfunc_sort_depth_order(): void;
-    get_id(): string;
-    parse_custom_node(script: Clutter.Script, value: any, name: string, node: Json.Node): boolean;
-    set_custom_property(script: Clutter.Script, name: string, value: any): void;
-    set_id(id_: string): void;
-    vfunc_get_id(): string;
-    vfunc_parse_custom_node(script: Clutter.Script, value: any, name: string, node: Json.Node): boolean;
-    vfunc_set_custom_property(script: Clutter.Script, name: string, value: any): void;
-    vfunc_set_id(id_: string): void;
 }
 export module Entry {
     export interface ConstructorProperties<A extends Clutter.Actor = Clutter.Actor>
@@ -665,21 +617,34 @@ export class Entry<A extends Clutter.Actor = Clutter.Actor>
     _init(properties?: Partial<Entry.ConstructorProperties<A>>, ...args: any[]): void;
 
     // Properties
-    clutter_text: Clutter.Text;
-    clutterText: Clutter.Text;
-    hint_actor: Clutter.Actor;
-    hintActor: Clutter.Actor;
-    hint_text: string;
-    hintText: string;
-    input_hints: Clutter.InputContentHintFlags;
-    inputHints: Clutter.InputContentHintFlags;
-    input_purpose: Clutter.InputContentPurpose;
-    inputPurpose: Clutter.InputContentPurpose;
-    primary_icon: Clutter.Actor;
-    primaryIcon: Clutter.Actor;
-    secondary_icon: Clutter.Actor;
-    secondaryIcon: Clutter.Actor;
-    text: string;
+    get clutter_text(): Clutter.Text;
+    get clutterText(): Clutter.Text;
+    get hint_actor(): Clutter.Actor;
+    set hint_actor(val: Clutter.Actor);
+    get hintActor(): Clutter.Actor;
+    set hintActor(val: Clutter.Actor);
+    get hint_text(): string;
+    set hint_text(val: string);
+    get hintText(): string;
+    set hintText(val: string);
+    get input_hints(): Clutter.InputContentHintFlags;
+    set input_hints(val: Clutter.InputContentHintFlags);
+    get inputHints(): Clutter.InputContentHintFlags;
+    set inputHints(val: Clutter.InputContentHintFlags);
+    get input_purpose(): Clutter.InputContentPurpose;
+    set input_purpose(val: Clutter.InputContentPurpose);
+    get inputPurpose(): Clutter.InputContentPurpose;
+    set inputPurpose(val: Clutter.InputContentPurpose);
+    get primary_icon(): Clutter.Actor;
+    set primary_icon(val: Clutter.Actor);
+    get primaryIcon(): Clutter.Actor;
+    set primaryIcon(val: Clutter.Actor);
+    get secondary_icon(): Clutter.Actor;
+    set secondary_icon(val: Clutter.Actor);
+    get secondaryIcon(): Clutter.Actor;
+    set secondaryIcon(val: Clutter.Actor);
+    get text(): string;
+    set text(val: string);
 
     // Signals
 
@@ -696,7 +661,8 @@ export class Entry<A extends Clutter.Actor = Clutter.Actor>
     // Constructors
 
     static ["new"](text?: string | null): Entry;
-    static ["new"](...args: never[]): never;
+    // Conflicted with Clutter.Actor.new
+    static ["new"](...args: never[]): any;
 
     // Members
 
@@ -720,26 +686,17 @@ export class Entry<A extends Clutter.Actor = Clutter.Actor>
 
     // Implemented Members
 
-    find_property(property_name: string): GObject.ParamSpec;
-    get_actor(): Clutter.Actor;
-    get_initial_state(property_name: string, value: any): void;
-    interpolate_value(property_name: string, interval: Clutter.Interval, progress: number): [boolean, unknown];
-    set_final_state(property_name: string, value: any): void;
-    vfunc_find_property(property_name: string): GObject.ParamSpec;
-    vfunc_get_actor(): Clutter.Actor;
-    vfunc_get_initial_state(property_name: string, value: any): void;
-    vfunc_interpolate_value(property_name: string, interval: Clutter.Interval, progress: number): [boolean, unknown];
-    vfunc_set_final_state(property_name: string, value: any): void;
     add_actor(actor: A): void;
-    child_get_property(child: A, property: string, value: any): void;
+    child_get_property(child: A, property: string, value: GObject.Value | any): void;
     child_notify(child: A, pspec: GObject.ParamSpec): void;
-    child_set_property(child: A, property: string, value: any): void;
+    child_set_property(child: A, property: string, value: GObject.Value | any): void;
     create_child_meta(actor: A): void;
     destroy_child_meta(actor: A): void;
     find_child_by_name(child_name: string): A;
     get_child_meta(actor: A): Clutter.ChildMeta;
     get_children(): A[];
-    get_children(...args: never[]): never;
+    // Conflicted with Clutter.Actor.get_children
+    get_children(...args: never[]): any;
     lower_child(actor: A, sibling?: A | null): void;
     raise_child(actor: A, sibling?: A | null): void;
     remove_actor(actor: A): void;
@@ -755,14 +712,6 @@ export class Entry<A extends Clutter.Actor = Clutter.Actor>
     vfunc_raise(actor: A, sibling?: A | null): void;
     vfunc_remove(actor: A): void;
     vfunc_sort_depth_order(): void;
-    get_id(): string;
-    parse_custom_node(script: Clutter.Script, value: any, name: string, node: Json.Node): boolean;
-    set_custom_property(script: Clutter.Script, name: string, value: any): void;
-    set_id(id_: string): void;
-    vfunc_get_id(): string;
-    vfunc_parse_custom_node(script: Clutter.Script, value: any, name: string, node: Json.Node): boolean;
-    vfunc_set_custom_property(script: Clutter.Script, name: string, value: any): void;
-    vfunc_set_id(id_: string): void;
 }
 export module FocusManager {
     export interface ConstructorProperties extends GObject.Object.ConstructorProperties {
@@ -794,9 +743,6 @@ export class GenericAccessible extends WidgetAccessible implements Atk.Action, A
     constructor(properties?: Partial<GenericAccessible.ConstructorProperties>, ...args: any[]);
     _init(properties?: Partial<GenericAccessible.ConstructorProperties>, ...args: any[]): void;
 
-    // Fields
-    priv: GenericAccessiblePrivate;
-
     // Signals
 
     connect(id: string, callback: (...args: any[]) => any): number;
@@ -824,57 +770,6 @@ export class GenericAccessible extends WidgetAccessible implements Atk.Action, A
 
     // Implemented Members
 
-    do_action(i: number): boolean;
-    get_description(i: number): string | null;
-    get_description(...args: never[]): never;
-    get_keybinding(i: number): string | null;
-    get_localized_name(i: number): string | null;
-    get_n_actions(): number;
-    get_name(i: number): string | null;
-    get_name(...args: never[]): never;
-    set_description(i: number, desc: string): boolean;
-    set_description(...args: never[]): never;
-    vfunc_do_action(i: number): boolean;
-    vfunc_get_description(i: number): string | null;
-    vfunc_get_description(...args: never[]): never;
-    vfunc_get_keybinding(i: number): string | null;
-    vfunc_get_localized_name(i: number): string | null;
-    vfunc_get_n_actions(): number;
-    vfunc_get_name(i: number): string | null;
-    vfunc_get_name(...args: never[]): never;
-    vfunc_set_description(i: number, desc: string): boolean;
-    vfunc_set_description(...args: never[]): never;
-    contains(x: number, y: number, coord_type: Atk.CoordType): boolean;
-    get_alpha(): number;
-    get_extents(coord_type: Atk.CoordType): [number | null, number | null, number | null, number | null];
-    get_layer(): Atk.Layer;
-    get_mdi_zorder(): number;
-    get_position(coord_type: Atk.CoordType): [number | null, number | null];
-    get_size(): [number | null, number | null];
-    grab_focus(): boolean;
-    ref_accessible_at_point(x: number, y: number, coord_type: Atk.CoordType): Atk.Object | null;
-    remove_focus_handler(handler_id: number): void;
-    scroll_to(type: Atk.ScrollType): boolean;
-    scroll_to_point(coords: Atk.CoordType, x: number, y: number): boolean;
-    set_extents(x: number, y: number, width: number, height: number, coord_type: Atk.CoordType): boolean;
-    set_position(x: number, y: number, coord_type: Atk.CoordType): boolean;
-    set_size(width: number, height: number): boolean;
-    vfunc_bounds_changed(bounds: Atk.Rectangle): void;
-    vfunc_contains(x: number, y: number, coord_type: Atk.CoordType): boolean;
-    vfunc_get_alpha(): number;
-    vfunc_get_extents(coord_type: Atk.CoordType): [number | null, number | null, number | null, number | null];
-    vfunc_get_layer(): Atk.Layer;
-    vfunc_get_mdi_zorder(): number;
-    vfunc_get_position(coord_type: Atk.CoordType): [number | null, number | null];
-    vfunc_get_size(): [number | null, number | null];
-    vfunc_grab_focus(): boolean;
-    vfunc_ref_accessible_at_point(x: number, y: number, coord_type: Atk.CoordType): Atk.Object | null;
-    vfunc_remove_focus_handler(handler_id: number): void;
-    vfunc_scroll_to(type: Atk.ScrollType): boolean;
-    vfunc_scroll_to_point(coords: Atk.CoordType, x: number, y: number): boolean;
-    vfunc_set_extents(x: number, y: number, width: number, height: number, coord_type: Atk.CoordType): boolean;
-    vfunc_set_position(x: number, y: number, coord_type: Atk.CoordType): boolean;
-    vfunc_set_size(width: number, height: number): boolean;
     get_current_value(): unknown;
     get_increment(): number;
     get_maximum_value(): unknown;
@@ -883,7 +778,7 @@ export class GenericAccessible extends WidgetAccessible implements Atk.Action, A
     get_range(): Atk.Range | null;
     get_sub_ranges(): Atk.Range[];
     get_value_and_text(): [number, string | null];
-    set_current_value(value: any): boolean;
+    set_current_value(value: GObject.Value | any): boolean;
     set_value(new_value: number): void;
     vfunc_get_current_value(): unknown;
     vfunc_get_increment(): number;
@@ -893,7 +788,7 @@ export class GenericAccessible extends WidgetAccessible implements Atk.Action, A
     vfunc_get_range(): Atk.Range | null;
     vfunc_get_sub_ranges(): Atk.Range[];
     vfunc_get_value_and_text(): [number, string | null];
-    vfunc_set_current_value(value: any): boolean;
+    vfunc_set_current_value(value: GObject.Value | any): boolean;
     vfunc_set_value(new_value: number): void;
 }
 export module Icon {
@@ -920,15 +815,24 @@ export class Icon<A extends Clutter.Actor = Clutter.Actor>
     _init(properties?: Partial<Icon.ConstructorProperties<A>>, ...args: any[]): void;
 
     // Properties
-    fallback_gicon: Gio.Icon;
-    fallbackGicon: Gio.Icon;
-    fallback_icon_name: string;
-    fallbackIconName: string;
-    gicon: Gio.Icon;
-    icon_name: string;
-    iconName: string;
-    icon_size: number;
-    iconSize: number;
+    get fallback_gicon(): Gio.Icon;
+    set fallback_gicon(val: Gio.Icon);
+    get fallbackGicon(): Gio.Icon;
+    set fallbackGicon(val: Gio.Icon);
+    get fallback_icon_name(): string;
+    set fallback_icon_name(val: string);
+    get fallbackIconName(): string;
+    set fallbackIconName(val: string);
+    get gicon(): Gio.Icon;
+    set gicon(val: Gio.Icon);
+    get icon_name(): string;
+    set icon_name(val: string);
+    get iconName(): string;
+    set iconName(val: string);
+    get icon_size(): number;
+    set icon_size(val: number);
+    get iconSize(): number;
+    set iconSize(val: number);
 
     // Constructors
 
@@ -949,26 +853,17 @@ export class Icon<A extends Clutter.Actor = Clutter.Actor>
 
     // Implemented Members
 
-    find_property(property_name: string): GObject.ParamSpec;
-    get_actor(): Clutter.Actor;
-    get_initial_state(property_name: string, value: any): void;
-    interpolate_value(property_name: string, interval: Clutter.Interval, progress: number): [boolean, unknown];
-    set_final_state(property_name: string, value: any): void;
-    vfunc_find_property(property_name: string): GObject.ParamSpec;
-    vfunc_get_actor(): Clutter.Actor;
-    vfunc_get_initial_state(property_name: string, value: any): void;
-    vfunc_interpolate_value(property_name: string, interval: Clutter.Interval, progress: number): [boolean, unknown];
-    vfunc_set_final_state(property_name: string, value: any): void;
     add_actor(actor: A): void;
-    child_get_property(child: A, property: string, value: any): void;
+    child_get_property(child: A, property: string, value: GObject.Value | any): void;
     child_notify(child: A, pspec: GObject.ParamSpec): void;
-    child_set_property(child: A, property: string, value: any): void;
+    child_set_property(child: A, property: string, value: GObject.Value | any): void;
     create_child_meta(actor: A): void;
     destroy_child_meta(actor: A): void;
     find_child_by_name(child_name: string): A;
     get_child_meta(actor: A): Clutter.ChildMeta;
     get_children(): A[];
-    get_children(...args: never[]): never;
+    // Conflicted with Clutter.Actor.get_children
+    get_children(...args: never[]): any;
     lower_child(actor: A, sibling?: A | null): void;
     raise_child(actor: A, sibling?: A | null): void;
     remove_actor(actor: A): void;
@@ -984,14 +879,6 @@ export class Icon<A extends Clutter.Actor = Clutter.Actor>
     vfunc_raise(actor: A, sibling?: A | null): void;
     vfunc_remove(actor: A): void;
     vfunc_sort_depth_order(): void;
-    get_id(): string;
-    parse_custom_node(script: Clutter.Script, value: any, name: string, node: Json.Node): boolean;
-    set_custom_property(script: Clutter.Script, name: string, value: any): void;
-    set_id(id_: string): void;
-    vfunc_get_id(): string;
-    vfunc_parse_custom_node(script: Clutter.Script, value: any, name: string, node: Json.Node): boolean;
-    vfunc_set_custom_property(script: Clutter.Script, name: string, value: any): void;
-    vfunc_set_id(id_: string): void;
 }
 export module ImageContent {
     export interface ConstructorProperties extends Clutter.Image.ConstructorProperties {
@@ -1009,10 +896,10 @@ export class ImageContent extends Clutter.Image implements Clutter.Content, Gio.
     _init(properties?: Partial<ImageContent.ConstructorProperties>, ...args: any[]): void;
 
     // Properties
-    preferred_height: number;
-    preferredHeight: number;
-    preferred_width: number;
-    preferredWidth: number;
+    get preferred_height(): number;
+    get preferredHeight(): number;
+    get preferred_width(): number;
+    get preferredWidth(): number;
 
     // Members
 
@@ -1076,14 +963,16 @@ export class Label<A extends Clutter.Actor = Clutter.Actor>
     _init(properties?: Partial<Label.ConstructorProperties<A>>, ...args: any[]): void;
 
     // Properties
-    clutter_text: Clutter.Text;
-    clutterText: Clutter.Text;
-    text: string;
+    get clutter_text(): Clutter.Text;
+    get clutterText(): Clutter.Text;
+    get text(): string;
+    set text(val: string);
 
     // Constructors
 
     static ["new"](text?: string | null): Label;
-    static ["new"](...args: never[]): never;
+    // Conflicted with Clutter.Actor.new
+    static ["new"](...args: never[]): any;
 
     // Members
 
@@ -1093,26 +982,17 @@ export class Label<A extends Clutter.Actor = Clutter.Actor>
 
     // Implemented Members
 
-    find_property(property_name: string): GObject.ParamSpec;
-    get_actor(): Clutter.Actor;
-    get_initial_state(property_name: string, value: any): void;
-    interpolate_value(property_name: string, interval: Clutter.Interval, progress: number): [boolean, unknown];
-    set_final_state(property_name: string, value: any): void;
-    vfunc_find_property(property_name: string): GObject.ParamSpec;
-    vfunc_get_actor(): Clutter.Actor;
-    vfunc_get_initial_state(property_name: string, value: any): void;
-    vfunc_interpolate_value(property_name: string, interval: Clutter.Interval, progress: number): [boolean, unknown];
-    vfunc_set_final_state(property_name: string, value: any): void;
     add_actor(actor: A): void;
-    child_get_property(child: A, property: string, value: any): void;
+    child_get_property(child: A, property: string, value: GObject.Value | any): void;
     child_notify(child: A, pspec: GObject.ParamSpec): void;
-    child_set_property(child: A, property: string, value: any): void;
+    child_set_property(child: A, property: string, value: GObject.Value | any): void;
     create_child_meta(actor: A): void;
     destroy_child_meta(actor: A): void;
     find_child_by_name(child_name: string): A;
     get_child_meta(actor: A): Clutter.ChildMeta;
     get_children(): A[];
-    get_children(...args: never[]): never;
+    // Conflicted with Clutter.Actor.get_children
+    get_children(...args: never[]): any;
     lower_child(actor: A, sibling?: A | null): void;
     raise_child(actor: A, sibling?: A | null): void;
     remove_actor(actor: A): void;
@@ -1128,14 +1008,6 @@ export class Label<A extends Clutter.Actor = Clutter.Actor>
     vfunc_raise(actor: A, sibling?: A | null): void;
     vfunc_remove(actor: A): void;
     vfunc_sort_depth_order(): void;
-    get_id(): string;
-    parse_custom_node(script: Clutter.Script, value: any, name: string, node: Json.Node): boolean;
-    set_custom_property(script: Clutter.Script, name: string, value: any): void;
-    set_id(id_: string): void;
-    vfunc_get_id(): string;
-    vfunc_parse_custom_node(script: Clutter.Script, value: any, name: string, node: Json.Node): boolean;
-    vfunc_set_custom_property(script: Clutter.Script, name: string, value: any): void;
-    vfunc_set_id(id_: string): void;
 }
 export module PasswordEntry {
     export interface ConstructorProperties<A extends Clutter.Actor = Clutter.Actor>
@@ -1156,15 +1028,18 @@ export class PasswordEntry<A extends Clutter.Actor = Clutter.Actor>
     _init(properties?: Partial<PasswordEntry.ConstructorProperties<A>>, ...args: any[]): void;
 
     // Properties
-    password_visible: boolean;
-    passwordVisible: boolean;
-    show_peek_icon: boolean;
-    showPeekIcon: boolean;
+    get password_visible(): boolean;
+    set password_visible(val: boolean);
+    get passwordVisible(): boolean;
+    set passwordVisible(val: boolean);
+    get show_peek_icon(): boolean;
+    set show_peek_icon(val: boolean);
+    get showPeekIcon(): boolean;
+    set showPeekIcon(val: boolean);
 
     // Constructors
 
     static ["new"](): PasswordEntry;
-    static ["new"](...args: never[]): never;
 
     // Members
 
@@ -1175,26 +1050,17 @@ export class PasswordEntry<A extends Clutter.Actor = Clutter.Actor>
 
     // Implemented Members
 
-    find_property(property_name: string): GObject.ParamSpec;
-    get_actor(): Clutter.Actor;
-    get_initial_state(property_name: string, value: any): void;
-    interpolate_value(property_name: string, interval: Clutter.Interval, progress: number): [boolean, unknown];
-    set_final_state(property_name: string, value: any): void;
-    vfunc_find_property(property_name: string): GObject.ParamSpec;
-    vfunc_get_actor(): Clutter.Actor;
-    vfunc_get_initial_state(property_name: string, value: any): void;
-    vfunc_interpolate_value(property_name: string, interval: Clutter.Interval, progress: number): [boolean, unknown];
-    vfunc_set_final_state(property_name: string, value: any): void;
     add_actor(actor: A): void;
-    child_get_property(child: A, property: string, value: any): void;
+    child_get_property(child: A, property: string, value: GObject.Value | any): void;
     child_notify(child: A, pspec: GObject.ParamSpec): void;
-    child_set_property(child: A, property: string, value: any): void;
+    child_set_property(child: A, property: string, value: GObject.Value | any): void;
     create_child_meta(actor: A): void;
     destroy_child_meta(actor: A): void;
     find_child_by_name(child_name: string): A;
     get_child_meta(actor: A): Clutter.ChildMeta;
     get_children(): A[];
-    get_children(...args: never[]): never;
+    // Conflicted with Clutter.Actor.get_children
+    get_children(...args: never[]): any;
     lower_child(actor: A, sibling?: A | null): void;
     raise_child(actor: A, sibling?: A | null): void;
     remove_actor(actor: A): void;
@@ -1210,14 +1076,6 @@ export class PasswordEntry<A extends Clutter.Actor = Clutter.Actor>
     vfunc_raise(actor: A, sibling?: A | null): void;
     vfunc_remove(actor: A): void;
     vfunc_sort_depth_order(): void;
-    get_id(): string;
-    parse_custom_node(script: Clutter.Script, value: any, name: string, node: Json.Node): boolean;
-    set_custom_property(script: Clutter.Script, name: string, value: any): void;
-    set_id(id_: string): void;
-    vfunc_get_id(): string;
-    vfunc_parse_custom_node(script: Clutter.Script, value: any, name: string, node: Json.Node): boolean;
-    vfunc_set_custom_property(script: Clutter.Script, name: string, value: any): void;
-    vfunc_set_id(id_: string): void;
 }
 export module ScrollBar {
     export interface ConstructorProperties<A extends Clutter.Actor = Clutter.Actor>
@@ -1236,8 +1094,10 @@ export class ScrollBar<A extends Clutter.Actor = Clutter.Actor>
     _init(properties?: Partial<ScrollBar.ConstructorProperties<A>>, ...args: any[]): void;
 
     // Properties
-    adjustment: Adjustment;
-    vertical: boolean;
+    get adjustment(): Adjustment;
+    set adjustment(val: Adjustment);
+    get vertical(): boolean;
+    set vertical(val: boolean);
 
     // Signals
 
@@ -1254,7 +1114,8 @@ export class ScrollBar<A extends Clutter.Actor = Clutter.Actor>
     // Constructors
 
     static ["new"](adjustment: Adjustment): ScrollBar;
-    static ["new"](...args: never[]): never;
+    // Conflicted with Clutter.Actor.new
+    static ["new"](...args: never[]): any;
 
     // Members
 
@@ -1265,26 +1126,17 @@ export class ScrollBar<A extends Clutter.Actor = Clutter.Actor>
 
     // Implemented Members
 
-    find_property(property_name: string): GObject.ParamSpec;
-    get_actor(): Clutter.Actor;
-    get_initial_state(property_name: string, value: any): void;
-    interpolate_value(property_name: string, interval: Clutter.Interval, progress: number): [boolean, unknown];
-    set_final_state(property_name: string, value: any): void;
-    vfunc_find_property(property_name: string): GObject.ParamSpec;
-    vfunc_get_actor(): Clutter.Actor;
-    vfunc_get_initial_state(property_name: string, value: any): void;
-    vfunc_interpolate_value(property_name: string, interval: Clutter.Interval, progress: number): [boolean, unknown];
-    vfunc_set_final_state(property_name: string, value: any): void;
     add_actor(actor: A): void;
-    child_get_property(child: A, property: string, value: any): void;
+    child_get_property(child: A, property: string, value: GObject.Value | any): void;
     child_notify(child: A, pspec: GObject.ParamSpec): void;
-    child_set_property(child: A, property: string, value: any): void;
+    child_set_property(child: A, property: string, value: GObject.Value | any): void;
     create_child_meta(actor: A): void;
     destroy_child_meta(actor: A): void;
     find_child_by_name(child_name: string): A;
     get_child_meta(actor: A): Clutter.ChildMeta;
     get_children(): A[];
-    get_children(...args: never[]): never;
+    // Conflicted with Clutter.Actor.get_children
+    get_children(...args: never[]): any;
     lower_child(actor: A, sibling?: A | null): void;
     raise_child(actor: A, sibling?: A | null): void;
     remove_actor(actor: A): void;
@@ -1300,19 +1152,13 @@ export class ScrollBar<A extends Clutter.Actor = Clutter.Actor>
     vfunc_raise(actor: A, sibling?: A | null): void;
     vfunc_remove(actor: A): void;
     vfunc_sort_depth_order(): void;
-    get_id(): string;
-    parse_custom_node(script: Clutter.Script, value: any, name: string, node: Json.Node): boolean;
-    set_custom_property(script: Clutter.Script, name: string, value: any): void;
-    set_id(id_: string): void;
-    vfunc_get_id(): string;
-    vfunc_parse_custom_node(script: Clutter.Script, value: any, name: string, node: Json.Node): boolean;
-    vfunc_set_custom_property(script: Clutter.Script, name: string, value: any): void;
-    vfunc_set_id(id_: string): void;
 }
 export module ScrollView {
     export interface ConstructorProperties<A extends Clutter.Actor = Clutter.Actor>
         extends Bin.ConstructorProperties<A> {
         [key: string]: any;
+        content_padding: Clutter.Margin;
+        contentPadding: Clutter.Margin;
         enable_mouse_scrolling: boolean;
         enableMouseScrolling: boolean;
         hscroll: ScrollBar;
@@ -1338,20 +1184,32 @@ export class ScrollView<A extends Clutter.Actor = Clutter.Actor>
     _init(properties?: Partial<ScrollView.ConstructorProperties<A>>, ...args: any[]): void;
 
     // Properties
-    enable_mouse_scrolling: boolean;
-    enableMouseScrolling: boolean;
-    hscroll: ScrollBar;
-    hscrollbar_policy: PolicyType;
-    hscrollbarPolicy: PolicyType;
-    hscrollbar_visible: boolean;
-    hscrollbarVisible: boolean;
-    overlay_scrollbars: boolean;
-    overlayScrollbars: boolean;
-    vscroll: ScrollBar;
-    vscrollbar_policy: PolicyType;
-    vscrollbarPolicy: PolicyType;
-    vscrollbar_visible: boolean;
-    vscrollbarVisible: boolean;
+    get content_padding(): Clutter.Margin;
+    set content_padding(val: Clutter.Margin);
+    get contentPadding(): Clutter.Margin;
+    set contentPadding(val: Clutter.Margin);
+    get enable_mouse_scrolling(): boolean;
+    set enable_mouse_scrolling(val: boolean);
+    get enableMouseScrolling(): boolean;
+    set enableMouseScrolling(val: boolean);
+    get hscroll(): ScrollBar;
+    get hscrollbar_policy(): PolicyType;
+    set hscrollbar_policy(val: PolicyType);
+    get hscrollbarPolicy(): PolicyType;
+    set hscrollbarPolicy(val: PolicyType);
+    get hscrollbar_visible(): boolean;
+    get hscrollbarVisible(): boolean;
+    get overlay_scrollbars(): boolean;
+    set overlay_scrollbars(val: boolean);
+    get overlayScrollbars(): boolean;
+    set overlayScrollbars(val: boolean);
+    get vscroll(): ScrollBar;
+    get vscrollbar_policy(): PolicyType;
+    set vscrollbar_policy(val: PolicyType);
+    get vscrollbarPolicy(): PolicyType;
+    set vscrollbarPolicy(val: PolicyType);
+    get vscrollbar_visible(): boolean;
+    get vscrollbarVisible(): boolean;
 
     // Constructors
 
@@ -1370,30 +1228,21 @@ export class ScrollView<A extends Clutter.Actor = Clutter.Actor>
     set_overlay_scrollbars(enabled: boolean): void;
     set_policy(hscroll: PolicyType, vscroll: PolicyType): void;
     set_row_size(row_size: number): void;
-    update_fade_effect(vfade_offset: number, hfade_offset: number): void;
+    update_fade_effect(fade_margins: Clutter.Margin): void;
 
     // Implemented Members
 
-    find_property(property_name: string): GObject.ParamSpec;
-    get_actor(): Clutter.Actor;
-    get_initial_state(property_name: string, value: any): void;
-    interpolate_value(property_name: string, interval: Clutter.Interval, progress: number): [boolean, unknown];
-    set_final_state(property_name: string, value: any): void;
-    vfunc_find_property(property_name: string): GObject.ParamSpec;
-    vfunc_get_actor(): Clutter.Actor;
-    vfunc_get_initial_state(property_name: string, value: any): void;
-    vfunc_interpolate_value(property_name: string, interval: Clutter.Interval, progress: number): [boolean, unknown];
-    vfunc_set_final_state(property_name: string, value: any): void;
     add_actor(actor: A): void;
-    child_get_property(child: A, property: string, value: any): void;
+    child_get_property(child: A, property: string, value: GObject.Value | any): void;
     child_notify(child: A, pspec: GObject.ParamSpec): void;
-    child_set_property(child: A, property: string, value: any): void;
+    child_set_property(child: A, property: string, value: GObject.Value | any): void;
     create_child_meta(actor: A): void;
     destroy_child_meta(actor: A): void;
     find_child_by_name(child_name: string): A;
     get_child_meta(actor: A): Clutter.ChildMeta;
     get_children(): A[];
-    get_children(...args: never[]): never;
+    // Conflicted with Clutter.Actor.get_children
+    get_children(...args: never[]): any;
     lower_child(actor: A, sibling?: A | null): void;
     raise_child(actor: A, sibling?: A | null): void;
     remove_actor(actor: A): void;
@@ -1409,24 +1258,14 @@ export class ScrollView<A extends Clutter.Actor = Clutter.Actor>
     vfunc_raise(actor: A, sibling?: A | null): void;
     vfunc_remove(actor: A): void;
     vfunc_sort_depth_order(): void;
-    get_id(): string;
-    parse_custom_node(script: Clutter.Script, value: any, name: string, node: Json.Node): boolean;
-    set_custom_property(script: Clutter.Script, name: string, value: any): void;
-    set_id(id_: string): void;
-    vfunc_get_id(): string;
-    vfunc_parse_custom_node(script: Clutter.Script, value: any, name: string, node: Json.Node): boolean;
-    vfunc_set_custom_property(script: Clutter.Script, name: string, value: any): void;
-    vfunc_set_id(id_: string): void;
 }
 export module ScrollViewFade {
     export interface ConstructorProperties extends Clutter.ShaderEffect.ConstructorProperties {
         [key: string]: any;
         fade_edges: boolean;
         fadeEdges: boolean;
-        hfade_offset: number;
-        hfadeOffset: number;
-        vfade_offset: number;
-        vfadeOffset: number;
+        fade_margins: Clutter.Margin;
+        fadeMargins: Clutter.Margin;
     }
 }
 export class ScrollViewFade extends Clutter.ShaderEffect {
@@ -1436,17 +1275,18 @@ export class ScrollViewFade extends Clutter.ShaderEffect {
     _init(properties?: Partial<ScrollViewFade.ConstructorProperties>, ...args: any[]): void;
 
     // Properties
-    fade_edges: boolean;
-    fadeEdges: boolean;
-    hfade_offset: number;
-    hfadeOffset: number;
-    vfade_offset: number;
-    vfadeOffset: number;
+    get fade_edges(): boolean;
+    set fade_edges(val: boolean);
+    get fadeEdges(): boolean;
+    set fadeEdges(val: boolean);
+    get fade_margins(): Clutter.Margin;
+    set fade_margins(val: Clutter.Margin);
+    get fadeMargins(): Clutter.Margin;
+    set fadeMargins(val: Clutter.Margin);
 
     // Constructors
 
     static ["new"](): ScrollViewFade;
-    static ["new"](...args: never[]): never;
 }
 export module Settings {
     export interface ConstructorProperties extends GObject.Object.ConstructorProperties {
@@ -1476,22 +1316,24 @@ export class Settings extends GObject.Object {
     _init(properties?: Partial<Settings.ConstructorProperties>, ...args: any[]): void;
 
     // Properties
-    drag_threshold: number;
-    dragThreshold: number;
-    enable_animations: boolean;
-    enableAnimations: boolean;
-    font_name: string;
-    fontName: string;
-    gtk_icon_theme: string;
-    gtkIconTheme: string;
-    gtk_theme: string;
-    gtkTheme: string;
-    magnifier_active: boolean;
-    magnifierActive: boolean;
-    primary_paste: boolean;
-    primaryPaste: boolean;
-    slow_down_factor: number;
-    slowDownFactor: number;
+    get drag_threshold(): number;
+    get dragThreshold(): number;
+    get enable_animations(): boolean;
+    get enableAnimations(): boolean;
+    get font_name(): string;
+    get fontName(): string;
+    get gtk_icon_theme(): string;
+    get gtkIconTheme(): string;
+    get gtk_theme(): string;
+    get gtkTheme(): string;
+    get magnifier_active(): boolean;
+    get magnifierActive(): boolean;
+    get primary_paste(): boolean;
+    get primaryPaste(): boolean;
+    get slow_down_factor(): number;
+    set slow_down_factor(val: number);
+    get slowDownFactor(): number;
+    set slowDownFactor(val: number);
 
     // Members
 
@@ -1510,9 +1352,6 @@ export class TextureCache extends GObject.Object {
     constructor(properties?: Partial<TextureCache.ConstructorProperties>, ...args: any[]);
     _init(properties?: Partial<TextureCache.ConstructorProperties>, ...args: any[]): void;
 
-    // Fields
-    priv: TextureCachePrivate;
-
     // Signals
 
     connect(id: string, callback: (...args: any[]) => any): number;
@@ -1528,6 +1367,7 @@ export class TextureCache extends GObject.Object {
     // Members
 
     bind_cairo_surface_property(object: GObject.Object, property_name: string): Gio.Icon;
+    load_cairo_surface_to_gicon(surface: cairo.Surface): Gio.Icon;
     load_file_async(
         file: Gio.File,
         available_width: number,
@@ -1572,12 +1412,12 @@ export class Theme extends GObject.Object {
     _init(properties?: Partial<Theme.ConstructorProperties>, ...args: any[]): void;
 
     // Properties
-    application_stylesheet: Gio.File;
-    applicationStylesheet: Gio.File;
-    default_stylesheet: Gio.File;
-    defaultStylesheet: Gio.File;
-    theme_stylesheet: Gio.File;
-    themeStylesheet: Gio.File;
+    get application_stylesheet(): Gio.File;
+    get applicationStylesheet(): Gio.File;
+    get default_stylesheet(): Gio.File;
+    get defaultStylesheet(): Gio.File;
+    get theme_stylesheet(): Gio.File;
+    get themeStylesheet(): Gio.File;
 
     // Signals
 
@@ -1612,8 +1452,10 @@ export class ThemeContext extends GObject.Object {
     _init(properties?: Partial<ThemeContext.ConstructorProperties>, ...args: any[]): void;
 
     // Properties
-    scale_factor: number;
-    scaleFactor: number;
+    get scale_factor(): number;
+    set scale_factor(val: number);
+    get scaleFactor(): number;
+    set scaleFactor(val: number);
 
     // Signals
 
@@ -1730,14 +1572,20 @@ export class ThemeNode extends GObject.Object {
 }
 export module Viewport {
     export interface ConstructorProperties<
-        A = Clutter.LayoutManager,
-        B = Clutter.Content,
+        A extends Clutter.LayoutManager = Clutter.LayoutManager,
+        B extends Clutter.Content = Clutter.Content,
         C extends Clutter.Actor = Clutter.Actor
     > extends Widget.ConstructorProperties<A, B> {
         [key: string]: any;
+        clip_to_view: boolean;
+        clipToView: boolean;
     }
 }
-export class Viewport<A = Clutter.LayoutManager, B = Clutter.Content, C extends Clutter.Actor = Clutter.Actor>
+export class Viewport<
+        A extends Clutter.LayoutManager = Clutter.LayoutManager,
+        B extends Clutter.Content = Clutter.Content,
+        C extends Clutter.Actor = Clutter.Actor
+    >
     extends Widget<A, B>
     implements Atk.ImplementorIface, Clutter.Animatable, Clutter.Container<C>, Clutter.Scriptable, Scrollable {
     static $gtype: GObject.GType<Viewport>;
@@ -1745,56 +1593,89 @@ export class Viewport<A = Clutter.LayoutManager, B = Clutter.Content, C extends 
     constructor(properties?: Partial<Viewport.ConstructorProperties<A, B, C>>, ...args: any[]);
     _init(properties?: Partial<Viewport.ConstructorProperties<A, B, C>>, ...args: any[]): void;
 
+    // Properties
+    get clip_to_view(): boolean;
+    set clip_to_view(val: boolean);
+    get clipToView(): boolean;
+    set clipToView(val: boolean);
+
     // Implemented Properties
 
-    hadjustment: Adjustment;
-    vadjustment: Adjustment;
+    get hadjustment(): Adjustment;
+    set hadjustment(val: Adjustment);
+    get vadjustment(): Adjustment;
+    set vadjustment(val: Adjustment);
 
     // Implemented Members
 
-    find_property(property_name: string): GObject.ParamSpec;
-    get_actor(): Clutter.Actor;
-    get_initial_state(property_name: string, value: any): void;
-    interpolate_value(property_name: string, interval: Clutter.Interval, progress: number): [boolean, unknown];
-    set_final_state(property_name: string, value: any): void;
-    vfunc_find_property(property_name: string): GObject.ParamSpec;
-    vfunc_get_actor(): Clutter.Actor;
-    vfunc_get_initial_state(property_name: string, value: any): void;
-    vfunc_interpolate_value(property_name: string, interval: Clutter.Interval, progress: number): [boolean, unknown];
-    vfunc_set_final_state(property_name: string, value: any): void;
     add_actor(actor: C): void;
-    child_get_property(child: C, property: string, value: any): void;
+    // Conflicted with Clutter.Container.add_actor
+    add_actor(...args: never[]): any;
+    child_get_property(child: C, property: string, value: GObject.Value | any): void;
+    // Conflicted with Clutter.Container.child_get_property
+    child_get_property(...args: never[]): any;
     child_notify(child: C, pspec: GObject.ParamSpec): void;
-    child_set_property(child: C, property: string, value: any): void;
+    // Conflicted with Clutter.Container.child_notify
+    child_notify(...args: never[]): any;
+    child_set_property(child: C, property: string, value: GObject.Value | any): void;
+    // Conflicted with Clutter.Container.child_set_property
+    child_set_property(...args: never[]): any;
     create_child_meta(actor: C): void;
+    // Conflicted with Clutter.Container.create_child_meta
+    create_child_meta(...args: never[]): any;
     destroy_child_meta(actor: C): void;
+    // Conflicted with Clutter.Container.destroy_child_meta
+    destroy_child_meta(...args: never[]): any;
     find_child_by_name(child_name: string): C;
+    // Conflicted with Clutter.Container.find_child_by_name
+    find_child_by_name(...args: never[]): any;
     get_child_meta(actor: C): Clutter.ChildMeta;
+    // Conflicted with Clutter.Container.get_child_meta
+    get_child_meta(...args: never[]): any;
     get_children(): C[];
-    get_children(...args: never[]): never;
+    // Conflicted with Clutter.Actor.get_children
+    get_children(...args: never[]): any;
     lower_child(actor: C, sibling?: C | null): void;
+    // Conflicted with Clutter.Container.lower_child
+    lower_child(...args: never[]): any;
     raise_child(actor: C, sibling?: C | null): void;
+    // Conflicted with Clutter.Container.raise_child
+    raise_child(...args: never[]): any;
     remove_actor(actor: C): void;
+    // Conflicted with Clutter.Container.remove_actor
+    remove_actor(...args: never[]): any;
     sort_depth_order(): void;
     vfunc_actor_added(actor: C): void;
+    // Conflicted with Clutter.Container.vfunc_actor_added
+    vfunc_actor_added(...args: never[]): any;
     vfunc_actor_removed(actor: C): void;
+    // Conflicted with Clutter.Container.vfunc_actor_removed
+    vfunc_actor_removed(...args: never[]): any;
     vfunc_add(actor: C): void;
+    // Conflicted with Clutter.Container.vfunc_add
+    vfunc_add(...args: never[]): any;
     vfunc_child_notify(child: C, pspec: GObject.ParamSpec): void;
+    // Conflicted with Clutter.Container.vfunc_child_notify
+    vfunc_child_notify(...args: never[]): any;
     vfunc_create_child_meta(actor: C): void;
+    // Conflicted with Clutter.Container.vfunc_create_child_meta
+    vfunc_create_child_meta(...args: never[]): any;
     vfunc_destroy_child_meta(actor: C): void;
+    // Conflicted with Clutter.Container.vfunc_destroy_child_meta
+    vfunc_destroy_child_meta(...args: never[]): any;
     vfunc_get_child_meta(actor: C): Clutter.ChildMeta;
+    // Conflicted with Clutter.Container.vfunc_get_child_meta
+    vfunc_get_child_meta(...args: never[]): any;
     vfunc_lower(actor: C, sibling?: C | null): void;
+    // Conflicted with Clutter.Container.vfunc_lower
+    vfunc_lower(...args: never[]): any;
     vfunc_raise(actor: C, sibling?: C | null): void;
+    // Conflicted with Clutter.Container.vfunc_raise
+    vfunc_raise(...args: never[]): any;
     vfunc_remove(actor: C): void;
+    // Conflicted with Clutter.Container.vfunc_remove
+    vfunc_remove(...args: never[]): any;
     vfunc_sort_depth_order(): void;
-    get_id(): string;
-    parse_custom_node(script: Clutter.Script, value: any, name: string, node: Json.Node): boolean;
-    set_custom_property(script: Clutter.Script, name: string, value: any): void;
-    set_id(id_: string): void;
-    vfunc_get_id(): string;
-    vfunc_parse_custom_node(script: Clutter.Script, value: any, name: string, node: Json.Node): boolean;
-    vfunc_set_custom_property(script: Clutter.Script, name: string, value: any): void;
-    vfunc_set_id(id_: string): void;
     get_adjustments(hadjustment: Adjustment, vadjustment: Adjustment): void;
     set_adjustments(hadjustment: Adjustment, vadjustment: Adjustment): void;
     vfunc_get_adjustments(hadjustment: Adjustment, vadjustment: Adjustment): void;
@@ -1802,8 +1683,8 @@ export class Viewport<A = Clutter.LayoutManager, B = Clutter.Content, C extends 
 }
 export module Widget {
     export interface ConstructorProperties<
-        A = Clutter.LayoutManager,
-        B = Clutter.Content,
+        A extends Clutter.LayoutManager = Clutter.LayoutManager,
+        B extends Clutter.Content = Clutter.Content,
         C extends Clutter.Actor = Clutter.Actor
     > extends Clutter.Actor.ConstructorProperties<A, B> {
         [key: string]: any;
@@ -1825,7 +1706,11 @@ export module Widget {
         trackHover: boolean;
     }
 }
-export class Widget<A = Clutter.LayoutManager, B = Clutter.Content, C extends Clutter.Actor = Clutter.Actor>
+export class Widget<
+        A extends Clutter.LayoutManager = Clutter.LayoutManager,
+        B extends Clutter.Content = Clutter.Content,
+        C extends Clutter.Actor = Clutter.Actor
+    >
     extends Clutter.Actor<A, B>
     implements Atk.ImplementorIface, Clutter.Animatable, Clutter.Container<C>, Clutter.Scriptable {
     static $gtype: GObject.GType<Widget>;
@@ -1834,22 +1719,38 @@ export class Widget<A = Clutter.LayoutManager, B = Clutter.Content, C extends Cl
     _init(properties?: Partial<Widget.ConstructorProperties<A, B, C>>, ...args: any[]): void;
 
     // Properties
-    accessible_name: string;
-    accessibleName: string;
-    accessible_role: Atk.Role;
-    accessibleRole: Atk.Role;
-    can_focus: boolean;
-    canFocus: boolean;
-    hover: boolean;
-    label_actor: Clutter.Actor;
-    labelActor: Clutter.Actor;
-    pseudo_class: string;
-    pseudoClass: string;
-    style: string;
-    style_class: string;
-    styleClass: string;
-    track_hover: boolean;
-    trackHover: boolean;
+    get accessible_name(): string;
+    set accessible_name(val: string);
+    get accessibleName(): string;
+    set accessibleName(val: string);
+    get accessible_role(): Atk.Role;
+    set accessible_role(val: Atk.Role);
+    get accessibleRole(): Atk.Role;
+    set accessibleRole(val: Atk.Role);
+    get can_focus(): boolean;
+    set can_focus(val: boolean);
+    get canFocus(): boolean;
+    set canFocus(val: boolean);
+    get hover(): boolean;
+    set hover(val: boolean);
+    get label_actor(): Clutter.Actor;
+    set label_actor(val: Clutter.Actor);
+    get labelActor(): Clutter.Actor;
+    set labelActor(val: Clutter.Actor);
+    get pseudo_class(): string;
+    set pseudo_class(val: string);
+    get pseudoClass(): string;
+    set pseudoClass(val: string);
+    get style(): string;
+    set style(val: string);
+    get style_class(): string;
+    set style_class(val: string);
+    get styleClass(): string;
+    set styleClass(val: string);
+    get track_hover(): boolean;
+    set track_hover(val: boolean);
+    get trackHover(): boolean;
+    set trackHover(val: boolean);
 
     // Signals
 
@@ -1910,46 +1811,89 @@ export class Widget<A = Clutter.LayoutManager, B = Clutter.Content, C extends Cl
 
     find_property(property_name: string): GObject.ParamSpec;
     get_actor(): Clutter.Actor;
-    get_initial_state(property_name: string, value: any): void;
+    get_initial_state(property_name: string, value: GObject.Value | any): void;
     interpolate_value(property_name: string, interval: Clutter.Interval, progress: number): [boolean, unknown];
-    set_final_state(property_name: string, value: any): void;
+    set_final_state(property_name: string, value: GObject.Value | any): void;
     vfunc_find_property(property_name: string): GObject.ParamSpec;
     vfunc_get_actor(): Clutter.Actor;
-    vfunc_get_initial_state(property_name: string, value: any): void;
+    vfunc_get_initial_state(property_name: string, value: GObject.Value | any): void;
     vfunc_interpolate_value(property_name: string, interval: Clutter.Interval, progress: number): [boolean, unknown];
-    vfunc_set_final_state(property_name: string, value: any): void;
+    vfunc_set_final_state(property_name: string, value: GObject.Value | any): void;
     add_actor(actor: C): void;
-    child_get_property(child: C, property: string, value: any): void;
+    // Conflicted with Clutter.Container.add_actor
+    add_actor(...args: never[]): any;
+    child_get_property(child: C, property: string, value: GObject.Value | any): void;
+    // Conflicted with Clutter.Container.child_get_property
+    child_get_property(...args: never[]): any;
     child_notify(child: C, pspec: GObject.ParamSpec): void;
-    child_set_property(child: C, property: string, value: any): void;
+    // Conflicted with Clutter.Container.child_notify
+    child_notify(...args: never[]): any;
+    child_set_property(child: C, property: string, value: GObject.Value | any): void;
+    // Conflicted with Clutter.Container.child_set_property
+    child_set_property(...args: never[]): any;
     create_child_meta(actor: C): void;
+    // Conflicted with Clutter.Container.create_child_meta
+    create_child_meta(...args: never[]): any;
     destroy_child_meta(actor: C): void;
+    // Conflicted with Clutter.Container.destroy_child_meta
+    destroy_child_meta(...args: never[]): any;
     find_child_by_name(child_name: string): C;
+    // Conflicted with Clutter.Container.find_child_by_name
+    find_child_by_name(...args: never[]): any;
     get_child_meta(actor: C): Clutter.ChildMeta;
+    // Conflicted with Clutter.Container.get_child_meta
+    get_child_meta(...args: never[]): any;
     get_children(): C[];
-    get_children(...args: never[]): never;
+    // Conflicted with Clutter.Actor.get_children
+    get_children(...args: never[]): any;
     lower_child(actor: C, sibling?: C | null): void;
+    // Conflicted with Clutter.Container.lower_child
+    lower_child(...args: never[]): any;
     raise_child(actor: C, sibling?: C | null): void;
+    // Conflicted with Clutter.Container.raise_child
+    raise_child(...args: never[]): any;
     remove_actor(actor: C): void;
+    // Conflicted with Clutter.Container.remove_actor
+    remove_actor(...args: never[]): any;
     sort_depth_order(): void;
     vfunc_actor_added(actor: C): void;
+    // Conflicted with Clutter.Container.vfunc_actor_added
+    vfunc_actor_added(...args: never[]): any;
     vfunc_actor_removed(actor: C): void;
+    // Conflicted with Clutter.Container.vfunc_actor_removed
+    vfunc_actor_removed(...args: never[]): any;
     vfunc_add(actor: C): void;
+    // Conflicted with Clutter.Container.vfunc_add
+    vfunc_add(...args: never[]): any;
     vfunc_child_notify(child: C, pspec: GObject.ParamSpec): void;
+    // Conflicted with Clutter.Container.vfunc_child_notify
+    vfunc_child_notify(...args: never[]): any;
     vfunc_create_child_meta(actor: C): void;
+    // Conflicted with Clutter.Container.vfunc_create_child_meta
+    vfunc_create_child_meta(...args: never[]): any;
     vfunc_destroy_child_meta(actor: C): void;
+    // Conflicted with Clutter.Container.vfunc_destroy_child_meta
+    vfunc_destroy_child_meta(...args: never[]): any;
     vfunc_get_child_meta(actor: C): Clutter.ChildMeta;
+    // Conflicted with Clutter.Container.vfunc_get_child_meta
+    vfunc_get_child_meta(...args: never[]): any;
     vfunc_lower(actor: C, sibling?: C | null): void;
+    // Conflicted with Clutter.Container.vfunc_lower
+    vfunc_lower(...args: never[]): any;
     vfunc_raise(actor: C, sibling?: C | null): void;
+    // Conflicted with Clutter.Container.vfunc_raise
+    vfunc_raise(...args: never[]): any;
     vfunc_remove(actor: C): void;
+    // Conflicted with Clutter.Container.vfunc_remove
+    vfunc_remove(...args: never[]): any;
     vfunc_sort_depth_order(): void;
     get_id(): string;
-    parse_custom_node(script: Clutter.Script, value: any, name: string, node: Json.Node): boolean;
-    set_custom_property(script: Clutter.Script, name: string, value: any): void;
+    parse_custom_node(script: Clutter.Script, value: GObject.Value | any, name: string, node: Json.Node): boolean;
+    set_custom_property(script: Clutter.Script, name: string, value: GObject.Value | any): void;
     set_id(id_: string): void;
     vfunc_get_id(): string;
-    vfunc_parse_custom_node(script: Clutter.Script, value: any, name: string, node: Json.Node): boolean;
-    vfunc_set_custom_property(script: Clutter.Script, name: string, value: any): void;
+    vfunc_parse_custom_node(script: Clutter.Script, value: GObject.Value | any, name: string, node: Json.Node): boolean;
+    vfunc_set_custom_property(script: Clutter.Script, name: string, value: GObject.Value | any): void;
     vfunc_set_id(id_: string): void;
 }
 export module WidgetAccessible {
@@ -1967,24 +1911,30 @@ export class WidgetAccessible extends Cally.Actor implements Atk.Action, Atk.Com
 
     do_action(i: number): boolean;
     get_description(i: number): string | null;
-    get_description(...args: never[]): never;
+    // Conflicted with Atk.Object.get_description
+    get_description(...args: never[]): any;
     get_keybinding(i: number): string | null;
     get_localized_name(i: number): string | null;
     get_n_actions(): number;
     get_name(i: number): string | null;
-    get_name(...args: never[]): never;
+    // Conflicted with Atk.Object.get_name
+    get_name(...args: never[]): any;
     set_description(i: number, desc: string): boolean;
-    set_description(...args: never[]): never;
+    // Conflicted with Atk.Object.set_description
+    set_description(...args: never[]): any;
     vfunc_do_action(i: number): boolean;
     vfunc_get_description(i: number): string | null;
-    vfunc_get_description(...args: never[]): never;
+    // Conflicted with Atk.Object.vfunc_get_description
+    vfunc_get_description(...args: never[]): any;
     vfunc_get_keybinding(i: number): string | null;
     vfunc_get_localized_name(i: number): string | null;
     vfunc_get_n_actions(): number;
     vfunc_get_name(i: number): string | null;
-    vfunc_get_name(...args: never[]): never;
+    // Conflicted with Atk.Object.vfunc_get_name
+    vfunc_get_name(...args: never[]): any;
     vfunc_set_description(i: number, desc: string): boolean;
-    vfunc_set_description(...args: never[]): never;
+    // Conflicted with Atk.Object.vfunc_set_description
+    vfunc_set_description(...args: never[]): any;
     contains(x: number, y: number, coord_type: Atk.CoordType): boolean;
     get_alpha(): number;
     get_extents(coord_type: Atk.CoordType): [number | null, number | null, number | null, number | null];
@@ -2043,20 +1993,12 @@ export class IconColors {
     constructor(
         properties?: Partial<{
             ref_count?: number;
-            foreground?: Clutter.Color;
-            warning?: Clutter.Color;
-            error?: Clutter.Color;
-            success?: Clutter.Color;
         }>
     );
     constructor(copy: IconColors);
 
     // Fields
     ref_count: number;
-    foreground: Clutter.Color;
-    warning: Clutter.Color;
-    error: Clutter.Color;
-    success: Clutter.Color;
 
     // Constructors
     static ["new"](): IconColors;
@@ -2092,7 +2034,6 @@ export class Shadow {
     constructor(color: Clutter.Color, xoffset: number, yoffset: number, blur: number, spread: number, inset: boolean);
     constructor(
         properties?: Partial<{
-            color?: Clutter.Color;
             xoffset?: number;
             yoffset?: number;
             blur?: number;
@@ -2104,7 +2045,6 @@ export class Shadow {
     constructor(copy: Shadow);
 
     // Fields
-    color: Clutter.Color;
     xoffset: number;
     yoffset: number;
     blur: number;
@@ -2154,19 +2094,23 @@ export class TextureCachePrivate {
 export class ThemeNodePaintState {
     static $gtype: GObject.GType<ThemeNodePaintState>;
 
+    constructor(
+        properties?: Partial<{
+            alloc_width?: number;
+            alloc_height?: number;
+            box_shadow_width?: number;
+            box_shadow_height?: number;
+            resource_scale?: number;
+        }>
+    );
     constructor(copy: ThemeNodePaintState);
 
     // Fields
-    node: ThemeNode;
     alloc_width: number;
     alloc_height: number;
     box_shadow_width: number;
     box_shadow_height: number;
     resource_scale: number;
-    box_shadow_pipeline: Cogl.Pipeline;
-    prerendered_texture: Cogl.Pipeline;
-    prerendered_pipeline: Cogl.Pipeline;
-    corner_material: Cogl.Pipeline[];
 
     // Members
     copy(other: ThemeNodePaintState): void;

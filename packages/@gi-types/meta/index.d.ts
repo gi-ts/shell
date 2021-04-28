@@ -4,22 +4,20 @@
  * Generated from 8.0
  */
 
-import * as Clutter from "@gi-types/clutter";
-import * as Cogl from "@gi-types/cogl";
-import * as CoglPango from "@gi-types/coglpango";
-import * as GDesktopEnums from "@gi-types/gdesktopenums";
-import * as GObject from "@gi-types/gobject";
-import * as Gdk from "@gi-types/gdk";
-import * as Gtk from "@gi-types/gtk";
-import * as xfixes from "@gi-types/xfixes";
-import * as xlib from "@gi-types/xlib";
 import * as Gio from "@gi-types/gio";
 import * as Atk from "@gi-types/atk";
+import * as GObject from "@gi-types/gobject";
+import * as Clutter from "@gi-types/clutter";
+import * as Gtk from "@gi-types/gtk";
 import * as GLib from "@gi-types/glib";
+import * as GDesktopEnums from "@gi-types/gdesktopenums";
 import * as Pango from "@gi-types/pango";
 import * as Json from "@gi-types/json";
 import * as Graphene from "@gi-types/graphene";
+import * as Cogl from "@gi-types/cogl";
+import * as xlib from "@gi-types/xlib";
 import * as cairo from "@gi-types/cairo";
+import * as xfixes from "@gi-types/xfixes";
 
 export const CURRENT_TIME: number;
 export const DEFAULT_ICON_NAME: string;
@@ -45,11 +43,13 @@ export function disable_unredirect_for_display(display: Display): void;
 export function enable_unredirect_for_display(display: Display): void;
 export function exit(code: ExitCode): void;
 export function external_binding_name_for_action(keybinding_action: number): string;
+export function finalize(): void;
 export function focus_stage_window(display: Display, timestamp: number): void;
 export function frame_type_to_string(type: FrameType): string;
 export function g_utf8_strndup(src: string, n: number): string;
 export function get_backend(): Backend;
 export function get_debug_paint_flags(): DebugPaintFlag;
+export function get_exit_code(): ExitCode;
 export function get_feedback_group_for_display(display: Display): Clutter.Actor;
 export function get_locale_direction(): LocaleDirection;
 export function get_replace_current_wm(): boolean;
@@ -122,6 +122,8 @@ export function remove_clutter_debug_flags(
 export function remove_debug_paint_flag(flag: DebugPaintFlag): void;
 export function remove_verbose_topic(topic: DebugTopic): void;
 export function restart(message?: string | null): void;
+export function run_main_loop(): void;
+export function start(): void;
 export function test_init(): void;
 export function unsigned_long_equal(v1?: any | null, v2?: any | null): number;
 export function unsigned_long_hash(v?: any | null): number;
@@ -801,6 +803,9 @@ export abstract class Backend extends GObject.Object implements Gio.Initable {
     connect(signal: "lid-is-closed-changed", callback: (_source: this, object: boolean) => void): number;
     connect_after(signal: "lid-is-closed-changed", callback: (_source: this, object: boolean) => void): number;
     emit(signal: "lid-is-closed-changed", object: boolean): void;
+    connect(signal: "prepare-shutdown", callback: (_source: this) => void): number;
+    connect_after(signal: "prepare-shutdown", callback: (_source: this) => void): number;
+    emit(signal: "prepare-shutdown"): void;
 
     // Members
 
@@ -831,8 +836,8 @@ export class Background extends GObject.Object {
     _init(properties?: Partial<Background.ConstructorProperties>, ...args: any[]): void;
 
     // Properties
-    meta_display: Display;
-    metaDisplay: Display;
+    get meta_display(): Display;
+    get metaDisplay(): Display;
 
     // Signals
 
@@ -877,37 +882,39 @@ export class BackgroundActor<A extends Clutter.Actor = Clutter.Actor>
     _init(properties?: Partial<BackgroundActor.ConstructorProperties<A>>, ...args: any[]): void;
 
     // Properties
-    meta_display: Display;
-    metaDisplay: Display;
-    monitor: number;
+    get meta_display(): Display;
+    get metaDisplay(): Display;
+    get monitor(): number;
 
     // Constructors
 
     static ["new"](display: Display, monitor: number): BackgroundActor;
-    static ["new"](...args: never[]): never;
+    // Conflicted with Clutter.Actor.new
+    static ["new"](...args: never[]): any;
 
     // Implemented Members
 
     find_property(property_name: string): GObject.ParamSpec;
     get_actor(): Clutter.Actor;
-    get_initial_state(property_name: string, value: any): void;
+    get_initial_state(property_name: string, value: GObject.Value | any): void;
     interpolate_value(property_name: string, interval: Clutter.Interval, progress: number): [boolean, unknown];
-    set_final_state(property_name: string, value: any): void;
+    set_final_state(property_name: string, value: GObject.Value | any): void;
     vfunc_find_property(property_name: string): GObject.ParamSpec;
     vfunc_get_actor(): Clutter.Actor;
-    vfunc_get_initial_state(property_name: string, value: any): void;
+    vfunc_get_initial_state(property_name: string, value: GObject.Value | any): void;
     vfunc_interpolate_value(property_name: string, interval: Clutter.Interval, progress: number): [boolean, unknown];
-    vfunc_set_final_state(property_name: string, value: any): void;
+    vfunc_set_final_state(property_name: string, value: GObject.Value | any): void;
     add_actor(actor: A): void;
-    child_get_property(child: A, property: string, value: any): void;
+    child_get_property(child: A, property: string, value: GObject.Value | any): void;
     child_notify(child: A, pspec: GObject.ParamSpec): void;
-    child_set_property(child: A, property: string, value: any): void;
+    child_set_property(child: A, property: string, value: GObject.Value | any): void;
     create_child_meta(actor: A): void;
     destroy_child_meta(actor: A): void;
     find_child_by_name(child_name: string): A;
     get_child_meta(actor: A): Clutter.ChildMeta;
     get_children(): A[];
-    get_children(...args: never[]): never;
+    // Conflicted with Clutter.Actor.get_children
+    get_children(...args: never[]): any;
     lower_child(actor: A, sibling?: A | null): void;
     raise_child(actor: A, sibling?: A | null): void;
     remove_actor(actor: A): void;
@@ -924,12 +931,12 @@ export class BackgroundActor<A extends Clutter.Actor = Clutter.Actor>
     vfunc_remove(actor: A): void;
     vfunc_sort_depth_order(): void;
     get_id(): string;
-    parse_custom_node(script: Clutter.Script, value: any, name: string, node: Json.Node): boolean;
-    set_custom_property(script: Clutter.Script, name: string, value: any): void;
+    parse_custom_node(script: Clutter.Script, value: GObject.Value | any, name: string, node: Json.Node): boolean;
+    set_custom_property(script: Clutter.Script, name: string, value: GObject.Value | any): void;
     set_id(id_: string): void;
     vfunc_get_id(): string;
-    vfunc_parse_custom_node(script: Clutter.Script, value: any, name: string, node: Json.Node): boolean;
-    vfunc_set_custom_property(script: Clutter.Script, name: string, value: any): void;
+    vfunc_parse_custom_node(script: Clutter.Script, value: GObject.Value | any, name: string, node: Json.Node): boolean;
+    vfunc_set_custom_property(script: Clutter.Script, name: string, value: GObject.Value | any): void;
     vfunc_set_id(id_: string): void;
 }
 export module BackgroundContent {
@@ -959,21 +966,33 @@ export class BackgroundContent extends GObject.Object implements Clutter.Content
     _init(properties?: Partial<BackgroundContent.ConstructorProperties>, ...args: any[]): void;
 
     // Properties
-    background: Background;
-    brightness: number;
-    gradient: boolean;
-    gradient_height: number;
-    gradientHeight: number;
-    gradient_max_darkness: number;
-    gradientMaxDarkness: number;
-    meta_display: Display;
-    metaDisplay: Display;
-    monitor: number;
-    rounded_clip_radius: number;
-    roundedClipRadius: number;
-    vignette: boolean;
-    vignette_sharpness: number;
-    vignetteSharpness: number;
+    get background(): Background;
+    set background(val: Background);
+    get brightness(): number;
+    set brightness(val: number);
+    get gradient(): boolean;
+    set gradient(val: boolean);
+    get gradient_height(): number;
+    set gradient_height(val: number);
+    get gradientHeight(): number;
+    set gradientHeight(val: number);
+    get gradient_max_darkness(): number;
+    set gradient_max_darkness(val: number);
+    get gradientMaxDarkness(): number;
+    set gradientMaxDarkness(val: number);
+    get meta_display(): Display;
+    get metaDisplay(): Display;
+    get monitor(): number;
+    get rounded_clip_radius(): number;
+    set rounded_clip_radius(val: number);
+    get roundedClipRadius(): number;
+    set roundedClipRadius(val: number);
+    get vignette(): boolean;
+    set vignette(val: boolean);
+    get vignette_sharpness(): number;
+    set vignette_sharpness(val: number);
+    get vignetteSharpness(): number;
+    set vignetteSharpness(val: number);
 
     // Members
 
@@ -1018,24 +1037,25 @@ export class BackgroundGroup<A extends Clutter.Actor = Clutter.Actor>
 
     find_property(property_name: string): GObject.ParamSpec;
     get_actor(): Clutter.Actor;
-    get_initial_state(property_name: string, value: any): void;
+    get_initial_state(property_name: string, value: GObject.Value | any): void;
     interpolate_value(property_name: string, interval: Clutter.Interval, progress: number): [boolean, unknown];
-    set_final_state(property_name: string, value: any): void;
+    set_final_state(property_name: string, value: GObject.Value | any): void;
     vfunc_find_property(property_name: string): GObject.ParamSpec;
     vfunc_get_actor(): Clutter.Actor;
-    vfunc_get_initial_state(property_name: string, value: any): void;
+    vfunc_get_initial_state(property_name: string, value: GObject.Value | any): void;
     vfunc_interpolate_value(property_name: string, interval: Clutter.Interval, progress: number): [boolean, unknown];
-    vfunc_set_final_state(property_name: string, value: any): void;
+    vfunc_set_final_state(property_name: string, value: GObject.Value | any): void;
     add_actor(actor: A): void;
-    child_get_property(child: A, property: string, value: any): void;
+    child_get_property(child: A, property: string, value: GObject.Value | any): void;
     child_notify(child: A, pspec: GObject.ParamSpec): void;
-    child_set_property(child: A, property: string, value: any): void;
+    child_set_property(child: A, property: string, value: GObject.Value | any): void;
     create_child_meta(actor: A): void;
     destroy_child_meta(actor: A): void;
     find_child_by_name(child_name: string): A;
     get_child_meta(actor: A): Clutter.ChildMeta;
     get_children(): A[];
-    get_children(...args: never[]): never;
+    // Conflicted with Clutter.Actor.get_children
+    get_children(...args: never[]): any;
     lower_child(actor: A, sibling?: A | null): void;
     raise_child(actor: A, sibling?: A | null): void;
     remove_actor(actor: A): void;
@@ -1052,12 +1072,12 @@ export class BackgroundGroup<A extends Clutter.Actor = Clutter.Actor>
     vfunc_remove(actor: A): void;
     vfunc_sort_depth_order(): void;
     get_id(): string;
-    parse_custom_node(script: Clutter.Script, value: any, name: string, node: Json.Node): boolean;
-    set_custom_property(script: Clutter.Script, name: string, value: any): void;
+    parse_custom_node(script: Clutter.Script, value: GObject.Value | any, name: string, node: Json.Node): boolean;
+    set_custom_property(script: Clutter.Script, name: string, value: GObject.Value | any): void;
     set_id(id_: string): void;
     vfunc_get_id(): string;
-    vfunc_parse_custom_node(script: Clutter.Script, value: any, name: string, node: Json.Node): boolean;
-    vfunc_set_custom_property(script: Clutter.Script, name: string, value: any): void;
+    vfunc_parse_custom_node(script: Clutter.Script, value: GObject.Value | any, name: string, node: Json.Node): boolean;
+    vfunc_set_custom_property(script: Clutter.Script, name: string, value: GObject.Value | any): void;
     vfunc_set_id(id_: string): void;
 }
 export module BackgroundImage {
@@ -1121,15 +1141,12 @@ export class Barrier extends GObject.Object {
     _init(properties?: Partial<Barrier.ConstructorProperties>, ...args: any[]): void;
 
     // Properties
-    directions: BarrierDirection;
-    display: Display;
-    x1: number;
-    x2: number;
-    y1: number;
-    y2: number;
-
-    // Fields
-    priv: BarrierPrivate;
+    get directions(): BarrierDirection;
+    get display(): Display;
+    get x1(): number;
+    get x2(): number;
+    get y1(): number;
+    get y2(): number;
 
     // Signals
 
@@ -1162,7 +1179,7 @@ export class CursorTracker extends GObject.Object {
     _init(properties?: Partial<CursorTracker.ConstructorProperties>, ...args: any[]): void;
 
     // Properties
-    backend: Backend;
+    get backend(): Backend;
 
     // Signals
 
@@ -1204,10 +1221,10 @@ export class Display extends GObject.Object {
     _init(properties?: Partial<Display.ConstructorProperties>, ...args: any[]): void;
 
     // Properties
-    compositor_modifiers: Clutter.ModifierType;
-    compositorModifiers: Clutter.ModifierType;
-    focus_window: Window;
-    focusWindow: Window;
+    get compositor_modifiers(): Clutter.ModifierType;
+    get compositorModifiers(): Clutter.ModifierType;
+    get focus_window(): Window;
+    get focusWindow(): Window;
 
     // Signals
 
@@ -1443,7 +1460,7 @@ export class IdleMonitor extends GObject.Object {
     _init(properties?: Partial<IdleMonitor.ConstructorProperties>, ...args: any[]): void;
 
     // Properties
-    device: Clutter.InputDevice;
+    get device(): Clutter.InputDevice;
 
     // Members
 
@@ -1468,9 +1485,11 @@ export class LaunchContext extends Gio.AppLaunchContext {
     _init(properties?: Partial<LaunchContext.ConstructorProperties>, ...args: any[]): void;
 
     // Properties
-    display: Display;
-    timestamp: number;
-    workspace: Workspace;
+    get display(): Display;
+    get timestamp(): number;
+    set timestamp(val: number);
+    get workspace(): Workspace;
+    set workspace(val: Workspace);
 
     // Members
 
@@ -1492,9 +1511,9 @@ export class MonitorManager extends GObject.Object {
     _init(properties?: Partial<MonitorManager.ConstructorProperties>, ...args: any[]): void;
 
     // Properties
-    backend: Backend;
-    panel_orientation_managed: boolean;
-    panelOrientationManaged: boolean;
+    get backend(): Backend;
+    get panel_orientation_managed(): boolean;
+    get panelOrientationManaged(): boolean;
 
     // Signals
 
@@ -1614,8 +1633,8 @@ export class RemoteAccessHandle extends GObject.Object {
     _init(properties?: Partial<RemoteAccessHandle.ConstructorProperties>, ...args: any[]): void;
 
     // Properties
-    is_recording: boolean;
-    isRecording: boolean;
+    get is_recording(): boolean;
+    get isRecording(): boolean;
 
     // Signals
 
@@ -1874,26 +1893,17 @@ export class Stage<A extends Clutter.Actor = Clutter.Actor>
 
     // Implemented Members
 
-    find_property(property_name: string): GObject.ParamSpec;
-    get_actor(): Clutter.Actor;
-    get_initial_state(property_name: string, value: any): void;
-    interpolate_value(property_name: string, interval: Clutter.Interval, progress: number): [boolean, unknown];
-    set_final_state(property_name: string, value: any): void;
-    vfunc_find_property(property_name: string): GObject.ParamSpec;
-    vfunc_get_actor(): Clutter.Actor;
-    vfunc_get_initial_state(property_name: string, value: any): void;
-    vfunc_interpolate_value(property_name: string, interval: Clutter.Interval, progress: number): [boolean, unknown];
-    vfunc_set_final_state(property_name: string, value: any): void;
     add_actor(actor: A): void;
-    child_get_property(child: A, property: string, value: any): void;
+    child_get_property(child: A, property: string, value: GObject.Value | any): void;
     child_notify(child: A, pspec: GObject.ParamSpec): void;
-    child_set_property(child: A, property: string, value: any): void;
+    child_set_property(child: A, property: string, value: GObject.Value | any): void;
     create_child_meta(actor: A): void;
     destroy_child_meta(actor: A): void;
     find_child_by_name(child_name: string): A;
     get_child_meta(actor: A): Clutter.ChildMeta;
     get_children(): A[];
-    get_children(...args: never[]): never;
+    // Conflicted with Clutter.Actor.get_children
+    get_children(...args: never[]): any;
     lower_child(actor: A, sibling?: A | null): void;
     raise_child(actor: A, sibling?: A | null): void;
     remove_actor(actor: A): void;
@@ -1909,14 +1919,6 @@ export class Stage<A extends Clutter.Actor = Clutter.Actor>
     vfunc_raise(actor: A, sibling?: A | null): void;
     vfunc_remove(actor: A): void;
     vfunc_sort_depth_order(): void;
-    get_id(): string;
-    parse_custom_node(script: Clutter.Script, value: any, name: string, node: Json.Node): boolean;
-    set_custom_property(script: Clutter.Script, name: string, value: any): void;
-    set_id(id_: string): void;
-    vfunc_get_id(): string;
-    vfunc_parse_custom_node(script: Clutter.Script, value: any, name: string, node: Json.Node): boolean;
-    vfunc_set_custom_property(script: Clutter.Script, name: string, value: any): void;
-    vfunc_set_id(id_: string): void;
 }
 export module StartupNotification {
     export interface ConstructorProperties extends GObject.Object.ConstructorProperties {
@@ -1931,7 +1933,7 @@ export class StartupNotification extends GObject.Object {
     _init(properties?: Partial<StartupNotification.ConstructorProperties>, ...args: any[]): void;
 
     // Properties
-    display: Display;
+    get display(): Display;
 
     // Signals
 
@@ -1967,15 +1969,15 @@ export class StartupSequence extends GObject.Object {
     _init(properties?: Partial<StartupSequence.ConstructorProperties>, ...args: any[]): void;
 
     // Properties
-    application_id: string;
-    applicationId: string;
-    icon_name: string;
-    iconName: string;
-    id: string;
-    name: string;
-    timestamp: number;
-    wmclass: string;
-    workspace: number;
+    get application_id(): string;
+    get applicationId(): string;
+    get icon_name(): string;
+    get iconName(): string;
+    get id(): string;
+    get name(): string;
+    get timestamp(): number;
+    get wmclass(): string;
+    get workspace(): number;
 
     // Signals
 
@@ -2074,48 +2076,48 @@ export abstract class Window extends GObject.Object {
     _init(properties?: Partial<Window.ConstructorProperties>, ...args: any[]): void;
 
     // Properties
-    above: boolean;
-    appears_focused: boolean;
-    appearsFocused: boolean;
-    decorated: boolean;
-    demands_attention: boolean;
-    demandsAttention: boolean;
-    fullscreen: boolean;
-    gtk_app_menu_object_path: string;
-    gtkAppMenuObjectPath: string;
-    gtk_application_id: string;
-    gtkApplicationId: string;
-    gtk_application_object_path: string;
-    gtkApplicationObjectPath: string;
-    gtk_menubar_object_path: string;
-    gtkMenubarObjectPath: string;
-    gtk_unique_bus_name: string;
-    gtkUniqueBusName: string;
-    gtk_window_object_path: string;
-    gtkWindowObjectPath: string;
-    icon: any;
-    maximized_horizontally: boolean;
-    maximizedHorizontally: boolean;
-    maximized_vertically: boolean;
-    maximizedVertically: boolean;
-    mini_icon: any;
-    miniIcon: any;
-    minimized: boolean;
-    mutter_hints: string;
-    mutterHints: string;
-    on_all_workspaces: boolean;
-    onAllWorkspaces: boolean;
-    resizeable: boolean;
-    skip_taskbar: boolean;
-    skipTaskbar: boolean;
-    title: string;
-    urgent: boolean;
-    user_time: number;
-    userTime: number;
-    window_type: WindowType;
-    windowType: WindowType;
-    wm_class: string;
-    wmClass: string;
+    get above(): boolean;
+    get appears_focused(): boolean;
+    get appearsFocused(): boolean;
+    get decorated(): boolean;
+    get demands_attention(): boolean;
+    get demandsAttention(): boolean;
+    get fullscreen(): boolean;
+    get gtk_app_menu_object_path(): string;
+    get gtkAppMenuObjectPath(): string;
+    get gtk_application_id(): string;
+    get gtkApplicationId(): string;
+    get gtk_application_object_path(): string;
+    get gtkApplicationObjectPath(): string;
+    get gtk_menubar_object_path(): string;
+    get gtkMenubarObjectPath(): string;
+    get gtk_unique_bus_name(): string;
+    get gtkUniqueBusName(): string;
+    get gtk_window_object_path(): string;
+    get gtkWindowObjectPath(): string;
+    get icon(): any;
+    get maximized_horizontally(): boolean;
+    get maximizedHorizontally(): boolean;
+    get maximized_vertically(): boolean;
+    get maximizedVertically(): boolean;
+    get mini_icon(): any;
+    get miniIcon(): any;
+    get minimized(): boolean;
+    get mutter_hints(): string;
+    get mutterHints(): string;
+    get on_all_workspaces(): boolean;
+    get onAllWorkspaces(): boolean;
+    get resizeable(): boolean;
+    get skip_taskbar(): boolean;
+    get skipTaskbar(): boolean;
+    get title(): string;
+    get urgent(): boolean;
+    get user_time(): number;
+    get userTime(): number;
+    get window_type(): WindowType;
+    get windowType(): WindowType;
+    get wm_class(): string;
+    get wmClass(): string;
 
     // Signals
 
@@ -2269,8 +2271,8 @@ export abstract class WindowActor<A extends Clutter.Actor = Clutter.Actor>
     _init(properties?: Partial<WindowActor.ConstructorProperties<A>>, ...args: any[]): void;
 
     // Properties
-    meta_window: Window;
-    metaWindow: Window;
+    get meta_window(): Window;
+    get metaWindow(): Window;
 
     // Signals
 
@@ -2304,24 +2306,25 @@ export abstract class WindowActor<A extends Clutter.Actor = Clutter.Actor>
 
     find_property(property_name: string): GObject.ParamSpec;
     get_actor(): Clutter.Actor;
-    get_initial_state(property_name: string, value: any): void;
+    get_initial_state(property_name: string, value: GObject.Value | any): void;
     interpolate_value(property_name: string, interval: Clutter.Interval, progress: number): [boolean, unknown];
-    set_final_state(property_name: string, value: any): void;
+    set_final_state(property_name: string, value: GObject.Value | any): void;
     vfunc_find_property(property_name: string): GObject.ParamSpec;
     vfunc_get_actor(): Clutter.Actor;
-    vfunc_get_initial_state(property_name: string, value: any): void;
+    vfunc_get_initial_state(property_name: string, value: GObject.Value | any): void;
     vfunc_interpolate_value(property_name: string, interval: Clutter.Interval, progress: number): [boolean, unknown];
-    vfunc_set_final_state(property_name: string, value: any): void;
+    vfunc_set_final_state(property_name: string, value: GObject.Value | any): void;
     add_actor(actor: A): void;
-    child_get_property(child: A, property: string, value: any): void;
+    child_get_property(child: A, property: string, value: GObject.Value | any): void;
     child_notify(child: A, pspec: GObject.ParamSpec): void;
-    child_set_property(child: A, property: string, value: any): void;
+    child_set_property(child: A, property: string, value: GObject.Value | any): void;
     create_child_meta(actor: A): void;
     destroy_child_meta(actor: A): void;
     find_child_by_name(child_name: string): A;
     get_child_meta(actor: A): Clutter.ChildMeta;
     get_children(): A[];
-    get_children(...args: never[]): never;
+    // Conflicted with Clutter.Actor.get_children
+    get_children(...args: never[]): any;
     lower_child(actor: A, sibling?: A | null): void;
     raise_child(actor: A, sibling?: A | null): void;
     remove_actor(actor: A): void;
@@ -2338,12 +2341,12 @@ export abstract class WindowActor<A extends Clutter.Actor = Clutter.Actor>
     vfunc_remove(actor: A): void;
     vfunc_sort_depth_order(): void;
     get_id(): string;
-    parse_custom_node(script: Clutter.Script, value: any, name: string, node: Json.Node): boolean;
-    set_custom_property(script: Clutter.Script, name: string, value: any): void;
+    parse_custom_node(script: Clutter.Script, value: GObject.Value | any, name: string, node: Json.Node): boolean;
+    set_custom_property(script: Clutter.Script, name: string, value: GObject.Value | any): void;
     set_id(id_: string): void;
     vfunc_get_id(): string;
-    vfunc_parse_custom_node(script: Clutter.Script, value: any, name: string, node: Json.Node): boolean;
-    vfunc_set_custom_property(script: Clutter.Script, name: string, value: any): void;
+    vfunc_parse_custom_node(script: Clutter.Script, value: GObject.Value | any, name: string, node: Json.Node): boolean;
+    vfunc_set_custom_property(script: Clutter.Script, name: string, value: GObject.Value | any): void;
     vfunc_set_id(id_: string): void;
 }
 export module WindowGroup {
@@ -2364,24 +2367,25 @@ export class WindowGroup<A extends Clutter.Actor = Clutter.Actor>
 
     find_property(property_name: string): GObject.ParamSpec;
     get_actor(): Clutter.Actor;
-    get_initial_state(property_name: string, value: any): void;
+    get_initial_state(property_name: string, value: GObject.Value | any): void;
     interpolate_value(property_name: string, interval: Clutter.Interval, progress: number): [boolean, unknown];
-    set_final_state(property_name: string, value: any): void;
+    set_final_state(property_name: string, value: GObject.Value | any): void;
     vfunc_find_property(property_name: string): GObject.ParamSpec;
     vfunc_get_actor(): Clutter.Actor;
-    vfunc_get_initial_state(property_name: string, value: any): void;
+    vfunc_get_initial_state(property_name: string, value: GObject.Value | any): void;
     vfunc_interpolate_value(property_name: string, interval: Clutter.Interval, progress: number): [boolean, unknown];
-    vfunc_set_final_state(property_name: string, value: any): void;
+    vfunc_set_final_state(property_name: string, value: GObject.Value | any): void;
     add_actor(actor: A): void;
-    child_get_property(child: A, property: string, value: any): void;
+    child_get_property(child: A, property: string, value: GObject.Value | any): void;
     child_notify(child: A, pspec: GObject.ParamSpec): void;
-    child_set_property(child: A, property: string, value: any): void;
+    child_set_property(child: A, property: string, value: GObject.Value | any): void;
     create_child_meta(actor: A): void;
     destroy_child_meta(actor: A): void;
     find_child_by_name(child_name: string): A;
     get_child_meta(actor: A): Clutter.ChildMeta;
     get_children(): A[];
-    get_children(...args: never[]): never;
+    // Conflicted with Clutter.Actor.get_children
+    get_children(...args: never[]): any;
     lower_child(actor: A, sibling?: A | null): void;
     raise_child(actor: A, sibling?: A | null): void;
     remove_actor(actor: A): void;
@@ -2398,12 +2402,12 @@ export class WindowGroup<A extends Clutter.Actor = Clutter.Actor>
     vfunc_remove(actor: A): void;
     vfunc_sort_depth_order(): void;
     get_id(): string;
-    parse_custom_node(script: Clutter.Script, value: any, name: string, node: Json.Node): boolean;
-    set_custom_property(script: Clutter.Script, name: string, value: any): void;
+    parse_custom_node(script: Clutter.Script, value: GObject.Value | any, name: string, node: Json.Node): boolean;
+    set_custom_property(script: Clutter.Script, name: string, value: GObject.Value | any): void;
     set_id(id_: string): void;
     vfunc_get_id(): string;
-    vfunc_parse_custom_node(script: Clutter.Script, value: any, name: string, node: Json.Node): boolean;
-    vfunc_set_custom_property(script: Clutter.Script, name: string, value: any): void;
+    vfunc_parse_custom_node(script: Clutter.Script, value: GObject.Value | any, name: string, node: Json.Node): boolean;
+    vfunc_set_custom_property(script: Clutter.Script, name: string, value: GObject.Value | any): void;
     vfunc_set_id(id_: string): void;
 }
 export module Workspace {
@@ -2423,11 +2427,11 @@ export class Workspace extends GObject.Object {
     _init(properties?: Partial<Workspace.ConstructorProperties>, ...args: any[]): void;
 
     // Properties
-    active: boolean;
-    n_windows: number;
-    nWindows: number;
-    workspace_index: number;
-    workspaceIndex: number;
+    get active(): boolean;
+    get n_windows(): number;
+    get nWindows(): number;
+    get workspace_index(): number;
+    get workspaceIndex(): number;
 
     // Signals
 
@@ -2471,12 +2475,12 @@ export class WorkspaceManager extends GObject.Object {
     _init(properties?: Partial<WorkspaceManager.ConstructorProperties>, ...args: any[]): void;
 
     // Properties
-    layout_columns: number;
-    layoutColumns: number;
-    layout_rows: number;
-    layoutRows: number;
-    n_workspaces: number;
-    nWorkspaces: number;
+    get layout_columns(): number;
+    get layoutColumns(): number;
+    get layout_rows(): number;
+    get layoutRows(): number;
+    get n_workspaces(): number;
+    get nWorkspaces(): number;
 
     // Signals
 
@@ -2589,12 +2593,6 @@ export class ButtonLayout {
     static $gtype: GObject.GType<ButtonLayout>;
 
     constructor(copy: ButtonLayout);
-
-    // Fields
-    left_buttons: ButtonFunction[];
-    left_buttons_has_spacer: boolean[];
-    right_buttons: ButtonFunction[];
-    right_buttons_has_spacer: boolean[];
 }
 
 export class Edge {
@@ -2603,7 +2601,6 @@ export class Edge {
     constructor(copy: Edge);
 
     // Fields
-    rect: Rectangle;
     side_type: Side;
     edge_type: EdgeType;
 }
@@ -2617,19 +2614,7 @@ export class Frame {
 export class FrameBorders {
     static $gtype: GObject.GType<FrameBorders>;
 
-    constructor(
-        properties?: Partial<{
-            visible?: Gtk.Border;
-            invisible?: Gtk.Border;
-            total?: Gtk.Border;
-        }>
-    );
     constructor(copy: FrameBorders);
-
-    // Fields
-    visible: Gtk.Border;
-    invisible: Gtk.Border;
-    total: Gtk.Border;
 
     // Members
     clear(): void;
@@ -2768,7 +2753,6 @@ export class Strut {
     constructor(copy: Strut);
 
     // Fields
-    rect: Rectangle;
     side: Side;
 }
 
@@ -2806,7 +2790,7 @@ export interface CloseDialogNamespace {
 export type CloseDialog = CloseDialogPrototype;
 export interface CloseDialogPrototype extends GObject.Object {
     // Properties
-    window: Window;
+    readonly window: Window;
 
     // Members
 
@@ -2829,7 +2813,7 @@ export interface InhibitShortcutsDialogNamespace {
 export type InhibitShortcutsDialog = InhibitShortcutsDialogPrototype;
 export interface InhibitShortcutsDialogPrototype extends GObject.Object {
     // Properties
-    window: Window;
+    readonly window: Window;
 
     // Members
 

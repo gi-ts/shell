@@ -4,10 +4,9 @@
  * Generated from 8.0
  */
 
-import * as Cogl from "@gi-types/cogl";
 import * as Pango from "@gi-types/pango";
-import * as PangoCairo from "@gi-types/pangocairo";
 import * as GObject from "@gi-types/gobject";
+import * as PangoCairo from "@gi-types/pangocairo";
 
 export function ensure_glyph_cache_for_layout(layout: Pango.Layout): void;
 export function font_map_clear_glyph_cache(font_map: FontMap): void;
@@ -30,6 +29,7 @@ export class Renderer extends Pango.Renderer {
     _init(properties?: Partial<Renderer.ConstructorProperties>, ...args: any[]): void;
 
     // Properties
-    context: any;
+    set context(val: any);
 }
+
 export type FontMap = PangoCairo.FontMap;

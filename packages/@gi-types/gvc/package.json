@@ -4,13 +4,13 @@
         "access": "public",
         "tag": "latest"
     },
-    "version": "1.0.2",
+    "version": "1.0.3",
     "description": "TypeScript definitions for Gvc",
     "license": "MIT",
     "contributors": [
         {
             "name": "Evan Welsh",
-            "url": "https://gitlab.gnome.org/ewlsh/",
+            "url": "https://github.com/ewlsh/",
             "githubUsername": "ewlsh"
         }
     ],
@@ -25,11 +25,10 @@
     "types": "index.d.ts",
     "repository": {
         "type": "git",
-        "url": "https://gitlab.gnome.org/ewlsh/packages.gi.ts.git",
-        "directory": "packages/gvc1"
+        "url": "https://github.com/gi-ts/./_working/gi-ts/shell8/packages/@gi-types/",
+        "directory": "packages/@gi-types/gvc"
     },
     "scripts": {},
-    "contentHash": "79b0ef2d919dc4b6024f4b34e476f575",
     "dependencies": {
         "@gi-types/gio": "^2.66.9",
         "@gi-types/gobject": "^2.66.9"
