@@ -2,6 +2,8 @@
   "name": "@gi.ts/packages-shell8",
   "private": true,
   "devDependencies": {
+    "@gi.ts/cli": "^1.5.5",
+    "@gi.ts/lib": "^1.5.3",
     "lerna": "^3.22.1"
   },
   "workspaces": [
