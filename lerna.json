@@ -1,6 +1,6 @@
 {
   "packages": [
-    "packages/*"
+    "packages/@gi-types/*"
   ],
   "version": "independent",
   "access": "public"
