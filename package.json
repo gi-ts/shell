@@ -10,6 +10,7 @@
     "packages/@gi-types/**"
   ],
   "scripts": {
+    "build": "tsc",
     "pub": "lerna publish",
     "pub:package": "lerna publish from-package",
     "generate": "XDG_DATA_DIRS=$INSTALL_PREFIX/lib/mutter-8/:$INSTALL_PREFIX/share/gnome-shell/:$XDG_DATA_DIRS gi-ts generate docs.json"
