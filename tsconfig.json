@@ -1,17 +1,17 @@
 {
     "compilerOptions": {
+        "lib": ["ES2019"],
+        "noEmit": true,
         "strict": true,
-        "typeRoots": [
-            "./packages",
-            "./node_modules/@gi-types",
-        ],
         "paths": {
             "*": [
                 "*",
+                "./packages/*",
                 "./packages/@gi-types/*",
                 "./node_modules/@gi-types/*",
             ]
         },
+        "moduleResolution": "node",
         "baseUrl": ".",
         "allowSyntheticDefaultImports": true
     },

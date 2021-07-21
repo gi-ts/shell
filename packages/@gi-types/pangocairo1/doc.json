@@ -1,0 +1,10 @@
+{
+    "name": "PangoCairo",
+    "api_version": "1.0",
+    "package_version": "1.0",
+    "imports": {
+        "Pango": "1.0",
+        "cairo": "1.0",
+        "GObject": "2.0"
+    }
+}

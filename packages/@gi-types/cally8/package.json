@@ -1,0 +1,39 @@
+{
+    "name": "@gi-types/cally8",
+    "publishConfig": {
+        "access": "public",
+        "tag": "latest"
+    },
+    "version": "8.0.0",
+    "description": "TypeScript definitions for Cally",
+    "license": "MIT",
+    "contributors": [
+        {
+            "name": "Evan Welsh",
+            "url": "https://github.com/ewlsh/",
+            "githubUsername": "ewlsh"
+        }
+    ],
+    "main": "",
+    "files": [
+        "index.d.ts",
+        "doc.json",
+        "package.json",
+        "README.md",
+        "LICENSE"
+    ],
+    "types": "index.d.ts",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/gi-ts/shell8",
+        "directory": "packages/@gi-types/cally8"
+    },
+    "scripts": {},
+    "dependencies": {
+        "@gi-types/atk1": "^2.36.0",
+        "@gi-types/clutter8": "^8.0.0",
+        "@gi-types/gobject2": "^2.68.0"
+    },
+    "typeScriptVersion": "4.1",
+    "gitHead": null
+}

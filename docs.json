@@ -1,27 +1,29 @@
 {
     "options": {
         "outputFormat": "folder",
-        "versionedOutput": false,
+        "versionedOutput": true,
         "propertyCase": "both",
         "out": "./packages/@gi-types/",
-        "versionedImports": false,
+        "versionedImports": true,
         "importPrefix": "@gi-types/",
         "emitMetadata": true,
         "inferGenerics": true,
-        "promisify": true
+        "promisify": true,
+        "noInitTypes": true
     },
     "libraries": {
+        "Cally": "8",
         "Clutter": "8",
         "ClutterX11": "8",
-        "Cally": "8",
-        "CoglPango": "8",
         "Cogl": "8",
-        "Meta": "8",
-        "St": "1.0",
+        "CoglPango": "8",
+        "PangoCairo": "1.0",
         "Gvc": "1.0",
+        "Meta": "8",
         "Shell": "0.1",
-        "xfixes": "4.0",
-        "xlib": "2.0"
+        "Shew": "0",
+        "St": "1.0",
+        "xfixes": "4.0"
     },
     "dependencies": {
         "Atspi": "2.0",
@@ -29,8 +31,14 @@
         "Atk": "1.0",
         "NM": "1.0",
         "Rsvg": "2.0",
-        "Gtk": ["3.0", "4.0"],
-        "Gdk": ["3.0", "4.0"],
+        "Gtk": [
+            "3.0",
+            "4.0"
+        ],
+        "Gdk": [
+            "3.0",
+            "4.0"
+        ],
         "GdkPixbuf": "2.0",
         "Graphene": "1.0",
         "Gio": "2.0",
