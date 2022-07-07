@@ -4,7 +4,7 @@
         "access": "public",
         "tag": "latest"
     },
-    "version": "10.0.0",
+    "version": "10.0.1",
     "description": "TypeScript definitions for Cally",
     "license": "MIT",
     "contributors": [
@@ -31,7 +31,7 @@
     "scripts": {},
     "dependencies": {
         "@gi-types/atk1": "^2.36.0",
-        "@gi-types/clutter10": "^10.0.0",
+        "@gi-types/clutter10": "^10.0.1",
         "@gi-types/gobject2": "^2.72.1"
     },
     "typeScriptVersion": "4.1",

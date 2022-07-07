@@ -4,7 +4,7 @@
         "access": "public",
         "tag": "latest"
     },
-    "version": "1.0.0",
+    "version": "1.0.1",
     "description": "TypeScript definitions for PangoCairo",
     "license": "MIT",
     "contributors": [

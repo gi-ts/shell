@@ -4,7 +4,7 @@
         "access": "public",
         "tag": "latest"
     },
-    "version": "10.0.0",
+    "version": "10.0.1",
     "description": "TypeScript definitions for Cogl",
     "license": "MIT",
     "contributors": [

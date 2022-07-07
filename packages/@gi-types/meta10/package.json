@@ -4,7 +4,7 @@
         "access": "public",
         "tag": "latest"
     },
-    "version": "10.0.0",
+    "version": "10.0.1",
     "description": "TypeScript definitions for Meta",
     "license": "MIT",
     "contributors": [
@@ -32,8 +32,8 @@
     "dependencies": {
         "@gi-types/atk1": "^2.36.0",
         "@gi-types/cairo1": "^1.0.1",
-        "@gi-types/clutter10": "^10.0.0",
-        "@gi-types/cogl10": "^10.0.0",
+        "@gi-types/clutter10": "^10.0.1",
+        "@gi-types/cogl10": "^10.0.1",
         "@gi-types/gdesktopenums3": "^3.0.1",
         "@gi-types/gio2": "^2.72.1",
         "@gi-types/glib2": "^2.72.1",
@@ -42,7 +42,7 @@
         "@gi-types/gtk3": "^3.24.1",
         "@gi-types/json1": "^1.6.1",
         "@gi-types/pango1": "^1.50.1",
-        "@gi-types/xfixes4": "^4.0.0",
+        "@gi-types/xfixes4": "^4.0.1",
         "@gi-types/xlib2": "^2.0.1"
     },
     "typeScriptVersion": "4.1",

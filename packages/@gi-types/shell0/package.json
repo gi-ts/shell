@@ -4,7 +4,7 @@
         "access": "public",
         "tag": "latest"
     },
-    "version": "0.1.0",
+    "version": "0.1.1",
     "description": "TypeScript definitions for Shell",
     "license": "MIT",
     "contributors": [
@@ -32,8 +32,8 @@
     "dependencies": {
         "@gi-types/atk1": "^2.36.0",
         "@gi-types/cairo1": "^1.0.1",
-        "@gi-types/clutter10": "^10.0.0",
-        "@gi-types/cogl10": "^10.0.0",
+        "@gi-types/clutter10": "^10.0.1",
+        "@gi-types/cogl10": "^10.0.1",
         "@gi-types/gcr3": "^3.41.1",
         "@gi-types/gdkpixbuf2": "^2.0.2",
         "@gi-types/gio2": "^2.72.1",
@@ -41,10 +41,10 @@
         "@gi-types/gobject2": "^2.72.1",
         "@gi-types/graphene1": "^1.0.1",
         "@gi-types/gtk3": "^3.24.1",
-        "@gi-types/meta10": "^10.0.0",
+        "@gi-types/meta10": "^10.0.1",
         "@gi-types/nm1": "^1.38.1",
         "@gi-types/polkitagent1": "^1.0.1",
-        "@gi-types/st1": "^1.0.0"
+        "@gi-types/st1": "^1.0.1"
     },
     "typeScriptVersion": "4.1",
     "gitHead": null
