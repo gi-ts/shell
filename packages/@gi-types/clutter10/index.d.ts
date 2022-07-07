@@ -1,7 +1,7 @@
 /**
- * Clutter 8
+ * Clutter 10
  *
- * Generated from 8.0
+ * Generated from 10.0
  */
 
 import * as GObject from "@gi-types/gobject2";
@@ -12,7 +12,7 @@ import * as GLib from "@gi-types/glib2";
 import * as Graphene from "@gi-types/graphene1";
 import * as Gio from "@gi-types/gio2";
 import * as Json from "@gi-types/json1";
-import * as Cogl from "@gi-types/cogl8";
+import * as Cogl from "@gi-types/cogl10";
 
 export const BUTTON_MIDDLE: number;
 export const BUTTON_PRIMARY: number;
@@ -22,10 +22,6 @@ export const CURRENT_TIME: number;
 export const EVENT_PROPAGATE: boolean;
 export const EVENT_STOP: boolean;
 export const FLAVOUR: string;
-export const HAS_WAYLAND_COMPOSITOR_SUPPORT: number;
-export const INPUT_EVDEV: string;
-export const INPUT_NULL: string;
-export const INPUT_X11: string;
 export const KEY_0: number;
 export const KEY_1: number;
 export const KEY_2: number;
@@ -2305,11 +2301,7 @@ export const PATH_RELATIVE: number;
 export const PRIORITY_REDRAW: number;
 export const STAGE_TYPE: string;
 export const VIRTUAL_INPUT_DEVICE_MAX_TOUCH_SLOTS: number;
-export const WINDOWING_EGL: string;
-export const WINDOWING_GLX: string;
-export const WINDOWING_X11: string;
 export function actor_box_alloc(): ActorBox;
-export function base_init(): void;
 export function cairo_clear(cr: cairo.Context): void;
 export function cairo_set_source_color(cr: cairo.Context, color: Color): void;
 export function color_from_hls(hue: number, luminance: number, saturation: number): Color;
@@ -2318,6 +2310,7 @@ export function color_from_string(str: string): [boolean, Color];
 export function color_get_static(color: StaticColor): Color;
 export function container_class_find_child_property(klass: GObject.Object, property_name: string): GObject.ParamSpec;
 export function container_class_list_child_properties(klass: GObject.Object): GObject.ParamSpec[];
+export function debug_set_max_render_time_constant(max_render_time_constant_us: number): void;
 export function disable_accessibility(): void;
 export function do_event(event: Event): void;
 export function event_add_filter(stage: Stage | null, func: EventFilterFunc): number;
@@ -2329,23 +2322,14 @@ export function feature_get_all(): FeatureFlags;
 export function get_accessibility_enabled(): boolean;
 export function get_current_event(): Event;
 export function get_current_event_time(): number;
+export function get_debug_flags(debug_flags: DebugFlag, draw_flags: DrawDebugFlag, pick_flags: PickDebugFlag): void;
 export function get_default_backend(): Backend;
-export function get_default_frame_rate(): number;
 export function get_default_text_direction(): TextDirection;
 export function get_font_map(): Pango.FontMap;
 export function get_script_id(gobject: GObject.Object): string;
 export function image_error_quark(): GLib.Quark;
-export function init(argv?: string[] | null): [InitError, string[] | null];
-export function init_error_quark(): GLib.Quark;
-export function init_with_args(
-    argv?: string[] | null,
-    parameter_string?: string | null,
-    entries?: GLib.OptionEntry[] | null,
-    translation_domain?: string | null
-): [InitError, string[] | null];
 export function keysym_to_unicode(keyval: number): number;
 export function script_error_quark(): GLib.Quark;
-export function set_custom_backend_func(func?: any | null): void;
 export function threads_add_idle(priority: number, func: GLib.SourceFunc): number;
 export function threads_add_repaint_func(func: GLib.SourceFunc): number;
 export function threads_add_repaint_func_full(flags: RepaintFlags, func: GLib.SourceFunc): number;
@@ -2381,7 +2365,7 @@ export type BindingActionFunc<A = GObject.Object> = (
     modifiers: ModifierType
 ) => boolean;
 export type Callback = (actor: Actor) => void;
-export type EventFilterFunc = (event: Event) => boolean;
+export type EventFilterFunc = (event: Event, event_actor: Actor) => boolean;
 export type PathCallback = (node: PathNode) => void;
 export type ProgressFunc = (
     a: GObject.Value | any,
@@ -2541,6 +2525,15 @@ export enum DragAxis {
     Y_AXIS = 2,
 }
 
+export namespace EventPhase {
+    export const $gtype: GObject.GType<EventPhase>;
+}
+
+export enum EventPhase {
+    CAPTURE = 0,
+    BUBBLE = 1,
+}
+
 export namespace EventType {
     export const $gtype: GObject.GType<EventType>;
 }
@@ -2561,18 +2554,19 @@ export enum EventType {
     TOUCH_CANCEL = 12,
     TOUCHPAD_PINCH = 13,
     TOUCHPAD_SWIPE = 14,
-    PROXIMITY_IN = 15,
-    PROXIMITY_OUT = 16,
-    PAD_BUTTON_PRESS = 17,
-    PAD_BUTTON_RELEASE = 18,
-    PAD_STRIP = 19,
-    PAD_RING = 20,
-    DEVICE_ADDED = 21,
-    DEVICE_REMOVED = 22,
-    IM_COMMIT = 23,
-    IM_DELETE = 24,
-    IM_PREEDIT = 25,
-    EVENT_LAST = 26,
+    TOUCHPAD_HOLD = 15,
+    PROXIMITY_IN = 16,
+    PROXIMITY_OUT = 17,
+    PAD_BUTTON_PRESS = 18,
+    PAD_BUTTON_RELEASE = 19,
+    PAD_STRIP = 20,
+    PAD_RING = 21,
+    DEVICE_ADDED = 22,
+    DEVICE_REMOVED = 23,
+    IM_COMMIT = 24,
+    IM_DELETE = 25,
+    IM_PREEDIT = 26,
+    EVENT_LAST = 27,
 }
 
 export namespace FlowOrientation {
@@ -2639,23 +2633,6 @@ export class ImageError extends GLib.Error {
 
     // Fields
     static DATA: number;
-
-    // Members
-    static quark(): GLib.Quark;
-}
-
-export class InitError extends GLib.Error {
-    static $gtype: GObject.GType<InitError>;
-
-    constructor(options: { message: string; code: number });
-    constructor(copy: InitError);
-
-    // Fields
-    static SUCCESS: number;
-    static ERROR_UNKNOWN: number;
-    static ERROR_THREADS: number;
-    static ERROR_BACKEND: number;
-    static ERROR_INTERNAL: number;
 
     // Members
     static quark(): GLib.Quark;
@@ -2888,6 +2865,15 @@ export enum PointerA11yTimeoutType {
     GESTURE = 2,
 }
 
+export namespace PreeditResetMode {
+    export const $gtype: GObject.GType<PreeditResetMode>;
+}
+
+export enum PreeditResetMode {
+    CLEAR = 0,
+    COMMIT = 1,
+}
+
 export namespace RequestMode {
     export const $gtype: GObject.GType<RequestMode>;
 }
@@ -3098,16 +3084,6 @@ export enum UnitType {
     CM = 4,
 }
 
-export namespace ZoomAxis {
-    export const $gtype: GObject.GType<ZoomAxis>;
-}
-
-export enum ZoomAxis {
-    X_AXIS = 0,
-    Y_AXIS = 1,
-    BOTH = 2,
-}
-
 export namespace ActorFlags {
     export const $gtype: GObject.GType<ActorFlags>;
 }
@@ -3153,6 +3129,8 @@ export enum DebugFlag {
     EVENTLOOP = 16384,
     CLIPPING = 32768,
     OOB_TRANSFORMS = 65536,
+    FRAME_TIMINGS = 131072,
+    DETAILED_TRACE = 262144,
 }
 
 export namespace DrawDebugFlag {
@@ -3169,6 +3147,8 @@ export enum DrawDebugFlag {
     CONTINUOUS_REDRAW = 64,
     PAINT_DEFORM_TILES = 128,
     PAINT_DAMAGE_REGION = 256,
+    DISABLE_DYNAMIC_MAX_RENDER_TIME = 512,
+    PAINT_MAX_RENDER_TIME = 1024,
 }
 
 export namespace EffectPaintFlags {
@@ -3190,6 +3170,7 @@ export enum EventFlags {
     FLAG_INPUT_METHOD = 2,
     FLAG_REPEATED = 4,
     FLAG_RELATIVE_MOTION = 8,
+    FLAG_GRAB_NOTIFY = 16,
 }
 
 export namespace FeatureFlags {
@@ -3197,12 +3178,7 @@ export namespace FeatureFlags {
 }
 
 export enum FeatureFlags {
-    STAGE_STATIC = 64,
-    STAGE_CURSOR = 256,
-    SHADERS_GLSL = 512,
-    OFFSCREEN = 1024,
-    STAGE_MULTIPLE = 2048,
-    SWAP_EVENTS = 4096,
+    GLSL = 512,
 }
 
 export namespace FrameInfoFlag {
@@ -3214,6 +3190,17 @@ export enum FrameInfoFlag {
     HW_CLOCK = 1,
     ZERO_COPY = 2,
     VSYNC = 4,
+}
+
+export namespace GrabState {
+    export const $gtype: GObject.GType<GrabState>;
+}
+
+export enum GrabState {
+    NONE = 0,
+    POINTER = 1,
+    KEYBOARD = 2,
+    ALL = 3,
 }
 
 export namespace InputAxisFlags {
@@ -3231,6 +3218,20 @@ export enum InputAxisFlags {
     DISTANCE = 128,
     ROTATION = 256,
     SLIDER = 512,
+}
+
+export namespace InputCapabilities {
+    export const $gtype: GObject.GType<InputCapabilities>;
+}
+
+export enum InputCapabilities {
+    NONE = 0,
+    POINTER = 1,
+    KEYBOARD = 2,
+    TOUCHPAD = 4,
+    TOUCH = 8,
+    TABLET_TOOL = 16,
+    TABLET_PAD = 32,
 }
 
 export namespace InputContentHintFlags {
@@ -3399,6 +3400,11 @@ export abstract class Action extends ActorMeta {
 
     constructor(properties?: Partial<Action.ConstructorProperties>, ...args: any[]);
     _init(...args: any[]): void;
+
+    // Members
+
+    get_phase(): EventPhase;
+    vfunc_handle_event(event: Event): boolean;
 }
 export module Actor {
     export interface ConstructorProperties<A extends LayoutManager = LayoutManager, B extends Content = Content>
@@ -3530,7 +3536,8 @@ export module Actor {
 }
 export class Actor<A extends LayoutManager = LayoutManager, B extends Content = Content>
     extends GObject.InitiallyUnowned
-    implements Atk.ImplementorIface, Animatable, Container<Actor>, Scriptable {
+    implements Atk.ImplementorIface, Animatable, Container<Actor>, Scriptable
+{
     static $gtype: GObject.GType<Actor>;
 
     constructor(properties?: Partial<Actor.ConstructorProperties<A, B>>, ...args: any[]);
@@ -3857,6 +3864,7 @@ export class Actor<A extends LayoutManager = LayoutManager, B extends Content = 
     // Members
 
     add_action(action: Action): void;
+    add_action_full(name: string, phase: EventPhase, action: Action): void;
     add_action_with_name(name: string, action: Action): void;
     add_child(child: Actor): void;
     add_constraint(constraint: Constraint): void;
@@ -3884,77 +3892,75 @@ export class Actor<A extends LayoutManager = LayoutManager, B extends Content = 
     event(event: Event, capture: boolean): boolean;
     get_abs_allocation_vertices(): Graphene.Point3D[];
     get_accessible(): Atk.Object;
-    get_action(name: string): Action;
+    get_action(name: string): Action | null;
     get_actions(): Action[];
     get_allocation_box(): ActorBox;
     get_background_color(): Color;
-    get_child_at_index(index_: number): Actor;
+    get_child_at_index(index_: number): Actor | null;
     get_child_transform(): Graphene.Matrix;
     get_children(): Actor[];
-    // Conflicted with Clutter.Container.get_children
-    get_children(...args: never[]): any;
-    get_clip(): [number | null, number | null, number | null, number | null];
+    get_clip(): [number, number, number, number];
     get_clip_to_allocation(): boolean;
-    get_constraint(name: string): Constraint;
+    get_constraint(name: string): Constraint | null;
     get_constraints(): Constraint[];
-    get_content(): B;
+    get_content(): B | null;
     get_content_box(): ActorBox;
     get_content_gravity(): ContentGravity;
     get_content_repeat(): ContentRepeat;
     get_content_scaling_filters(): [ScalingFilter | null, ScalingFilter | null];
-    get_default_paint_volume(): PaintVolume;
+    get_default_paint_volume(): PaintVolume | null;
     get_easing_delay(): number;
     get_easing_duration(): number;
     get_easing_mode(): AnimationMode;
-    get_effect(name: string): Effect;
+    get_effect(name: string): Effect | null;
     get_effects(): Effect[];
-    get_first_child(): Actor;
-    get_fixed_position(): [boolean, number | null, number | null];
+    get_first_child(): Actor | null;
+    get_fixed_position(): [boolean, number, number];
     get_fixed_position_set(): boolean;
     get_flags(): ActorFlags;
     get_height(): number;
-    get_last_child(): Actor;
-    get_layout_manager(): A;
+    get_last_child(): Actor | null;
+    get_layout_manager(): A | null;
     get_margin(): Margin;
     get_margin_bottom(): number;
     get_margin_left(): number;
     get_margin_right(): number;
     get_margin_top(): number;
     get_n_children(): number;
-    get_name(): string;
-    get_next_sibling(): Actor;
+    get_name(): string | null;
+    get_next_sibling(): Actor | null;
     get_offscreen_redirect(): OffscreenRedirect;
     get_opacity(): number;
     get_opacity_override(): number;
     get_paint_box(): [boolean, ActorBox];
     get_paint_opacity(): number;
     get_paint_visibility(): boolean;
-    get_paint_volume(): PaintVolume;
+    get_paint_volume(): PaintVolume | null;
     get_pango_context(): Pango.Context;
-    get_parent(): Actor;
-    get_pivot_point(): [number | null, number | null];
+    get_parent(): Actor | null;
+    get_pivot_point(): [number, number];
     get_pivot_point_z(): number;
-    get_position(): [number | null, number | null];
-    get_preferred_height(for_width: number): [number | null, number | null];
-    get_preferred_size(): [number | null, number | null, number | null, number | null];
-    get_preferred_width(for_height: number): [number | null, number | null];
-    get_previous_sibling(): Actor;
+    get_position(): [number, number];
+    get_preferred_height(for_width: number): [number, number];
+    get_preferred_size(): [number, number, number, number];
+    get_preferred_width(for_height: number): [number, number];
+    get_previous_sibling(): Actor | null;
     get_reactive(): boolean;
     get_request_mode(): RequestMode;
     get_resource_scale(): number;
     get_rotation_angle(axis: RotateAxis): number;
-    get_scale(): [number | null, number | null];
+    get_scale(): [number, number];
     get_scale_z(): number;
-    get_size(): [number | null, number | null];
+    get_size(): [number, number];
     get_stage(): Stage;
     get_text_direction(): TextDirection;
     get_transform(): Graphene.Matrix;
     get_transformed_extents(): Graphene.Rect;
-    get_transformed_paint_volume(relative_to_ancestor: Actor): PaintVolume;
-    get_transformed_position(): [number | null, number | null];
-    get_transformed_size(): [number | null, number | null];
-    get_transition(name: string): Transition;
-    get_translation(): [number | null, number | null, number | null];
+    get_transformed_paint_volume(relative_to_ancestor: Actor): PaintVolume | null;
+    get_transformed_position(): [number, number];
+    get_transformed_size(): [number, number];
+    get_transition(name: string): Transition | null;
+    get_translation(): [number, number, number];
     get_width(): number;
     get_x(): number;
     get_x_align(): ActorAlign;
@@ -4036,7 +4042,7 @@ export class Actor<A extends LayoutManager = LayoutManager, B extends Content = 
     set_margin_left(margin: number): void;
     set_margin_right(margin: number): void;
     set_margin_top(margin: number): void;
-    set_name(name: string): void;
+    set_name(name?: string | null): void;
     set_offscreen_redirect(redirect: OffscreenRedirect): void;
     set_opacity(opacity: number): void;
     set_opacity_override(opacity: number): void;
@@ -4078,8 +4084,8 @@ export class Actor<A extends LayoutManager = LayoutManager, B extends Content = 
     vfunc_event(event: Event): boolean;
     vfunc_get_accessible(): Atk.Object;
     vfunc_get_paint_volume(volume: PaintVolume): boolean;
-    vfunc_get_preferred_height(for_width: number): [number | null, number | null];
-    vfunc_get_preferred_width(for_height: number): [number | null, number | null];
+    vfunc_get_preferred_height(for_width: number): [number, number];
+    vfunc_get_preferred_width(for_height: number): [number, number];
     vfunc_has_accessible(): boolean;
     vfunc_has_overlaps(): boolean;
     vfunc_hide(): void;
@@ -4140,16 +4146,9 @@ export class Actor<A extends LayoutManager = LayoutManager, B extends Content = 
     get_child_meta(actor: Actor): ChildMeta;
     // Conflicted with Clutter.Container.get_child_meta
     get_child_meta(...args: never[]): any;
-    lower_child(actor: Actor, sibling?: Actor | null): void;
-    // Conflicted with Clutter.Container.lower_child
-    lower_child(...args: never[]): any;
-    raise_child(actor: Actor, sibling?: Actor | null): void;
-    // Conflicted with Clutter.Container.raise_child
-    raise_child(...args: never[]): any;
     remove_actor(actor: Actor): void;
     // Conflicted with Clutter.Container.remove_actor
     remove_actor(...args: never[]): any;
-    sort_depth_order(): void;
     vfunc_actor_added(actor: Actor): void;
     // Conflicted with Clutter.Container.vfunc_actor_added
     vfunc_actor_added(...args: never[]): any;
@@ -4171,16 +4170,9 @@ export class Actor<A extends LayoutManager = LayoutManager, B extends Content = 
     vfunc_get_child_meta(actor: Actor): ChildMeta;
     // Conflicted with Clutter.Container.vfunc_get_child_meta
     vfunc_get_child_meta(...args: never[]): any;
-    vfunc_lower(actor: Actor, sibling?: Actor | null): void;
-    // Conflicted with Clutter.Container.vfunc_lower
-    vfunc_lower(...args: never[]): any;
-    vfunc_raise(actor: Actor, sibling?: Actor | null): void;
-    // Conflicted with Clutter.Container.vfunc_raise
-    vfunc_raise(...args: never[]): any;
     vfunc_remove(actor: Actor): void;
     // Conflicted with Clutter.Container.vfunc_remove
     vfunc_remove(...args: never[]): any;
-    vfunc_sort_depth_order(): void;
     get_id(): string;
     parse_custom_node(script: Script, value: GObject.Value | any, name: string, node: Json.Node): boolean;
     set_custom_property(script: Script, name: string, value: GObject.Value | any): void;
@@ -4533,8 +4525,8 @@ export class BrightnessContrastEffect extends OffscreenEffect {
 
     // Members
 
-    get_brightness(): [number | null, number | null, number | null];
-    get_contrast(): [number | null, number | null, number | null];
+    get_brightness(): [number, number, number];
+    get_contrast(): [number, number, number];
     set_brightness(brightness: number): void;
     set_brightness_full(red: number, green: number, blue: number): void;
     set_contrast(contrast: number): void;
@@ -4702,7 +4694,8 @@ export module Clone {
 }
 export class Clone<A extends Actor = Actor>
     extends Actor
-    implements Atk.ImplementorIface, Animatable, Container<A>, Scriptable {
+    implements Atk.ImplementorIface, Animatable, Container<A>, Scriptable
+{
     static $gtype: GObject.GType<Clone>;
 
     constructor(properties?: Partial<Clone.ConstructorProperties<A>>, ...args: any[]);
@@ -4743,13 +4736,7 @@ export class Clone<A extends Actor = Actor>
     destroy_child_meta(actor: A): void;
     find_child_by_name(child_name: string): A;
     get_child_meta(actor: A): ChildMeta;
-    get_children(): A[];
-    // Conflicted with Clutter.Actor.get_children
-    get_children(...args: never[]): any;
-    lower_child(actor: A, sibling?: A | null): void;
-    raise_child(actor: A, sibling?: A | null): void;
     remove_actor(actor: A): void;
-    sort_depth_order(): void;
     vfunc_actor_added(actor: A): void;
     vfunc_actor_removed(actor: A): void;
     vfunc_add(actor: A): void;
@@ -4757,10 +4744,7 @@ export class Clone<A extends Actor = Actor>
     vfunc_create_child_meta(actor: A): void;
     vfunc_destroy_child_meta(actor: A): void;
     vfunc_get_child_meta(actor: A): ChildMeta;
-    vfunc_lower(actor: A, sibling?: A | null): void;
-    vfunc_raise(actor: A, sibling?: A | null): void;
     vfunc_remove(actor: A): void;
-    vfunc_sort_depth_order(): void;
     get_id(): string;
     parse_custom_node(script: Script, value: GObject.Value | any, name: string, node: Json.Node): boolean;
     set_custom_property(script: Script, name: string, value: GObject.Value | any): void;
@@ -5042,9 +5026,11 @@ export class FrameClock extends GObject.Object {
 
     add_timeline(timeline: Timeline): void;
     destroy(): void;
+    get_max_render_time_debug_info(): GLib.String;
     get_refresh_rate(): number;
     inhibit(): void;
     notify_ready(): void;
+    record_flip_time(flip_time_us: number): void;
     remove_timeline(timeline: Timeline): void;
     schedule_update(): void;
     schedule_update_now(): void;
@@ -5108,17 +5094,17 @@ export class GestureAction extends Action {
     cancel(): void;
     get_device(point: number): InputDevice;
     get_last_event(point: number): Event;
-    get_motion_coords(point: number): [number | null, number | null];
-    get_motion_delta(point: number): [number, number | null, number | null];
+    get_motion_coords(point: number): [number, number];
+    get_motion_delta(point: number): [number, number, number];
     get_n_current_points(): number;
     get_n_touch_points(): number;
-    get_press_coords(point: number): [number | null, number | null];
-    get_release_coords(point: number): [number | null, number | null];
+    get_press_coords(point: number): [number, number];
+    get_release_coords(point: number): [number, number];
     get_sequence(point: number): EventSequence;
-    get_threshold_trigger_distance(): [number | null, number | null];
+    get_threshold_trigger_distance(): [number, number];
     get_threshold_trigger_edge(): GestureTriggerEdge;
     get_threshold_trigger_egde(): GestureTriggerEdge;
-    get_velocity(point: number): [number, number | null, number | null];
+    get_velocity(point: number): [number, number, number];
     set_n_touch_points(nb_points: number): void;
     set_threshold_trigger_distance(x: number, y: number): void;
     set_threshold_trigger_edge(edge: GestureTriggerEdge): void;
@@ -5245,6 +5231,7 @@ export module InputDevice {
     export interface ConstructorProperties extends GObject.Object.ConstructorProperties {
         [key: string]: any;
         backend: Backend;
+        capabilities: InputCapabilities;
         device_mode: InputMode;
         deviceMode: InputMode;
         device_node: string;
@@ -5277,6 +5264,7 @@ export class InputDevice extends GObject.Object {
 
     // Properties
     get backend(): Backend;
+    get capabilities(): InputCapabilities;
     get device_mode(): InputMode;
     get deviceMode(): InputMode;
     get device_node(): string;
@@ -5302,17 +5290,14 @@ export class InputDevice extends GObject.Object {
 
     // Members
 
-    get_axis(index_: number): InputAxis;
-    get_axis_value(axes: number, axis: InputAxis, value: number): boolean;
+    get_capabilities(): InputCapabilities;
     get_device_mode(): InputMode;
     get_device_name(): string;
     get_device_node(): string;
     get_device_type(): InputDeviceType;
-    get_grabbed_actor(): Actor;
     get_group_n_modes(group: number): number;
     get_has_cursor(): boolean;
     get_mode_switch_button_group(button: number): number;
-    get_n_axes(): number;
     get_n_buttons(): number;
     get_n_mode_groups(): number;
     get_n_rings(): number;
@@ -5321,13 +5306,8 @@ export class InputDevice extends GObject.Object {
     get_product_id(): string;
     get_seat(): Seat;
     get_vendor_id(): string;
-    grab(actor: Actor): void;
     is_grouped(other_device: InputDevice): boolean;
     is_mode_switch_button(group: number, button: number): boolean;
-    sequence_get_grabbed_actor(sequence: EventSequence): Actor;
-    sequence_grab(sequence: EventSequence, actor: Actor): void;
-    sequence_ungrab(sequence: EventSequence): void;
-    ungrab(): void;
     vfunc_get_group_n_modes(group: number): number;
     vfunc_get_pad_feature_group(feature: InputDevicePadFeature, n_feature: number): number;
     vfunc_is_grouped(other_device: InputDevice): boolean;
@@ -5452,7 +5432,7 @@ export abstract class InputMethod extends GObject.Object {
     notify_key_event(event: Event, filtered: boolean): void;
     request_surrounding(): void;
     set_input_panel_state(state: InputPanelState): void;
-    set_preedit_text(preedit: string | null, cursor: number): void;
+    set_preedit_text(preedit: string | null, cursor: number, mode: PreeditResetMode): void;
     vfunc_filter_key_event(key: Event): boolean;
     vfunc_focus_in(actor: InputFocus): void;
     vfunc_focus_out(): void;
@@ -5541,7 +5521,7 @@ export class KeyframeTransition extends PropertyTransition implements Scriptable
     // Members
 
     clear(): void;
-    get_key_frame(index_: number): [number | null, AnimationMode | null, unknown];
+    get_key_frame(index_: number): [number, AnimationMode | null, unknown];
     get_n_key_frames(): number;
     set_key_frame(index_: number, key: number, mode: AnimationMode, value: GObject.Value | any): void;
     set_key_frames(key_frames: number[]): void;
@@ -5634,15 +5614,15 @@ export abstract class LayoutManager extends GObject.InitiallyUnowned {
     child_set_property(container: Container, actor: Actor, property_name: string, value: GObject.Value | any): void;
     find_child_property(name: string): GObject.ParamSpec;
     get_child_meta(container: Container, actor: Actor): LayoutMeta;
-    get_preferred_height(container: Container, for_width: number): [number | null, number | null];
-    get_preferred_width(container: Container, for_height: number): [number | null, number | null];
+    get_preferred_height(container: Container, for_width: number): [number, number];
+    get_preferred_width(container: Container, for_height: number): [number, number];
     layout_changed(): void;
     list_child_properties(): GObject.ParamSpec[];
     set_container(container?: Container | null): void;
     vfunc_allocate(container: Container, allocation: ActorBox): void;
     vfunc_get_child_meta_type(): GObject.GType;
-    vfunc_get_preferred_height(container: Container, for_width: number): [number | null, number | null];
-    vfunc_get_preferred_width(container: Container, for_height: number): [number | null, number | null];
+    vfunc_get_preferred_height(container: Container, for_width: number): [number, number];
+    vfunc_get_preferred_width(container: Container, for_height: number): [number, number];
     vfunc_layout_changed(): void;
     vfunc_set_container(container?: Container | null): void;
 }
@@ -5796,19 +5776,18 @@ export class PanAction extends GestureAction {
     // Members
 
     get_acceleration_factor(): number;
-    get_constrained_motion_delta(point: number): [number, number | null, number | null];
+    get_constrained_motion_delta(point: number): [number, number, number];
     get_deceleration(): number;
     get_interpolate(): boolean;
-    get_interpolated_coords(): [number | null, number | null];
-    get_interpolated_delta(): [number, number | null, number | null];
-    get_motion_coords(point: number): [number | null, number | null];
-    get_motion_delta(point: number): [number, number | null, number | null];
+    get_interpolated_coords(): [number, number];
+    get_interpolated_delta(): [number, number, number];
+    get_motion_coords(point: number): [number, number];
+    get_motion_delta(point: number): [number, number, number];
     get_pan_axis(): PanAxis;
     set_acceleration_factor(factor: number): void;
     set_deceleration(rate: number): void;
     set_interpolate(should_interpolate: boolean): void;
     set_pan_axis(axis: PanAxis): void;
-    vfunc_pan(actor: Actor, is_interpolated: boolean): boolean;
     vfunc_pan_stopped(actor: Actor): void;
 }
 
@@ -5986,10 +5965,6 @@ export class RotateAction extends GestureAction {
     // Constructors
 
     static ["new"](): RotateAction;
-
-    // Members
-
-    vfunc_rotate(actor: Actor, angle: number): boolean;
 }
 export module Script {
     export interface ConstructorProperties extends GObject.Object.ConstructorProperties {
@@ -6047,7 +6022,8 @@ export module ScrollActor {
 }
 export class ScrollActor<A extends Actor = Actor>
     extends Actor
-    implements Atk.ImplementorIface, Animatable, Container<A>, Scriptable {
+    implements Atk.ImplementorIface, Animatable, Container<A>, Scriptable
+{
     static $gtype: GObject.GType<ScrollActor>;
 
     constructor(properties?: Partial<ScrollActor.ConstructorProperties<A>>, ...args: any[]);
@@ -6090,13 +6066,7 @@ export class ScrollActor<A extends Actor = Actor>
     destroy_child_meta(actor: A): void;
     find_child_by_name(child_name: string): A;
     get_child_meta(actor: A): ChildMeta;
-    get_children(): A[];
-    // Conflicted with Clutter.Actor.get_children
-    get_children(...args: never[]): any;
-    lower_child(actor: A, sibling?: A | null): void;
-    raise_child(actor: A, sibling?: A | null): void;
     remove_actor(actor: A): void;
-    sort_depth_order(): void;
     vfunc_actor_added(actor: A): void;
     vfunc_actor_removed(actor: A): void;
     vfunc_add(actor: A): void;
@@ -6104,10 +6074,7 @@ export class ScrollActor<A extends Actor = Actor>
     vfunc_create_child_meta(actor: A): void;
     vfunc_destroy_child_meta(actor: A): void;
     vfunc_get_child_meta(actor: A): ChildMeta;
-    vfunc_lower(actor: A, sibling?: A | null): void;
-    vfunc_raise(actor: A, sibling?: A | null): void;
     vfunc_remove(actor: A): void;
-    vfunc_sort_depth_order(): void;
     get_id(): string;
     parse_custom_node(script: Script, value: GObject.Value | any, name: string, node: Json.Node): boolean;
     set_custom_property(script: Script, name: string, value: GObject.Value | any): void;
@@ -6120,7 +6087,6 @@ export class ScrollActor<A extends Actor = Actor>
 export module Seat {
     export interface ConstructorProperties extends GObject.Object.ConstructorProperties {
         [key: string]: any;
-        backend: Backend;
         touch_mode: boolean;
         touchMode: boolean;
     }
@@ -6132,7 +6098,6 @@ export abstract class Seat extends GObject.Object {
     _init(...args: any[]): void;
 
     // Properties
-    get backend(): Backend;
     get touch_mode(): boolean;
     get touchMode(): boolean;
 
@@ -6230,6 +6195,7 @@ export abstract class Seat extends GObject.Object {
     vfunc_get_keyboard(): InputDevice;
     vfunc_get_keymap(): Keymap;
     vfunc_get_pointer(): InputDevice;
+    vfunc_grab(time: number): GrabState;
     vfunc_handle_event_post(event: Event): boolean;
     vfunc_query_state(
         device: InputDevice,
@@ -6237,6 +6203,7 @@ export abstract class Seat extends GObject.Object {
         coords: Graphene.Point,
         modifiers: ModifierType
     ): boolean;
+    vfunc_ungrab(time: number): void;
     vfunc_warp_pointer(x: number, y: number): void;
 }
 export module Settings {
@@ -6449,7 +6416,8 @@ export module Stage {
 }
 export class Stage<A extends Actor = Actor>
     extends Actor
-    implements Atk.ImplementorIface, Animatable, Container<A>, Scriptable {
+    implements Atk.ImplementorIface, Animatable, Container<A>, Scriptable
+{
     static $gtype: GObject.GType<Stage>;
 
     constructor(properties?: Partial<Stage.ConstructorProperties<A>>, ...args: any[]);
@@ -6499,6 +6467,9 @@ export class Stage<A extends Actor = Actor>
         callback: (_source: this, view: StageView, redraw_clip: cairo.Region) => void
     ): number;
     emit(signal: "paint-view", view: StageView, redraw_clip: cairo.Region): void;
+    connect(signal: "prepare-frame", callback: (_source: this, view: StageView) => void): number;
+    connect_after(signal: "prepare-frame", callback: (_source: this, view: StageView) => void): number;
+    emit(signal: "prepare-frame", view: StageView): void;
     connect(signal: "presented", callback: (_source: this, view: StageView, frame_info: any | null) => void): number;
     connect_after(
         signal: "presented",
@@ -6508,22 +6479,20 @@ export class Stage<A extends Actor = Actor>
 
     // Members
 
-    capture_into(rect: cairo.RectangleInt, scale: number, data: number, stride: number): void;
     capture_view_into(view: StageView, rect: cairo.RectangleInt, data: number, stride: number): void;
     clear_stage_views(): void;
     ensure_viewport(): void;
-    event(event: Event): boolean;
     get_actor_at_pos(pick_mode: PickMode, x: number, y: number): Actor;
-    get_capture_final_size(rect: cairo.RectangleInt): [boolean, number | null, number | null, number | null];
+    get_capture_final_size(rect: cairo.RectangleInt): [boolean, number, number, number];
     get_device_actor(device: InputDevice, sequence?: EventSequence | null): Actor;
+    get_event_actor(event: Event): Actor;
     get_frame_counter(): number;
+    get_grab_actor(): Actor;
     get_key_focus(): Actor;
-    get_minimum_size(): [number, number];
-    get_motion_events_enabled(): boolean;
+    get_minimum_size(width: number, height: number): void;
     get_perspective(): Perspective | null;
-    get_throttle_motion_events(): boolean;
     get_title(): string;
-    get_use_alpha(): boolean;
+    grab(actor: Actor): Grab;
     paint_to_buffer(
         rect: cairo.RectangleInt,
         scale: number,
@@ -6531,7 +6500,8 @@ export class Stage<A extends Actor = Actor>
         stride: number,
         format: Cogl.PixelFormat,
         paint_flags: PaintFlag
-    ): [boolean, Uint8Array];
+    ): boolean;
+    paint_to_content(rect: cairo.RectangleInt, scale: number, paint_flags: PaintFlag): Content;
     paint_to_framebuffer(
         framebuffer: Cogl.Framebuffer,
         rect: cairo.RectangleInt,
@@ -6543,16 +6513,14 @@ export class Stage<A extends Actor = Actor>
     schedule_update(): void;
     set_key_focus(actor?: Actor | null): void;
     set_minimum_size(width: number, height: number): void;
-    set_motion_events_enabled(enabled: boolean): void;
-    set_throttle_motion_events(throttle: boolean): void;
     set_title(title: string): void;
-    set_use_alpha(use_alpha: boolean): void;
     update_device(
         device: InputDevice,
         sequence: EventSequence,
         point: Graphene.Point,
         time: number,
         new_actor: Actor,
+        region: cairo.Region,
         emit_crossing: boolean
     ): void;
     vfunc_activate(): void;
@@ -6580,13 +6548,7 @@ export class Stage<A extends Actor = Actor>
     destroy_child_meta(actor: A): void;
     find_child_by_name(child_name: string): A;
     get_child_meta(actor: A): ChildMeta;
-    get_children(): A[];
-    // Conflicted with Clutter.Actor.get_children
-    get_children(...args: never[]): any;
-    lower_child(actor: A, sibling?: A | null): void;
-    raise_child(actor: A, sibling?: A | null): void;
     remove_actor(actor: A): void;
-    sort_depth_order(): void;
     vfunc_actor_added(actor: A): void;
     vfunc_actor_removed(actor: A): void;
     vfunc_add(actor: A): void;
@@ -6594,10 +6556,7 @@ export class Stage<A extends Actor = Actor>
     vfunc_create_child_meta(actor: A): void;
     vfunc_destroy_child_meta(actor: A): void;
     vfunc_get_child_meta(actor: A): ChildMeta;
-    vfunc_lower(actor: A, sibling?: A | null): void;
-    vfunc_raise(actor: A, sibling?: A | null): void;
     vfunc_remove(actor: A): void;
-    vfunc_sort_depth_order(): void;
     get_id(): string;
     parse_custom_node(script: Script, value: GObject.Value | any, name: string, node: Json.Node): boolean;
     set_custom_property(script: Script, name: string, value: GObject.Value | any): void;
@@ -6658,6 +6617,8 @@ export module StageView {
         stage: Stage;
         use_shadowfb: boolean;
         useShadowfb: boolean;
+        vblank_duration_us: number;
+        vblankDurationUs: number;
     }
 }
 export class StageView extends GObject.Object {
@@ -6682,6 +6643,8 @@ export class StageView extends GObject.Object {
     get stage(): Stage;
     get use_shadowfb(): boolean;
     get useShadowfb(): boolean;
+    get vblank_duration_us(): number;
+    get vblankDurationUs(): number;
 
     // Members
 
@@ -6736,7 +6699,6 @@ export class SwipeAction extends GestureAction {
     // Members
 
     vfunc_swept(actor: Actor, direction: SwipeDirection): void;
-    vfunc_swipe(actor: Actor, direction: SwipeDirection): boolean;
 }
 export module TapAction {
     export interface ConstructorProperties extends GestureAction.ConstructorProperties {
@@ -6825,7 +6787,8 @@ export module Text {
 }
 export class Text<A extends Actor = Actor>
     extends Actor
-    implements Atk.ImplementorIface, Animatable, Container<A>, Scriptable {
+    implements Atk.ImplementorIface, Animatable, Container<A>, Scriptable
+{
     static $gtype: GObject.GType<Text>;
 
     constructor(properties?: Partial<Text.ConstructorProperties<A>>, ...args: any[]);
@@ -6901,11 +6864,9 @@ export class Text<A extends Actor = Actor>
     get passwordChar(): number;
     set passwordChar(val: number);
     // This accessor conflicts with another accessor's type in a parent class or interface.
-    // @ts-expect-error
-    get position(): number;
+    get position(): number | any;
     // This accessor conflicts with another accessor's type in a parent class or interface.
-    // @ts-expect-error
-    set position(val: number);
+    set position(val: number | any);
     get selectable(): boolean;
     set selectable(val: boolean);
     get selected_text_color(): Color;
@@ -7070,13 +7031,7 @@ export class Text<A extends Actor = Actor>
     destroy_child_meta(actor: A): void;
     find_child_by_name(child_name: string): A;
     get_child_meta(actor: A): ChildMeta;
-    get_children(): A[];
-    // Conflicted with Clutter.Actor.get_children
-    get_children(...args: never[]): any;
-    lower_child(actor: A, sibling?: A | null): void;
-    raise_child(actor: A, sibling?: A | null): void;
     remove_actor(actor: A): void;
-    sort_depth_order(): void;
     vfunc_actor_added(actor: A): void;
     vfunc_actor_removed(actor: A): void;
     vfunc_add(actor: A): void;
@@ -7084,10 +7039,7 @@ export class Text<A extends Actor = Actor>
     vfunc_create_child_meta(actor: A): void;
     vfunc_destroy_child_meta(actor: A): void;
     vfunc_get_child_meta(actor: A): ChildMeta;
-    vfunc_lower(actor: A, sibling?: A | null): void;
-    vfunc_raise(actor: A, sibling?: A | null): void;
     vfunc_remove(actor: A): void;
-    vfunc_sort_depth_order(): void;
     get_id(): string;
     parse_custom_node(script: Script, value: GObject.Value | any, name: string, node: Json.Node): boolean;
     set_custom_property(script: Script, name: string, value: GObject.Value | any): void;
@@ -7176,6 +7128,34 @@ export class TextNode extends PaintNode {
     // Constructors
 
     static ["new"](layout?: Pango.Layout | null, color?: Color | null): TextNode;
+}
+export module TextureContent {
+    export interface ConstructorProperties extends GObject.Object.ConstructorProperties {
+        [key: string]: any;
+    }
+}
+export class TextureContent extends GObject.Object implements Content {
+    static $gtype: GObject.GType<TextureContent>;
+
+    constructor(properties?: Partial<TextureContent.ConstructorProperties>, ...args: any[]);
+    _init(...args: any[]): void;
+
+    // Members
+
+    get_texture(): Cogl.Texture;
+    static new_from_texture(texture: Cogl.Texture, clip?: cairo.RectangleInt | null): Content;
+
+    // Implemented Members
+
+    get_preferred_size(): [boolean, number, number];
+    invalidate(): void;
+    invalidate_size(): void;
+    vfunc_attached(actor: Actor): void;
+    vfunc_detached(actor: Actor): void;
+    vfunc_get_preferred_size(): [boolean, number, number];
+    vfunc_invalidate(): void;
+    vfunc_invalidate_size(): void;
+    vfunc_paint_content(actor: Actor, node: PaintNode, paint_context: PaintContext): void;
 }
 export module TextureNode {
     export interface ConstructorProperties extends PipelineNode.ConstructorProperties {
@@ -7447,6 +7427,7 @@ export class VirtualInputDevice extends GObject.Object {
     // Members
 
     get_device_type(): number;
+    get_seat(): Seat;
     notify_absolute_motion(time_us: number, x: number, y: number): void;
     notify_button(time_us: number, button: number, button_state: ButtonState): void;
     notify_discrete_scroll(time_us: number, direction: ScrollDirection, scroll_source: ScrollSource): void;
@@ -7483,8 +7464,6 @@ export class VirtualInputDevice extends GObject.Object {
 export module ZoomAction {
     export interface ConstructorProperties extends GestureAction.ConstructorProperties {
         [key: string]: any;
-        zoom_axis: ZoomAxis;
-        zoomAxis: ZoomAxis;
     }
 }
 export class ZoomAction extends GestureAction {
@@ -7492,12 +7471,6 @@ export class ZoomAction extends GestureAction {
 
     constructor(properties?: Partial<ZoomAction.ConstructorProperties>, ...args: any[]);
     _init(...args: any[]): void;
-
-    // Properties
-    get zoom_axis(): ZoomAxis;
-    set zoom_axis(val: ZoomAxis);
-    get zoomAxis(): ZoomAxis;
-    set zoomAxis(val: ZoomAxis);
 
     // Signals
 
@@ -7522,15 +7495,11 @@ export class ZoomAction extends GestureAction {
 
     get_focal_point(): Graphene.Point;
     get_transformed_focal_point(): Graphene.Point;
-    get_zoom_axis(): ZoomAxis;
-    set_zoom_axis(axis: ZoomAxis): void;
-    vfunc_zoom(actor: Actor, focal_point: Graphene.Point, factor: number): boolean;
 }
 
 export class ActorBox {
     static $gtype: GObject.GType<ActorBox>;
 
-    constructor(x_1: number, y_1: number, x_2: number, y_2: number);
     constructor(
         properties?: Partial<{
             x1?: number;
@@ -7559,8 +7528,8 @@ export class ActorBox {
     from_vertices(verts: Graphene.Point3D[]): void;
     get_area(): number;
     get_height(): number;
-    get_origin(): [number | null, number | null];
-    get_size(): [number | null, number | null];
+    get_origin(): [number, number];
+    get_size(): [number, number];
     get_width(): number;
     get_x(): number;
     get_y(): number;
@@ -7578,30 +7547,14 @@ export class ActorBox {
 export class ActorIter {
     static $gtype: GObject.GType<ActorIter>;
 
-    constructor(
-        properties?: Partial<{
-            dummy1?: any;
-            dummy2?: any;
-            dummy3?: any;
-            dummy4?: number;
-            dummy5?: any;
-        }>
-    );
     constructor(copy: ActorIter);
-
-    // Fields
-    dummy1: any;
-    dummy2: any;
-    dummy3: any;
-    dummy4: number;
-    dummy5: any;
 
     // Members
     destroy(): void;
     init(root: Actor): void;
     is_valid(): boolean;
-    next(): [boolean, Actor];
-    prev(): [boolean, Actor];
+    next(): [boolean, Actor | null];
+    prev(): [boolean, Actor | null];
     remove(): void;
 }
 
@@ -7626,6 +7579,7 @@ export class AnyEvent {
     type: EventType;
     time: number;
     flags: EventFlags;
+    stage: Stage;
 }
 
 export class BinLayoutPrivate {
@@ -7649,12 +7603,13 @@ export class ButtonEvent {
     type: EventType;
     time: number;
     flags: EventFlags;
+    stage: Stage;
     x: number;
     y: number;
     modifier_state: ModifierType;
     button: number;
-    click_count: number;
     axes: number;
+    device: InputDevice;
     evdev_code: number;
 }
 
@@ -7668,6 +7623,10 @@ export class Capture {
     static $gtype: GObject.GType<Capture>;
 
     constructor(copy: Capture);
+
+    // Fields
+    image: cairo.Surface;
+    rect: cairo.RectangleInt;
 }
 
 export class ClickActionPrivate {
@@ -7727,6 +7686,15 @@ export class Color {
     static get_static(color: StaticColor): Color;
 }
 
+export class Context {
+    static $gtype: GObject.GType<Context>;
+
+    constructor(copy: Context);
+
+    // Members
+    get_backend(): Backend;
+}
+
 export class CrossingEvent {
     static $gtype: GObject.GType<CrossingEvent>;
 
@@ -7736,8 +7704,12 @@ export class CrossingEvent {
     type: EventType;
     time: number;
     flags: EventFlags;
+    stage: Stage;
     x: number;
     y: number;
+    device: InputDevice;
+    sequence: EventSequence;
+    related: Actor;
 }
 
 export class DeformEffectPrivate {
@@ -7755,6 +7727,8 @@ export class DeviceEvent {
     type: EventType;
     time: number;
     flags: EventFlags;
+    stage: Stage;
+    device: InputDevice;
 }
 
 export class EventSequence {
@@ -7788,6 +7762,18 @@ export class GestureActionPrivate {
     constructor(copy: GestureActionPrivate);
 }
 
+export class Grab {
+    static $gtype: GObject.GType<Grab>;
+
+    constructor(copy: Grab);
+
+    // Members
+    dismiss(): void;
+    get_seat_state(): GrabState;
+    ref(): Grab;
+    unref(): void;
+}
+
 export class GridLayoutPrivate {
     static $gtype: GObject.GType<GridLayoutPrivate>;
 
@@ -7803,9 +7789,11 @@ export class IMEvent {
     type: EventType;
     time: number;
     flags: EventFlags;
+    stage: Stage;
     text: string;
     offset: number;
     len: number;
+    mode: PreeditResetMode;
 }
 
 export class ImagePrivate {
@@ -7829,11 +7817,13 @@ export class KeyEvent {
     type: EventType;
     time: number;
     flags: EventFlags;
+    stage: Stage;
     modifier_state: ModifierType;
     keyval: number;
     hardware_keycode: number;
     unicode_value: number;
     evdev_code: number;
+    device: InputDevice;
 }
 
 export class KeyframeTransitionPrivate {
@@ -7900,10 +7890,12 @@ export class MotionEvent {
     type: EventType;
     time: number;
     flags: EventFlags;
+    stage: Stage;
     x: number;
     y: number;
     modifier_state: ModifierType;
     axes: number;
+    device: InputDevice;
     time_us: number;
     dx: number;
     dy: number;
@@ -7926,8 +7918,10 @@ export class PadButtonEvent {
     type: EventType;
     time: number;
     flags: EventFlags;
+    stage: Stage;
     button: number;
     group: number;
+    device: InputDevice;
     mode: number;
 }
 
@@ -7940,6 +7934,8 @@ export class PadRingEvent {
     type: EventType;
     time: number;
     flags: EventFlags;
+    stage: Stage;
+    device: InputDevice;
     ring_source: InputDevicePadSource;
     ring_number: number;
     group: number;
@@ -7956,6 +7952,8 @@ export class PadStripEvent {
     type: EventType;
     time: number;
     flags: EventFlags;
+    stage: Stage;
+    device: InputDevice;
     strip_source: InputDevicePadSource;
     strip_number: number;
     group: number;
@@ -8018,6 +8016,7 @@ export class PathNode {
 
     // Fields
     type: PathNodeType;
+    points: Knot[];
 
     // Members
     copy(): PathNode;
@@ -8059,6 +8058,7 @@ export class PickContext {
     // Members
     destroy(): void;
     get_transform(): Graphene.Matrix;
+    log_overlap(actor: Actor): void;
     log_pick(box: ActorBox, actor: Actor): void;
     pop_clip(): void;
     pop_transform(): void;
@@ -8101,6 +8101,8 @@ export class ProximityEvent {
     type: EventType;
     time: number;
     flags: EventFlags;
+    stage: Stage;
+    device: InputDevice;
 }
 
 export class RotateActionPrivate {
@@ -8130,11 +8132,13 @@ export class ScrollEvent {
     type: EventType;
     time: number;
     flags: EventFlags;
+    stage: Stage;
     x: number;
     y: number;
     direction: ScrollDirection;
     modifier_state: ModifierType;
     axes: number;
+    device: InputDevice;
     scroll_source: ScrollSource;
     finish_flags: ScrollFinishFlags;
 }
@@ -8196,10 +8200,29 @@ export class TouchEvent {
     type: EventType;
     time: number;
     flags: EventFlags;
+    stage: Stage;
     x: number;
     y: number;
+    sequence: EventSequence;
     modifier_state: ModifierType;
     axes: number;
+    device: InputDevice;
+}
+
+export class TouchpadHoldEvent {
+    static $gtype: GObject.GType<TouchpadHoldEvent>;
+
+    constructor(copy: TouchpadHoldEvent);
+
+    // Fields
+    type: EventType;
+    time: number;
+    flags: EventFlags;
+    stage: Stage;
+    phase: TouchpadGesturePhase;
+    n_fingers: number;
+    x: number;
+    y: number;
 }
 
 export class TouchpadPinchEvent {
@@ -8211,6 +8234,7 @@ export class TouchpadPinchEvent {
     type: EventType;
     time: number;
     flags: EventFlags;
+    stage: Stage;
     phase: TouchpadGesturePhase;
     x: number;
     y: number;
@@ -8232,6 +8256,7 @@ export class TouchpadSwipeEvent {
     type: EventType;
     time: number;
     flags: EventFlags;
+    stage: Stage;
     phase: TouchpadGesturePhase;
     n_fingers: number;
     x: number;
@@ -8258,13 +8283,6 @@ export class Units {
     static $gtype: GObject.GType<Units>;
 
     constructor(copy: Units);
-
-    // Fields
-    unit_type: UnitType;
-    value: number;
-    pixels: number;
-    pixels_set: number;
-    serial: number;
 
     // Members
     copy(): Units;
@@ -8303,7 +8321,6 @@ export class Event {
     get_angle(target: Event): number;
     get_axes(): [number, number];
     get_button(): number;
-    get_click_count(): number;
     get_coords(): [number, number];
     get_device(): InputDevice;
     get_device_tool(): InputDeviceTool;
@@ -8312,8 +8329,8 @@ export class Event {
     get_event_code(): number;
     get_event_sequence(): EventSequence;
     get_flags(): EventFlags;
-    get_gesture_motion_delta(): [number | null, number | null];
-    get_gesture_motion_delta_unaccelerated(): [number | null, number | null];
+    get_gesture_motion_delta(): [number, number];
+    get_gesture_motion_delta_unaccelerated(): [number, number];
     get_gesture_phase(): TouchpadGesturePhase;
     get_gesture_pinch_angle_delta(): number;
     get_gesture_pinch_scale(): number;
@@ -8321,7 +8338,7 @@ export class Event {
     get_key_symbol(): number;
     get_key_unicode(): number;
     get_mode_group(): number;
-    get_pad_event_details(): [boolean, number | null, number | null, number | null];
+    get_pad_event_details(): [boolean, number, number, number];
     get_position(position: Graphene.Point): void;
     get_related(): Actor;
     get_relative_motion(dx: number, dy: number, dx_unaccel: number, dy_unaccel: number): boolean;
@@ -8410,11 +8427,7 @@ export interface ContainerPrototype<A extends Actor = Actor> extends GObject.Obj
     destroy_child_meta(actor: A): void;
     find_child_by_name(child_name: string): A;
     get_child_meta(actor: A): ChildMeta;
-    get_children(): A[];
-    lower_child(actor: A, sibling?: A | null): void;
-    raise_child(actor: A, sibling?: A | null): void;
     remove_actor(actor: A): void;
-    sort_depth_order(): void;
     vfunc_actor_added(actor: A): void;
     vfunc_actor_removed(actor: A): void;
     vfunc_add(actor: A): void;
@@ -8422,10 +8435,7 @@ export interface ContainerPrototype<A extends Actor = Actor> extends GObject.Obj
     vfunc_create_child_meta(actor: A): void;
     vfunc_destroy_child_meta(actor: A): void;
     vfunc_get_child_meta(actor: A): ChildMeta;
-    vfunc_lower(actor: A, sibling?: A | null): void;
-    vfunc_raise(actor: A, sibling?: A | null): void;
     vfunc_remove(actor: A): void;
-    vfunc_sort_depth_order(): void;
 }
 
 export const Container: ContainerNamespace;

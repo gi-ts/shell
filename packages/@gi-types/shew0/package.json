@@ -30,10 +30,10 @@
     },
     "scripts": {},
     "dependencies": {
-        "@gi-types/gdk4": "^4.0.0",
-        "@gi-types/gio2": "^2.68.0",
-        "@gi-types/gobject2": "^2.68.0",
-        "@gi-types/gtk4": "^4.2.0"
+        "@gi-types/gdk4": "^4.0.1",
+        "@gi-types/gio2": "^2.72.1",
+        "@gi-types/gobject2": "^2.72.1",
+        "@gi-types/gtk4": "^4.6.1"
     },
     "typeScriptVersion": "4.1",
     "gitHead": null

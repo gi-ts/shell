@@ -1,11 +1,11 @@
 {
-    "name": "@gi-types/cally8",
+    "name": "@gi-types/clutter10",
     "publishConfig": {
         "access": "public",
         "tag": "latest"
     },
-    "version": "8.0.0",
-    "description": "TypeScript definitions for Cally",
+    "version": "10.0.0",
+    "description": "TypeScript definitions for Clutter",
     "license": "MIT",
     "contributors": [
         {
@@ -26,13 +26,19 @@
     "repository": {
         "type": "git",
         "url": "https://github.com/gi-ts/shell8",
-        "directory": "packages/@gi-types/cally8"
+        "directory": "packages/@gi-types/clutter10"
     },
     "scripts": {},
     "dependencies": {
         "@gi-types/atk1": "^2.36.0",
-        "@gi-types/clutter8": "^8.0.0",
-        "@gi-types/gobject2": "^2.68.0"
+        "@gi-types/cairo1": "^1.0.1",
+        "@gi-types/cogl10": "^10.0.0",
+        "@gi-types/gio2": "^2.72.1",
+        "@gi-types/glib2": "^2.72.1",
+        "@gi-types/gobject2": "^2.72.1",
+        "@gi-types/graphene1": "^1.0.1",
+        "@gi-types/json1": "^1.6.1",
+        "@gi-types/pango1": "^1.50.1"
     },
     "typeScriptVersion": "4.1",
     "gitHead": null

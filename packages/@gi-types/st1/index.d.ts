@@ -7,9 +7,9 @@
 import * as Atk from "@gi-types/atk1";
 import * as Gio from "@gi-types/gio2";
 import * as GObject from "@gi-types/gobject2";
-import * as Clutter from "@gi-types/clutter8";
-import * as Cogl from "@gi-types/cogl8";
-import * as Cally from "@gi-types/cally8";
+import * as Cally from "@gi-types/cally10";
+import * as Clutter from "@gi-types/clutter10";
+import * as Cogl from "@gi-types/cogl10";
 import * as GLib from "@gi-types/glib2";
 import * as cairo from "@gi-types/cairo1";
 import * as Pango from "@gi-types/pango1";
@@ -228,7 +228,7 @@ export class Adjustment extends GObject.Object implements Clutter.Animatable {
     clamp_page(lower: number, upper: number): void;
     get_transition(name: string): Clutter.Transition | null;
     get_value(): number;
-    get_values(): [number | null, number | null, number | null, number | null, number | null, number | null];
+    get_values(): [number, number, number, number, number, number];
     remove_transition(name: string): void;
     set_value(value: number): void;
     set_values(
@@ -263,7 +263,8 @@ export module Bin {
 }
 export class Bin<A extends Clutter.Actor = Clutter.Actor>
     extends Widget
-    implements Atk.ImplementorIface, Clutter.Animatable, Clutter.Container<A>, Clutter.Scriptable {
+    implements Atk.ImplementorIface, Clutter.Animatable, Clutter.Container<A>, Clutter.Scriptable
+{
     static $gtype: GObject.GType<Bin>;
 
     constructor(properties?: Partial<Bin.ConstructorProperties<A>>, ...args: any[]);
@@ -292,13 +293,7 @@ export class Bin<A extends Clutter.Actor = Clutter.Actor>
     destroy_child_meta(actor: A): void;
     find_child_by_name(child_name: string): A;
     get_child_meta(actor: A): Clutter.ChildMeta;
-    get_children(): A[];
-    // Conflicted with Clutter.Actor.get_children
-    get_children(...args: never[]): any;
-    lower_child(actor: A, sibling?: A | null): void;
-    raise_child(actor: A, sibling?: A | null): void;
     remove_actor(actor: A): void;
-    sort_depth_order(): void;
     vfunc_actor_added(actor: A): void;
     vfunc_actor_removed(actor: A): void;
     vfunc_add(actor: A): void;
@@ -306,10 +301,7 @@ export class Bin<A extends Clutter.Actor = Clutter.Actor>
     vfunc_create_child_meta(actor: A): void;
     vfunc_destroy_child_meta(actor: A): void;
     vfunc_get_child_meta(actor: A): Clutter.ChildMeta;
-    vfunc_lower(actor: A, sibling?: A | null): void;
-    vfunc_raise(actor: A, sibling?: A | null): void;
     vfunc_remove(actor: A): void;
-    vfunc_sort_depth_order(): void;
 }
 export module BorderImage {
     export interface ConstructorProperties extends GObject.Object.ConstructorProperties {
@@ -350,7 +342,8 @@ export module BoxLayout {
 }
 export class BoxLayout<A extends Clutter.Actor = Clutter.Actor>
     extends Viewport<Clutter.BoxLayout>
-    implements Atk.ImplementorIface, Clutter.Animatable, Clutter.Container<A>, Clutter.Scriptable, Scrollable {
+    implements Atk.ImplementorIface, Clutter.Animatable, Clutter.Container<A>, Clutter.Scriptable, Scrollable
+{
     static $gtype: GObject.GType<BoxLayout>;
 
     constructor(properties?: Partial<BoxLayout.ConstructorProperties<A>>, ...args: any[]);
@@ -392,13 +385,7 @@ export class BoxLayout<A extends Clutter.Actor = Clutter.Actor>
     destroy_child_meta(actor: A): void;
     find_child_by_name(child_name: string): A;
     get_child_meta(actor: A): Clutter.ChildMeta;
-    get_children(): A[];
-    // Conflicted with Clutter.Actor.get_children
-    get_children(...args: never[]): any;
-    lower_child(actor: A, sibling?: A | null): void;
-    raise_child(actor: A, sibling?: A | null): void;
     remove_actor(actor: A): void;
-    sort_depth_order(): void;
     vfunc_actor_added(actor: A): void;
     vfunc_actor_removed(actor: A): void;
     vfunc_add(actor: A): void;
@@ -406,10 +393,7 @@ export class BoxLayout<A extends Clutter.Actor = Clutter.Actor>
     vfunc_create_child_meta(actor: A): void;
     vfunc_destroy_child_meta(actor: A): void;
     vfunc_get_child_meta(actor: A): Clutter.ChildMeta;
-    vfunc_lower(actor: A, sibling?: A | null): void;
-    vfunc_raise(actor: A, sibling?: A | null): void;
     vfunc_remove(actor: A): void;
-    vfunc_sort_depth_order(): void;
     get_adjustments(hadjustment: Adjustment, vadjustment: Adjustment): void;
     set_adjustments(hadjustment: Adjustment, vadjustment: Adjustment): void;
     vfunc_get_adjustments(hadjustment: Adjustment, vadjustment: Adjustment): void;
@@ -430,7 +414,8 @@ export module Button {
 }
 export class Button<A extends Clutter.Actor = Clutter.Actor>
     extends Bin<A>
-    implements Atk.ImplementorIface, Clutter.Animatable, Clutter.Container<A>, Clutter.Scriptable {
+    implements Atk.ImplementorIface, Clutter.Animatable, Clutter.Container<A>, Clutter.Scriptable
+{
     static $gtype: GObject.GType<Button>;
 
     constructor(properties?: Partial<Button.ConstructorProperties<A>>, ...args: any[]);
@@ -489,13 +474,7 @@ export class Button<A extends Clutter.Actor = Clutter.Actor>
     destroy_child_meta(actor: A): void;
     find_child_by_name(child_name: string): A;
     get_child_meta(actor: A): Clutter.ChildMeta;
-    get_children(): A[];
-    // Conflicted with Clutter.Actor.get_children
-    get_children(...args: never[]): any;
-    lower_child(actor: A, sibling?: A | null): void;
-    raise_child(actor: A, sibling?: A | null): void;
     remove_actor(actor: A): void;
-    sort_depth_order(): void;
     vfunc_actor_added(actor: A): void;
     vfunc_actor_removed(actor: A): void;
     vfunc_add(actor: A): void;
@@ -503,10 +482,7 @@ export class Button<A extends Clutter.Actor = Clutter.Actor>
     vfunc_create_child_meta(actor: A): void;
     vfunc_destroy_child_meta(actor: A): void;
     vfunc_get_child_meta(actor: A): Clutter.ChildMeta;
-    vfunc_lower(actor: A, sibling?: A | null): void;
-    vfunc_raise(actor: A, sibling?: A | null): void;
     vfunc_remove(actor: A): void;
-    vfunc_sort_depth_order(): void;
 }
 export module Clipboard {
     export interface ConstructorProperties extends GObject.Object.ConstructorProperties {
@@ -536,7 +512,8 @@ export module DrawingArea {
 }
 export class DrawingArea<A extends Clutter.Actor = Clutter.Actor>
     extends Widget
-    implements Atk.ImplementorIface, Clutter.Animatable, Clutter.Container<A>, Clutter.Scriptable {
+    implements Atk.ImplementorIface, Clutter.Animatable, Clutter.Container<A>, Clutter.Scriptable
+{
     static $gtype: GObject.GType<DrawingArea>;
 
     constructor(properties?: Partial<DrawingArea.ConstructorProperties<A>>, ...args: any[]);
@@ -554,7 +531,7 @@ export class DrawingArea<A extends Clutter.Actor = Clutter.Actor>
     // Members
 
     get_context(): cairo.Context;
-    get_surface_size(): [number | null, number | null];
+    get_surface_size(): [number, number];
     queue_repaint(): void;
     vfunc_repaint(): void;
 
@@ -568,13 +545,7 @@ export class DrawingArea<A extends Clutter.Actor = Clutter.Actor>
     destroy_child_meta(actor: A): void;
     find_child_by_name(child_name: string): A;
     get_child_meta(actor: A): Clutter.ChildMeta;
-    get_children(): A[];
-    // Conflicted with Clutter.Actor.get_children
-    get_children(...args: never[]): any;
-    lower_child(actor: A, sibling?: A | null): void;
-    raise_child(actor: A, sibling?: A | null): void;
     remove_actor(actor: A): void;
-    sort_depth_order(): void;
     vfunc_actor_added(actor: A): void;
     vfunc_actor_removed(actor: A): void;
     vfunc_add(actor: A): void;
@@ -582,10 +553,7 @@ export class DrawingArea<A extends Clutter.Actor = Clutter.Actor>
     vfunc_create_child_meta(actor: A): void;
     vfunc_destroy_child_meta(actor: A): void;
     vfunc_get_child_meta(actor: A): Clutter.ChildMeta;
-    vfunc_lower(actor: A, sibling?: A | null): void;
-    vfunc_raise(actor: A, sibling?: A | null): void;
     vfunc_remove(actor: A): void;
-    vfunc_sort_depth_order(): void;
 }
 export module Entry {
     export interface ConstructorProperties<A extends Clutter.Actor = Clutter.Actor>
@@ -610,7 +578,8 @@ export module Entry {
 }
 export class Entry<A extends Clutter.Actor = Clutter.Actor>
     extends Widget
-    implements Atk.ImplementorIface, Clutter.Animatable, Clutter.Container<A>, Clutter.Scriptable {
+    implements Atk.ImplementorIface, Clutter.Animatable, Clutter.Container<A>, Clutter.Scriptable
+{
     static $gtype: GObject.GType<Entry>;
 
     constructor(properties?: Partial<Entry.ConstructorProperties<A>>, ...args: any[]);
@@ -694,13 +663,7 @@ export class Entry<A extends Clutter.Actor = Clutter.Actor>
     destroy_child_meta(actor: A): void;
     find_child_by_name(child_name: string): A;
     get_child_meta(actor: A): Clutter.ChildMeta;
-    get_children(): A[];
-    // Conflicted with Clutter.Actor.get_children
-    get_children(...args: never[]): any;
-    lower_child(actor: A, sibling?: A | null): void;
-    raise_child(actor: A, sibling?: A | null): void;
     remove_actor(actor: A): void;
-    sort_depth_order(): void;
     vfunc_actor_added(actor: A): void;
     vfunc_actor_removed(actor: A): void;
     vfunc_add(actor: A): void;
@@ -708,10 +671,7 @@ export class Entry<A extends Clutter.Actor = Clutter.Actor>
     vfunc_create_child_meta(actor: A): void;
     vfunc_destroy_child_meta(actor: A): void;
     vfunc_get_child_meta(actor: A): Clutter.ChildMeta;
-    vfunc_lower(actor: A, sibling?: A | null): void;
-    vfunc_raise(actor: A, sibling?: A | null): void;
     vfunc_remove(actor: A): void;
-    vfunc_sort_depth_order(): void;
 }
 export module FocusManager {
     export interface ConstructorProperties extends GObject.Object.ConstructorProperties {
@@ -742,6 +702,9 @@ export class GenericAccessible extends WidgetAccessible implements Atk.Action, A
 
     constructor(properties?: Partial<GenericAccessible.ConstructorProperties>, ...args: any[]);
     _init(...args: any[]): void;
+
+    // Fields
+    priv: GenericAccessiblePrivate;
 
     // Signals
 
@@ -777,7 +740,7 @@ export class GenericAccessible extends WidgetAccessible implements Atk.Action, A
     get_minimum_value(): unknown;
     get_range(): Atk.Range | null;
     get_sub_ranges(): Atk.Range[];
-    get_value_and_text(): [number, string | null];
+    get_value_and_text(): [number, string];
     set_current_value(value: GObject.Value | any): boolean;
     set_value(new_value: number): void;
     vfunc_get_current_value(): unknown;
@@ -787,7 +750,7 @@ export class GenericAccessible extends WidgetAccessible implements Atk.Action, A
     vfunc_get_minimum_value(): unknown;
     vfunc_get_range(): Atk.Range | null;
     vfunc_get_sub_ranges(): Atk.Range[];
-    vfunc_get_value_and_text(): [number, string | null];
+    vfunc_get_value_and_text(): [number, string];
     vfunc_set_current_value(value: GObject.Value | any): boolean;
     vfunc_set_value(new_value: number): void;
 }
@@ -808,7 +771,8 @@ export module Icon {
 }
 export class Icon<A extends Clutter.Actor = Clutter.Actor>
     extends Widget
-    implements Atk.ImplementorIface, Clutter.Animatable, Clutter.Container<A>, Clutter.Scriptable {
+    implements Atk.ImplementorIface, Clutter.Animatable, Clutter.Container<A>, Clutter.Scriptable
+{
     static $gtype: GObject.GType<Icon>;
 
     constructor(properties?: Partial<Icon.ConstructorProperties<A>>, ...args: any[]);
@@ -861,13 +825,7 @@ export class Icon<A extends Clutter.Actor = Clutter.Actor>
     destroy_child_meta(actor: A): void;
     find_child_by_name(child_name: string): A;
     get_child_meta(actor: A): Clutter.ChildMeta;
-    get_children(): A[];
-    // Conflicted with Clutter.Actor.get_children
-    get_children(...args: never[]): any;
-    lower_child(actor: A, sibling?: A | null): void;
-    raise_child(actor: A, sibling?: A | null): void;
     remove_actor(actor: A): void;
-    sort_depth_order(): void;
     vfunc_actor_added(actor: A): void;
     vfunc_actor_removed(actor: A): void;
     vfunc_add(actor: A): void;
@@ -875,10 +833,7 @@ export class Icon<A extends Clutter.Actor = Clutter.Actor>
     vfunc_create_child_meta(actor: A): void;
     vfunc_destroy_child_meta(actor: A): void;
     vfunc_get_child_meta(actor: A): Clutter.ChildMeta;
-    vfunc_lower(actor: A, sibling?: A | null): void;
-    vfunc_raise(actor: A, sibling?: A | null): void;
     vfunc_remove(actor: A): void;
-    vfunc_sort_depth_order(): void;
 }
 export module ImageContent {
     export interface ConstructorProperties extends Clutter.Image.ConstructorProperties {
@@ -922,17 +877,17 @@ export class ImageContent extends Clutter.Image implements Clutter.Content, Gio.
     vfunc_equal(icon2?: Gio.Icon | null): boolean;
     vfunc_hash(): number;
     vfunc_serialize(): GLib.Variant | null;
-    load(size: number, cancellable?: Gio.Cancellable | null): [Gio.InputStream, string | null];
-    load_async(size: number, cancellable?: Gio.Cancellable | null): Promise<[Gio.InputStream, string | null]>;
+    load(size: number, cancellable?: Gio.Cancellable | null): [Gio.InputStream, string];
+    load_async(size: number, cancellable?: Gio.Cancellable | null): Promise<[Gio.InputStream, string]>;
     load_async(size: number, cancellable: Gio.Cancellable | null, callback: Gio.AsyncReadyCallback<this> | null): void;
     load_async(
         size: number,
         cancellable?: Gio.Cancellable | null,
         callback?: Gio.AsyncReadyCallback<this> | null
-    ): Promise<[Gio.InputStream, string | null]> | void;
-    load_finish(res: Gio.AsyncResult): [Gio.InputStream, string | null];
-    vfunc_load(size: number, cancellable?: Gio.Cancellable | null): [Gio.InputStream, string | null];
-    vfunc_load_async(size: number, cancellable?: Gio.Cancellable | null): Promise<[Gio.InputStream, string | null]>;
+    ): Promise<[Gio.InputStream, string]> | void;
+    load_finish(res: Gio.AsyncResult): [Gio.InputStream, string];
+    vfunc_load(size: number, cancellable?: Gio.Cancellable | null): [Gio.InputStream, string];
+    vfunc_load_async(size: number, cancellable?: Gio.Cancellable | null): Promise<[Gio.InputStream, string]>;
     vfunc_load_async(
         size: number,
         cancellable: Gio.Cancellable | null,
@@ -942,8 +897,8 @@ export class ImageContent extends Clutter.Image implements Clutter.Content, Gio.
         size: number,
         cancellable?: Gio.Cancellable | null,
         callback?: Gio.AsyncReadyCallback<this> | null
-    ): Promise<[Gio.InputStream, string | null]> | void;
-    vfunc_load_finish(res: Gio.AsyncResult): [Gio.InputStream, string | null];
+    ): Promise<[Gio.InputStream, string]> | void;
+    vfunc_load_finish(res: Gio.AsyncResult): [Gio.InputStream, string];
 }
 export module Label {
     export interface ConstructorProperties<A extends Clutter.Actor = Clutter.Actor>
@@ -956,7 +911,8 @@ export module Label {
 }
 export class Label<A extends Clutter.Actor = Clutter.Actor>
     extends Widget
-    implements Atk.ImplementorIface, Clutter.Animatable, Clutter.Container<A>, Clutter.Scriptable {
+    implements Atk.ImplementorIface, Clutter.Animatable, Clutter.Container<A>, Clutter.Scriptable
+{
     static $gtype: GObject.GType<Label>;
 
     constructor(properties?: Partial<Label.ConstructorProperties<A>>, ...args: any[]);
@@ -990,13 +946,7 @@ export class Label<A extends Clutter.Actor = Clutter.Actor>
     destroy_child_meta(actor: A): void;
     find_child_by_name(child_name: string): A;
     get_child_meta(actor: A): Clutter.ChildMeta;
-    get_children(): A[];
-    // Conflicted with Clutter.Actor.get_children
-    get_children(...args: never[]): any;
-    lower_child(actor: A, sibling?: A | null): void;
-    raise_child(actor: A, sibling?: A | null): void;
     remove_actor(actor: A): void;
-    sort_depth_order(): void;
     vfunc_actor_added(actor: A): void;
     vfunc_actor_removed(actor: A): void;
     vfunc_add(actor: A): void;
@@ -1004,10 +954,7 @@ export class Label<A extends Clutter.Actor = Clutter.Actor>
     vfunc_create_child_meta(actor: A): void;
     vfunc_destroy_child_meta(actor: A): void;
     vfunc_get_child_meta(actor: A): Clutter.ChildMeta;
-    vfunc_lower(actor: A, sibling?: A | null): void;
-    vfunc_raise(actor: A, sibling?: A | null): void;
     vfunc_remove(actor: A): void;
-    vfunc_sort_depth_order(): void;
 }
 export module PasswordEntry {
     export interface ConstructorProperties<A extends Clutter.Actor = Clutter.Actor>
@@ -1021,7 +968,8 @@ export module PasswordEntry {
 }
 export class PasswordEntry<A extends Clutter.Actor = Clutter.Actor>
     extends Entry<A>
-    implements Atk.ImplementorIface, Clutter.Animatable, Clutter.Container<A>, Clutter.Scriptable {
+    implements Atk.ImplementorIface, Clutter.Animatable, Clutter.Container<A>, Clutter.Scriptable
+{
     static $gtype: GObject.GType<PasswordEntry>;
 
     constructor(properties?: Partial<PasswordEntry.ConstructorProperties<A>>, ...args: any[]);
@@ -1058,13 +1006,7 @@ export class PasswordEntry<A extends Clutter.Actor = Clutter.Actor>
     destroy_child_meta(actor: A): void;
     find_child_by_name(child_name: string): A;
     get_child_meta(actor: A): Clutter.ChildMeta;
-    get_children(): A[];
-    // Conflicted with Clutter.Actor.get_children
-    get_children(...args: never[]): any;
-    lower_child(actor: A, sibling?: A | null): void;
-    raise_child(actor: A, sibling?: A | null): void;
     remove_actor(actor: A): void;
-    sort_depth_order(): void;
     vfunc_actor_added(actor: A): void;
     vfunc_actor_removed(actor: A): void;
     vfunc_add(actor: A): void;
@@ -1072,10 +1014,7 @@ export class PasswordEntry<A extends Clutter.Actor = Clutter.Actor>
     vfunc_create_child_meta(actor: A): void;
     vfunc_destroy_child_meta(actor: A): void;
     vfunc_get_child_meta(actor: A): Clutter.ChildMeta;
-    vfunc_lower(actor: A, sibling?: A | null): void;
-    vfunc_raise(actor: A, sibling?: A | null): void;
     vfunc_remove(actor: A): void;
-    vfunc_sort_depth_order(): void;
 }
 export module ScrollBar {
     export interface ConstructorProperties<A extends Clutter.Actor = Clutter.Actor>
@@ -1087,7 +1026,8 @@ export module ScrollBar {
 }
 export class ScrollBar<A extends Clutter.Actor = Clutter.Actor>
     extends Widget
-    implements Atk.ImplementorIface, Clutter.Animatable, Clutter.Container<A>, Clutter.Scriptable {
+    implements Atk.ImplementorIface, Clutter.Animatable, Clutter.Container<A>, Clutter.Scriptable
+{
     static $gtype: GObject.GType<ScrollBar>;
 
     constructor(properties?: Partial<ScrollBar.ConstructorProperties<A>>, ...args: any[]);
@@ -1134,13 +1074,7 @@ export class ScrollBar<A extends Clutter.Actor = Clutter.Actor>
     destroy_child_meta(actor: A): void;
     find_child_by_name(child_name: string): A;
     get_child_meta(actor: A): Clutter.ChildMeta;
-    get_children(): A[];
-    // Conflicted with Clutter.Actor.get_children
-    get_children(...args: never[]): any;
-    lower_child(actor: A, sibling?: A | null): void;
-    raise_child(actor: A, sibling?: A | null): void;
     remove_actor(actor: A): void;
-    sort_depth_order(): void;
     vfunc_actor_added(actor: A): void;
     vfunc_actor_removed(actor: A): void;
     vfunc_add(actor: A): void;
@@ -1148,10 +1082,7 @@ export class ScrollBar<A extends Clutter.Actor = Clutter.Actor>
     vfunc_create_child_meta(actor: A): void;
     vfunc_destroy_child_meta(actor: A): void;
     vfunc_get_child_meta(actor: A): Clutter.ChildMeta;
-    vfunc_lower(actor: A, sibling?: A | null): void;
-    vfunc_raise(actor: A, sibling?: A | null): void;
     vfunc_remove(actor: A): void;
-    vfunc_sort_depth_order(): void;
 }
 export module ScrollView {
     export interface ConstructorProperties<A extends Clutter.Actor = Clutter.Actor>
@@ -1177,7 +1108,8 @@ export module ScrollView {
 }
 export class ScrollView<A extends Clutter.Actor = Clutter.Actor>
     extends Bin<A>
-    implements Atk.ImplementorIface, Clutter.Animatable, Clutter.Container<A>, Clutter.Scriptable {
+    implements Atk.ImplementorIface, Clutter.Animatable, Clutter.Container<A>, Clutter.Scriptable
+{
     static $gtype: GObject.GType<ScrollView>;
 
     constructor(properties?: Partial<ScrollView.ConstructorProperties<A>>, ...args: any[]);
@@ -1218,11 +1150,11 @@ export class ScrollView<A extends Clutter.Actor = Clutter.Actor>
     // Members
 
     get_column_size(): number;
-    get_hscroll_bar(): A;
+    get_hscroll_bar(): ScrollBar;
     get_mouse_scrolling(): boolean;
     get_overlay_scrollbars(): boolean;
     get_row_size(): number;
-    get_vscroll_bar(): A;
+    get_vscroll_bar(): ScrollBar;
     set_column_size(column_size: number): void;
     set_mouse_scrolling(enabled: boolean): void;
     set_overlay_scrollbars(enabled: boolean): void;
@@ -1240,13 +1172,7 @@ export class ScrollView<A extends Clutter.Actor = Clutter.Actor>
     destroy_child_meta(actor: A): void;
     find_child_by_name(child_name: string): A;
     get_child_meta(actor: A): Clutter.ChildMeta;
-    get_children(): A[];
-    // Conflicted with Clutter.Actor.get_children
-    get_children(...args: never[]): any;
-    lower_child(actor: A, sibling?: A | null): void;
-    raise_child(actor: A, sibling?: A | null): void;
     remove_actor(actor: A): void;
-    sort_depth_order(): void;
     vfunc_actor_added(actor: A): void;
     vfunc_actor_removed(actor: A): void;
     vfunc_add(actor: A): void;
@@ -1254,10 +1180,7 @@ export class ScrollView<A extends Clutter.Actor = Clutter.Actor>
     vfunc_create_child_meta(actor: A): void;
     vfunc_destroy_child_meta(actor: A): void;
     vfunc_get_child_meta(actor: A): Clutter.ChildMeta;
-    vfunc_lower(actor: A, sibling?: A | null): void;
-    vfunc_raise(actor: A, sibling?: A | null): void;
     vfunc_remove(actor: A): void;
-    vfunc_sort_depth_order(): void;
 }
 export module ScrollViewFade {
     export interface ConstructorProperties extends Clutter.ShaderEffect.ConstructorProperties {
@@ -1297,6 +1220,8 @@ export class ScrollViewFade extends Clutter.ShaderEffect {
 export module Settings {
     export interface ConstructorProperties extends GObject.Object.ConstructorProperties {
         [key: string]: any;
+        disable_show_password: boolean;
+        disableShowPassword: boolean;
         drag_threshold: number;
         dragThreshold: number;
         enable_animations: boolean;
@@ -1305,8 +1230,8 @@ export module Settings {
         fontName: string;
         gtk_icon_theme: string;
         gtkIconTheme: string;
-        gtk_theme: string;
-        gtkTheme: string;
+        high_contrast: boolean;
+        highContrast: boolean;
         magnifier_active: boolean;
         magnifierActive: boolean;
         primary_paste: boolean;
@@ -1322,6 +1247,8 @@ export class Settings extends GObject.Object {
     _init(...args: any[]): void;
 
     // Properties
+    get disable_show_password(): boolean;
+    get disableShowPassword(): boolean;
     get drag_threshold(): number;
     get dragThreshold(): number;
     get enable_animations(): boolean;
@@ -1330,8 +1257,8 @@ export class Settings extends GObject.Object {
     get fontName(): string;
     get gtk_icon_theme(): string;
     get gtkIconTheme(): string;
-    get gtk_theme(): string;
-    get gtkTheme(): string;
+    get high_contrast(): boolean;
+    get highContrast(): boolean;
     get magnifier_active(): boolean;
     get magnifierActive(): boolean;
     get primary_paste(): boolean;
@@ -1357,6 +1284,9 @@ export class TextureCache extends GObject.Object {
 
     constructor(properties?: Partial<TextureCache.ConstructorProperties>, ...args: any[]);
     _init(...args: any[]): void;
+
+    // Fields
+    priv: TextureCachePrivate;
 
     // Signals
 
@@ -1515,8 +1445,8 @@ export class ThemeNode extends GObject.Object {
 
     adjust_for_height(for_height: number): number;
     adjust_for_width(for_width: number): number;
-    adjust_preferred_height(min_height_p: number | null, natural_height_p: number): [number | null, number];
-    adjust_preferred_width(min_width_p: number | null, natural_width_p: number): [number | null, number];
+    adjust_preferred_height(min_height_p: number, natural_height_p: number): [number, number];
+    adjust_preferred_width(min_width_p: number, natural_width_p: number): [number, number];
     equal(node_b: ThemeNode): boolean;
     geometry_equal(other: ThemeNode): boolean;
     get_background_color(): Clutter.Color;
@@ -1593,7 +1523,8 @@ export class Viewport<
         C extends Clutter.Actor = Clutter.Actor
     >
     extends Widget<A, B>
-    implements Atk.ImplementorIface, Clutter.Animatable, Clutter.Container<C>, Clutter.Scriptable, Scrollable {
+    implements Atk.ImplementorIface, Clutter.Animatable, Clutter.Container<C>, Clutter.Scriptable, Scrollable
+{
     static $gtype: GObject.GType<Viewport>;
 
     constructor(properties?: Partial<Viewport.ConstructorProperties<A, B, C>>, ...args: any[]);
@@ -1638,19 +1569,9 @@ export class Viewport<
     get_child_meta(actor: C): Clutter.ChildMeta;
     // Conflicted with Clutter.Container.get_child_meta
     get_child_meta(...args: never[]): any;
-    get_children(): C[];
-    // Conflicted with Clutter.Actor.get_children
-    get_children(...args: never[]): any;
-    lower_child(actor: C, sibling?: C | null): void;
-    // Conflicted with Clutter.Container.lower_child
-    lower_child(...args: never[]): any;
-    raise_child(actor: C, sibling?: C | null): void;
-    // Conflicted with Clutter.Container.raise_child
-    raise_child(...args: never[]): any;
     remove_actor(actor: C): void;
     // Conflicted with Clutter.Container.remove_actor
     remove_actor(...args: never[]): any;
-    sort_depth_order(): void;
     vfunc_actor_added(actor: C): void;
     // Conflicted with Clutter.Container.vfunc_actor_added
     vfunc_actor_added(...args: never[]): any;
@@ -1672,16 +1593,9 @@ export class Viewport<
     vfunc_get_child_meta(actor: C): Clutter.ChildMeta;
     // Conflicted with Clutter.Container.vfunc_get_child_meta
     vfunc_get_child_meta(...args: never[]): any;
-    vfunc_lower(actor: C, sibling?: C | null): void;
-    // Conflicted with Clutter.Container.vfunc_lower
-    vfunc_lower(...args: never[]): any;
-    vfunc_raise(actor: C, sibling?: C | null): void;
-    // Conflicted with Clutter.Container.vfunc_raise
-    vfunc_raise(...args: never[]): any;
     vfunc_remove(actor: C): void;
     // Conflicted with Clutter.Container.vfunc_remove
     vfunc_remove(...args: never[]): any;
-    vfunc_sort_depth_order(): void;
     get_adjustments(hadjustment: Adjustment, vadjustment: Adjustment): void;
     set_adjustments(hadjustment: Adjustment, vadjustment: Adjustment): void;
     vfunc_get_adjustments(hadjustment: Adjustment, vadjustment: Adjustment): void;
@@ -1718,7 +1632,8 @@ export class Widget<
         C extends Clutter.Actor = Clutter.Actor
     >
     extends Clutter.Actor<A, B>
-    implements Atk.ImplementorIface, Clutter.Animatable, Clutter.Container<C>, Clutter.Scriptable {
+    implements Atk.ImplementorIface, Clutter.Animatable, Clutter.Container<C>, Clutter.Scriptable
+{
     static $gtype: GObject.GType<Widget>;
 
     constructor(properties?: Partial<Widget.ConstructorProperties<A, B, C>>, ...args: any[]);
@@ -1849,19 +1764,9 @@ export class Widget<
     get_child_meta(actor: C): Clutter.ChildMeta;
     // Conflicted with Clutter.Container.get_child_meta
     get_child_meta(...args: never[]): any;
-    get_children(): C[];
-    // Conflicted with Clutter.Actor.get_children
-    get_children(...args: never[]): any;
-    lower_child(actor: C, sibling?: C | null): void;
-    // Conflicted with Clutter.Container.lower_child
-    lower_child(...args: never[]): any;
-    raise_child(actor: C, sibling?: C | null): void;
-    // Conflicted with Clutter.Container.raise_child
-    raise_child(...args: never[]): any;
     remove_actor(actor: C): void;
     // Conflicted with Clutter.Container.remove_actor
     remove_actor(...args: never[]): any;
-    sort_depth_order(): void;
     vfunc_actor_added(actor: C): void;
     // Conflicted with Clutter.Container.vfunc_actor_added
     vfunc_actor_added(...args: never[]): any;
@@ -1883,16 +1788,9 @@ export class Widget<
     vfunc_get_child_meta(actor: C): Clutter.ChildMeta;
     // Conflicted with Clutter.Container.vfunc_get_child_meta
     vfunc_get_child_meta(...args: never[]): any;
-    vfunc_lower(actor: C, sibling?: C | null): void;
-    // Conflicted with Clutter.Container.vfunc_lower
-    vfunc_lower(...args: never[]): any;
-    vfunc_raise(actor: C, sibling?: C | null): void;
-    // Conflicted with Clutter.Container.vfunc_raise
-    vfunc_raise(...args: never[]): any;
     vfunc_remove(actor: C): void;
     // Conflicted with Clutter.Container.vfunc_remove
     vfunc_remove(...args: never[]): any;
-    vfunc_sort_depth_order(): void;
     get_id(): string;
     parse_custom_node(script: Clutter.Script, value: GObject.Value | any, name: string, node: Json.Node): boolean;
     set_custom_property(script: Clutter.Script, name: string, value: GObject.Value | any): void;
@@ -1943,11 +1841,11 @@ export class WidgetAccessible extends Cally.Actor implements Atk.Action, Atk.Com
     vfunc_set_description(...args: never[]): any;
     contains(x: number, y: number, coord_type: Atk.CoordType): boolean;
     get_alpha(): number;
-    get_extents(coord_type: Atk.CoordType): [number | null, number | null, number | null, number | null];
+    get_extents(coord_type: Atk.CoordType): [number, number, number, number];
     get_layer(): Atk.Layer;
     get_mdi_zorder(): number;
-    get_position(coord_type: Atk.CoordType): [number | null, number | null];
-    get_size(): [number | null, number | null];
+    get_position(coord_type: Atk.CoordType): [number, number];
+    get_size(): [number, number];
     grab_focus(): boolean;
     ref_accessible_at_point(x: number, y: number, coord_type: Atk.CoordType): Atk.Object | null;
     remove_focus_handler(handler_id: number): void;
@@ -1959,11 +1857,11 @@ export class WidgetAccessible extends Cally.Actor implements Atk.Action, Atk.Com
     vfunc_bounds_changed(bounds: Atk.Rectangle): void;
     vfunc_contains(x: number, y: number, coord_type: Atk.CoordType): boolean;
     vfunc_get_alpha(): number;
-    vfunc_get_extents(coord_type: Atk.CoordType): [number | null, number | null, number | null, number | null];
+    vfunc_get_extents(coord_type: Atk.CoordType): [number, number, number, number];
     vfunc_get_layer(): Atk.Layer;
     vfunc_get_mdi_zorder(): number;
-    vfunc_get_position(coord_type: Atk.CoordType): [number | null, number | null];
-    vfunc_get_size(): [number | null, number | null];
+    vfunc_get_position(coord_type: Atk.CoordType): [number, number];
+    vfunc_get_size(): [number, number];
     vfunc_grab_focus(): boolean;
     vfunc_ref_accessible_at_point(x: number, y: number, coord_type: Atk.CoordType): Atk.Object | null;
     vfunc_remove_focus_handler(handler_id: number): void;
@@ -1999,12 +1897,20 @@ export class IconColors {
     constructor(
         properties?: Partial<{
             ref_count?: number;
+            foreground?: Clutter.Color;
+            warning?: Clutter.Color;
+            error?: Clutter.Color;
+            success?: Clutter.Color;
         }>
     );
     constructor(copy: IconColors);
 
     // Fields
     ref_count: number;
+    foreground: Clutter.Color;
+    warning: Clutter.Color;
+    error: Clutter.Color;
+    success: Clutter.Color;
 
     // Constructors
     static ["new"](): IconColors;
@@ -2037,9 +1943,9 @@ export class ScrollViewPrivate {
 export class Shadow {
     static $gtype: GObject.GType<Shadow>;
 
-    constructor(color: Clutter.Color, xoffset: number, yoffset: number, blur: number, spread: number, inset: boolean);
     constructor(
         properties?: Partial<{
+            color?: Clutter.Color;
             xoffset?: number;
             yoffset?: number;
             blur?: number;
@@ -2051,6 +1957,7 @@ export class Shadow {
     constructor(copy: Shadow);
 
     // Fields
+    color: Clutter.Color;
     xoffset: number;
     yoffset: number;
     blur: number;
@@ -2100,23 +2007,19 @@ export class TextureCachePrivate {
 export class ThemeNodePaintState {
     static $gtype: GObject.GType<ThemeNodePaintState>;
 
-    constructor(
-        properties?: Partial<{
-            alloc_width?: number;
-            alloc_height?: number;
-            box_shadow_width?: number;
-            box_shadow_height?: number;
-            resource_scale?: number;
-        }>
-    );
     constructor(copy: ThemeNodePaintState);
 
     // Fields
+    node: ThemeNode;
     alloc_width: number;
     alloc_height: number;
     box_shadow_width: number;
     box_shadow_height: number;
     resource_scale: number;
+    box_shadow_pipeline: Cogl.Pipeline;
+    prerendered_texture: Cogl.Pipeline;
+    prerendered_pipeline: Cogl.Pipeline;
+    corner_material: Cogl.Pipeline[];
 
     // Members
     copy(other: ThemeNodePaintState): void;

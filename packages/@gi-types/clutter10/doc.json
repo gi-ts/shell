@@ -1,7 +1,7 @@
 {
     "name": "Clutter",
-    "api_version": "8",
-    "package_version": "8.0",
+    "api_version": "10",
+    "package_version": "10.0",
     "imports": {
         "GObject": "2.0",
         "cairo": "1.0",
@@ -11,6 +11,6 @@
         "Graphene": "1.0",
         "Gio": "2.0",
         "Json": "1.0",
-        "Cogl": "8"
+        "Cogl": "10"
     }
 }

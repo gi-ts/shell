@@ -6,13 +6,18 @@
 
 import * as Pango from "@gi-types/pango1";
 import * as cairo from "@gi-types/cairo1";
+import * as GLib from "@gi-types/glib2";
 import * as GObject from "@gi-types/gobject2";
 
 export function context_get_font_options(context: Pango.Context): cairo.FontOptions | null;
 export function context_get_resolution(context: Pango.Context): number;
 export function context_set_font_options(context: Pango.Context, options?: cairo.FontOptions | null): void;
 export function context_set_resolution(context: Pango.Context, dpi: number): void;
-export function context_set_shape_renderer(context: Pango.Context, func?: ShapeRendererFunc | null): void;
+export function context_set_shape_renderer(
+    context: Pango.Context,
+    func?: ShapeRendererFunc | null,
+    dnotify?: GLib.DestroyNotify | null
+): void;
 export function create_context(cr: cairo.Context): Pango.Context;
 export function create_layout(cr: cairo.Context): Pango.Layout;
 export function error_underline_path(cr: cairo.Context, x: number, y: number, width: number, height: number): void;
@@ -52,8 +57,8 @@ export interface FontMapNamespace {
     ["new"](): Pango.FontMap;
     new_for_font_type(fonttype: cairo.FontType): Pango.FontMap | null;
 }
-export type FontMap = FontMapPrototype;
-export interface FontMapPrototype extends Pango.FontMap {
+export type FontMap<A extends GObject.Object = GObject.Object> = FontMapPrototype<A>;
+export interface FontMapPrototype<A extends GObject.Object = GObject.Object> extends Pango.FontMap<A> {
     // Members
 
     get_font_type(): cairo.FontType;

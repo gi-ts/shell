@@ -1,7 +1,7 @@
 /**
- * CoglPango 8
+ * CoglPango 10
  *
- * Generated from 8.0
+ * Generated from 10.0
  */
 
 import * as Pango from "@gi-types/pango1";

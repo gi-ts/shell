@@ -2,9 +2,10 @@
   "name": "@gi.ts/packages-shell8",
   "private": true,
   "devDependencies": {
-    "@gi.ts/cli": "^1.5.7",
-    "@gi.ts/lib": "^1.5.9",
-    "lerna": "^3.22.1"
+    "@gi.ts/cli": "^1.5.10",
+    "@gi.ts/lib": "^1.5.13",
+    "lerna": "^3.22.1",
+    "typescript": "^4.7.4"
   },
   "workspaces": [
     "packages/@gi-types/**"
@@ -13,6 +14,6 @@
     "build": "tsc",
     "pub": "lerna publish",
     "pub:package": "lerna publish from-package",
-    "generate": "XDG_DATA_DIRS=$INSTALL_PREFIX/lib/mutter-8/:$INSTALL_PREFIX/share/gnome-shell/:$XDG_DATA_DIRS gi-ts generate docs.json"
+    "generate": "gi-ts generate docs.json"
   }
 }

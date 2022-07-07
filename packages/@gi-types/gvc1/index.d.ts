@@ -61,6 +61,9 @@ export class ChannelMap extends GObject.Object {
     constructor(properties?: Partial<ChannelMap.ConstructorProperties>, ...args: any[]);
     _init(...args: any[]): void;
 
+    // Fields
+    priv: ChannelMapPrivate;
+
     // Signals
 
     connect(id: string, callback: (...args: any[]) => any): number;
@@ -120,6 +123,9 @@ export class MixerCard extends GObject.Object {
     get profile(): string;
     set profile(val: string);
 
+    // Fields
+    priv: MixerCardPrivate;
+
     // Members
 
     change_profile(profile?: string | null): boolean;
@@ -150,6 +156,9 @@ export class MixerControl extends GObject.Object {
 
     // Properties
     get name(): string;
+
+    // Fields
+    priv: MixerControlPrivate;
 
     // Signals
 
@@ -271,6 +280,9 @@ export class MixerEventRole extends MixerStream {
     // Properties
     get device(): string;
     set device(val: string);
+
+    // Fields
+    priv: MixerEventRolePrivate | any;
 }
 export module MixerSink {
     export interface ConstructorProperties extends MixerStream.ConstructorProperties {
@@ -282,6 +294,9 @@ export class MixerSink extends MixerStream {
 
     constructor(properties?: Partial<MixerSink.ConstructorProperties>, ...args: any[]);
     _init(...args: any[]): void;
+
+    // Fields
+    priv: MixerSinkPrivate | any;
 }
 export module MixerSinkInput {
     export interface ConstructorProperties extends MixerStream.ConstructorProperties {
@@ -293,6 +308,9 @@ export class MixerSinkInput extends MixerStream {
 
     constructor(properties?: Partial<MixerSinkInput.ConstructorProperties>, ...args: any[]);
     _init(...args: any[]): void;
+
+    // Fields
+    priv: MixerSinkInputPrivate | any;
 }
 export module MixerSource {
     export interface ConstructorProperties extends MixerStream.ConstructorProperties {
@@ -304,6 +322,9 @@ export class MixerSource extends MixerStream {
 
     constructor(properties?: Partial<MixerSource.ConstructorProperties>, ...args: any[]);
     _init(...args: any[]): void;
+
+    // Fields
+    priv: MixerSourcePrivate | any;
 }
 export module MixerSourceOutput {
     export interface ConstructorProperties extends MixerStream.ConstructorProperties {
@@ -315,6 +336,9 @@ export class MixerSourceOutput extends MixerStream {
 
     constructor(properties?: Partial<MixerSourceOutput.ConstructorProperties>, ...args: any[]);
     _init(...args: any[]): void;
+
+    // Fields
+    priv: MixerSourceOutputPrivate | any;
 }
 export module MixerStream {
     export interface ConstructorProperties extends GObject.Object.ConstructorProperties {
@@ -415,6 +439,9 @@ export abstract class MixerStream extends GObject.Object {
     get volume(): number;
     set volume(val: number);
 
+    // Fields
+    priv: MixerStreamPrivate;
+
     // Members
 
     change_is_muted(is_muted: boolean): boolean;
@@ -510,6 +537,9 @@ export class MixerUIDevice extends GObject.Object {
     get type(): number;
     set type(val: number);
 
+    // Fields
+    priv: MixerUIDevicePrivate;
+
     // Members
 
     get_active_profile(): string;
@@ -543,16 +573,6 @@ export class ChannelMapPrivate {
 export class MixerCardPort {
     static $gtype: GObject.GType<MixerCardPort>;
 
-    constructor(
-        properties?: Partial<{
-            port?: string;
-            human_port?: string;
-            icon_name?: string;
-            priority?: number;
-            available?: number;
-            direction?: number;
-        }>
-    );
     constructor(copy: MixerCardPort);
 
     // Fields
@@ -562,6 +582,7 @@ export class MixerCardPort {
     priority: number;
     available: number;
     direction: number;
+    profiles: any[];
 }
 
 export class MixerCardPrivate {

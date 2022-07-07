@@ -1,11 +1,11 @@
 {
-    "name": "@gi-types/clutter8",
+    "name": "@gi-types/meta10",
     "publishConfig": {
         "access": "public",
         "tag": "latest"
     },
-    "version": "8.0.0",
-    "description": "TypeScript definitions for Clutter",
+    "version": "10.0.0",
+    "description": "TypeScript definitions for Meta",
     "license": "MIT",
     "contributors": [
         {
@@ -26,19 +26,24 @@
     "repository": {
         "type": "git",
         "url": "https://github.com/gi-ts/shell8",
-        "directory": "packages/@gi-types/clutter8"
+        "directory": "packages/@gi-types/meta10"
     },
     "scripts": {},
     "dependencies": {
         "@gi-types/atk1": "^2.36.0",
-        "@gi-types/cairo1": "^1.0.0",
-        "@gi-types/cogl8": "^8.0.0",
-        "@gi-types/gio2": "^2.68.0",
-        "@gi-types/glib2": "^2.68.0",
-        "@gi-types/gobject2": "^2.68.0",
-        "@gi-types/graphene1": "^1.0.0",
-        "@gi-types/json1": "^1.6.0",
-        "@gi-types/pango1": "^1.0.0"
+        "@gi-types/cairo1": "^1.0.1",
+        "@gi-types/clutter10": "^10.0.0",
+        "@gi-types/cogl10": "^10.0.0",
+        "@gi-types/gdesktopenums3": "^3.0.1",
+        "@gi-types/gio2": "^2.72.1",
+        "@gi-types/glib2": "^2.72.1",
+        "@gi-types/gobject2": "^2.72.1",
+        "@gi-types/graphene1": "^1.0.1",
+        "@gi-types/gtk3": "^3.24.1",
+        "@gi-types/json1": "^1.6.1",
+        "@gi-types/pango1": "^1.50.1",
+        "@gi-types/xfixes4": "^4.0.0",
+        "@gi-types/xlib2": "^2.0.1"
     },
     "typeScriptVersion": "4.1",
     "gitHead": null

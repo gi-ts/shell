@@ -7,15 +7,16 @@
         "Gtk": "3.0",
         "Gio": "2.0",
         "GObject": "2.0",
-        "Clutter": "8",
-        "Cogl": "8",
-        "NM": "1.0",
+        "Clutter": "10",
+        "Cogl": "10",
         "PolkitAgent": "1.0",
         "St": "1.0",
         "Gcr": "3",
+        "NM": "1.0",
         "cairo": "1.0",
         "GdkPixbuf": "2.0",
-        "Meta": "8",
-        "GLib": "2.0"
+        "Meta": "10",
+        "GLib": "2.0",
+        "Graphene": "1.0"
     }
 }

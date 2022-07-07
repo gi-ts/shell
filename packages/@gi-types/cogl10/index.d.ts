@@ -1,7 +1,7 @@
 /**
- * Cogl 8
+ * Cogl 10
  *
- * Generated from 8.0
+ * Generated from 10.0
  */
 
 import * as GObject from "@gi-types/gobject2";
@@ -37,8 +37,6 @@ export function debug_object_foreach_type(func: DebugObjectForeachTypeCallback):
 export function debug_object_print_instances(): void;
 export function flush(): void;
 export function foreach_feature(context: Context, callback: FeatureCallback): void;
-export function get_backface_culling_enabled(): boolean;
-export function get_depth_test_enabled(): boolean;
 export function get_graphics_reset_status(context: Context): GraphicsResetStatus;
 export function get_option_group(): GLib.OptionGroup;
 export function handle_get_type(): GObject.GType;
@@ -81,11 +79,9 @@ export function program_set_uniform_matrix(
     value: number[]
 ): void;
 export function scanout_error_quark(): GLib.Quark;
-export function set_backface_culling_enabled(setting: boolean): void;
-export function set_depth_test_enabled(setting: boolean): void;
-export function set_tracing_disabled_on_thread(data?: any | null): void;
-export function set_tracing_enabled_on_thread(data: any | null, group: string, filename: string): void;
-export function set_tracing_enabled_on_thread_with_fd(data: any | null, group: string, fd: number): void;
+export function set_tracing_disabled_on_thread(main_context: GLib.MainContext): void;
+export function set_tracing_enabled_on_thread(main_context: GLib.MainContext, group: string, filename: string): void;
+export function set_tracing_enabled_on_thread_with_fd(main_context: GLib.MainContext, group: string, fd: number): void;
 export function shader_get_type(handle: Handle): ShaderType;
 export function shader_source(shader: Handle, source: string): void;
 export function texture_error_quark(): number;
@@ -100,12 +96,8 @@ export function texture_new_from_data(
     data: Uint8Array | string
 ): Texture;
 export function texture_new_from_file(filename: string, flags: TextureFlags, internal_format: PixelFormat): Texture;
-export function texture_new_with_size(
-    width: number,
-    height: number,
-    flags: TextureFlags,
-    internal_format: PixelFormat
-): Texture;
+export function trace_describe(head: TraceHead, description: string): void;
+export function trace_end(head: TraceHead): void;
 export type DebugObjectForeachTypeCallback = (info: DebugObjectTypeInfo) => void;
 export type FeatureCallback = (feature: FeatureID) => void;
 export type FrameCallback = (onscreen: Onscreen, event: FrameEvent, info: FrameInfo) => void;
@@ -174,6 +166,7 @@ export enum FeatureID {
     OGL_FEATURE_ID_BUFFER_AGE = 5,
     OGL_FEATURE_ID_TEXTURE_EGL_IMAGE_EXTERNAL = 6,
     OGL_FEATURE_ID_BLIT_FRAMEBUFFER = 7,
+    OGL_FEATURE_ID_TIMESTAMP_QUERY = 8,
 }
 
 export namespace FilterReturn {
@@ -222,44 +215,6 @@ export enum IndicesType {
     BYTE = 0,
     SHORT = 1,
     INT = 2,
-}
-
-export namespace MaterialAlphaFunc {
-    export const $gtype: GObject.GType<MaterialAlphaFunc>;
-}
-
-export enum MaterialAlphaFunc {
-    NEVER = 512,
-    LESS = 513,
-    EQUAL = 514,
-    LEQUAL = 515,
-    GREATER = 516,
-    NOTEQUAL = 517,
-    GEQUAL = 518,
-    ALWAYS = 519,
-}
-
-export namespace MaterialFilter {
-    export const $gtype: GObject.GType<MaterialFilter>;
-}
-
-export enum MaterialFilter {
-    NEAREST = 9728,
-    LINEAR = 9729,
-    NEAREST_MIPMAP_NEAREST = 9984,
-    LINEAR_MIPMAP_NEAREST = 9985,
-    NEAREST_MIPMAP_LINEAR = 9986,
-    LINEAR_MIPMAP_LINEAR = 9987,
-}
-
-export namespace MaterialWrapMode {
-    export const $gtype: GObject.GType<MaterialWrapMode>;
-}
-
-export enum MaterialWrapMode {
-    REPEAT = 10497,
-    CLAMP_TO_EDGE = 33071,
-    AUTOMATIC = 519,
 }
 
 export namespace PipelineAlphaFunc {
@@ -410,17 +365,16 @@ export namespace WinsysFeature {
 }
 
 export enum WinsysFeature {
-    MULTIPLE_ONSCREEN = 0,
-    VBLANK_COUNTER = 1,
-    VBLANK_WAIT = 2,
-    TEXTURE_FROM_PIXMAP = 3,
-    SWAP_BUFFERS_EVENT = 4,
-    SWAP_REGION = 5,
-    SWAP_REGION_THROTTLE = 6,
-    SWAP_REGION_SYNCHRONIZED = 7,
-    BUFFER_AGE = 8,
-    SYNC_AND_COMPLETE_EVENT = 9,
-    N_FEATURES = 10,
+    VBLANK_COUNTER = 0,
+    VBLANK_WAIT = 1,
+    TEXTURE_FROM_PIXMAP = 2,
+    SWAP_BUFFERS_EVENT = 3,
+    SWAP_REGION = 4,
+    SWAP_REGION_THROTTLE = 5,
+    SWAP_REGION_SYNCHRONIZED = 6,
+    BUFFER_AGE = 7,
+    SYNC_AND_COMPLETE_EVENT = 8,
+    N_FEATURES = 9,
 }
 
 export namespace BufferBit {
@@ -472,11 +426,15 @@ export enum PixelFormat {
     ABGR_8888 = 115,
     RGBA_1010102 = 29,
     BGRA_1010102 = 61,
+    XRGB_2101010 = 77,
     ARGB_2101010 = 93,
+    XBGR_2101010 = 109,
     ABGR_2101010 = 125,
     RGBA_FP_16161616 = 27,
     BGRA_FP_16161616 = 59,
+    XRGB_FP_16161616 = 75,
     ARGB_FP_16161616 = 91,
+    XBGR_FP_16161616 = 107,
     ABGR_FP_16161616 = 123,
     RGBA_8888_PRE = 147,
     BGRA_8888_PRE = 179,
@@ -552,9 +510,12 @@ export class Context extends Object {
 
     // Members
 
+    free_timestamp_query(query: TimestampQuery): void;
+    get_gpu_time_ns(): number;
     get_named_pipeline(key: PipelineKey): Pipeline;
     is_hardware_accelerated(): boolean;
     set_named_pipeline(key: PipelineKey, pipeline?: Pipeline | null): void;
+    timestamp_query_get_time_ns(query: TimestampQuery): number;
 }
 export module FrameInfo {
     export interface ConstructorProperties extends Object.ConstructorProperties {
@@ -573,7 +534,9 @@ export class FrameInfo extends Object {
     get_is_symbolic(): boolean;
     get_presentation_time_us(): number;
     get_refresh_rate(): number;
+    get_rendering_duration_ns(): number;
     get_sequence(): number;
+    get_time_before_buffer_swap_us(): number;
     is_hw_clock(): boolean;
     is_vsync(): boolean;
     is_zero_copy(): boolean;
@@ -735,6 +698,7 @@ export class Onscreen extends Framebuffer {
     get_buffer_age(): number;
     get_frame_counter(): number;
     hide(): void;
+    queue_damage_region(rectangles: number, n_rectangles: number): void;
     remove_dirty_callback(closure: OnscreenDirtyClosure): void;
     remove_frame_callback(closure: FrameClosure): void;
     show(): void;
@@ -743,6 +707,7 @@ export class Onscreen extends Framebuffer {
     swap_region(rectangles: number, n_rectangles: number, info: FrameInfo, user_data?: any | null): void;
     vfunc_bind(): void;
     vfunc_get_buffer_age(): number;
+    vfunc_queue_damage_region(rectangles: number, n_rectangles: number): void;
     vfunc_swap_buffers_with_damage(rectangles: number, n_rectangles: number, info: FrameInfo): void;
     vfunc_swap_region(rectangles: number, n_rectangles: number, info: FrameInfo): void;
 }
@@ -843,13 +808,12 @@ export class Texture2D extends Object implements Texture {
     allocate(): boolean;
     get_components(): TextureComponents;
     get_data(format: PixelFormat, rowstride: number, data?: Uint8Array | null): number;
-    get_gl_texture(): [boolean, number | null, number | null];
+    get_gl_texture(): [boolean, number, number];
     get_height(): number;
     get_max_waste(): number;
     get_premultiplied(): boolean;
     get_width(): number;
     is_sliced(): boolean;
-    new_from_sub_texture(sub_x: number, sub_y: number, sub_width: number, sub_height: number): Texture;
     set_components(components: TextureComponents): void;
     set_data(format: PixelFormat, rowstride: number, data: Uint8Array | string, level: number): boolean;
     set_premultiplied(premultiplied: boolean): void;
@@ -898,13 +862,12 @@ export class Texture2DSliced extends Object implements Texture {
     allocate(): boolean;
     get_components(): TextureComponents;
     get_data(format: PixelFormat, rowstride: number, data?: Uint8Array | null): number;
-    get_gl_texture(): [boolean, number | null, number | null];
+    get_gl_texture(): [boolean, number, number];
     get_height(): number;
     get_max_waste(): number;
     get_premultiplied(): boolean;
     get_width(): number;
     is_sliced(): boolean;
-    new_from_sub_texture(sub_x: number, sub_y: number, sub_width: number, sub_height: number): Texture;
     set_components(components: TextureComponents): void;
     set_data(format: PixelFormat, rowstride: number, data: Uint8Array | string, level: number): boolean;
     set_premultiplied(premultiplied: boolean): void;
@@ -936,27 +899,8 @@ export class Color {
     static $gtype: GObject.GType<Color>;
 
     constructor();
-    constructor(
-        properties?: Partial<{
-            private_member_red?: number;
-            private_member_green?: number;
-            private_member_blue?: number;
-            private_member_alpha?: number;
-            private_member_padding0?: number;
-            private_member_padding1?: number;
-            private_member_padding2?: number;
-        }>
-    );
+    constructor(properties?: Partial<{}>);
     constructor(copy: Color);
-
-    // Fields
-    private_member_red: number;
-    private_member_green: number;
-    private_member_blue: number;
-    private_member_alpha: number;
-    private_member_padding0: number;
-    private_member_padding1: number;
-    private_member_padding2: number;
 
     // Constructors
     static ["new"](): Color;
@@ -1026,37 +970,6 @@ export class FramebufferDriverConfig {
     constructor(copy: FramebufferDriverConfig);
 }
 
-export class Material {
-    static $gtype: GObject.GType<Material>;
-
-    constructor();
-    constructor(copy: Material);
-
-    // Constructors
-    static ["new"](): Material;
-
-    // Members
-    set_alpha_test_function(alpha_func: MaterialAlphaFunc, alpha_reference: number): void;
-    set_blend(blend_string: string): boolean;
-    set_blend_constant(constant_color: Color): void;
-    set_color(color: Color): void;
-    set_color4ub(red: number, green: number, blue: number, alpha: number): void;
-    set_layer(layer_index: number, texture: Handle): void;
-    set_layer_combine(layer_index: number, blend_string: string): boolean;
-    set_layer_combine_constant(layer_index: number, constant: Color): void;
-    set_layer_filters(layer_index: number, min_filter: MaterialFilter, mag_filter: MaterialFilter): void;
-    set_layer_matrix(layer_index: number, matrix: Graphene.Matrix): void;
-    set_layer_point_sprite_coords_enabled(layer_index: number, enable: boolean): boolean;
-    set_point_size(point_size: number): void;
-    set_user_program(program: Handle): void;
-}
-
-export class MaterialLayer {
-    static $gtype: GObject.GType<MaterialLayer>;
-
-    constructor(copy: MaterialLayer);
-}
-
 export class OnscreenDirtyClosure {
     static $gtype: GObject.GType<OnscreenDirtyClosure>;
 
@@ -1095,15 +1008,6 @@ export class Scanout {
 export class TextureVertex {
     static $gtype: GObject.GType<TextureVertex>;
 
-    constructor(
-        properties?: Partial<{
-            x?: number;
-            y?: number;
-            z?: number;
-            tx?: number;
-            ty?: number;
-        }>
-    );
     constructor(copy: TextureVertex);
 
     // Fields
@@ -1112,6 +1016,37 @@ export class TextureVertex {
     z: number;
     tx: number;
     ty: number;
+    color: Color;
+}
+
+export class TimestampQuery {
+    static $gtype: GObject.GType<TimestampQuery>;
+
+    constructor(copy: TimestampQuery);
+}
+
+export class TraceContext {
+    static $gtype: GObject.GType<TraceContext>;
+
+    constructor(copy: TraceContext);
+}
+
+export class TraceHead {
+    static $gtype: GObject.GType<TraceHead>;
+
+    constructor(
+        properties?: Partial<{
+            begin_time?: number;
+            name?: string;
+            description?: string;
+        }>
+    );
+    constructor(copy: TraceHead);
+
+    // Fields
+    begin_time: number;
+    name: string;
+    description: string;
 }
 
 export class UserDataKey {
@@ -1132,12 +1067,18 @@ export class _ColorSizeCheck {
     static $gtype: GObject.GType<_ColorSizeCheck>;
 
     constructor(copy: _ColorSizeCheck);
+
+    // Fields
+    compile_time_assert_CoglColor_size: number[];
 }
 
 export class _TextureVertexSizeCheck {
     static $gtype: GObject.GType<_TextureVertexSizeCheck>;
 
     constructor(copy: _TextureVertexSizeCheck);
+
+    // Fields
+    compile_time_assert_CoglTextureVertex_size: number[];
 }
 
 export interface TextureNamespace {
@@ -1155,7 +1096,6 @@ export interface TextureNamespace {
         data: Uint8Array | string
     ): Texture;
     new_from_file(filename: string, flags: TextureFlags, internal_format: PixelFormat): Texture;
-    new_with_size(width: number, height: number, flags: TextureFlags, internal_format: PixelFormat): Texture;
 }
 export type Texture = TexturePrototype;
 export interface TexturePrototype extends Object {
@@ -1164,13 +1104,12 @@ export interface TexturePrototype extends Object {
     allocate(): boolean;
     get_components(): TextureComponents;
     get_data(format: PixelFormat, rowstride: number, data?: Uint8Array | null): number;
-    get_gl_texture(): [boolean, number | null, number | null];
+    get_gl_texture(): [boolean, number, number];
     get_height(): number;
     get_max_waste(): number;
     get_premultiplied(): boolean;
     get_width(): number;
     is_sliced(): boolean;
-    new_from_sub_texture(sub_x: number, sub_y: number, sub_width: number, sub_height: number): Texture;
     set_components(components: TextureComponents): void;
     set_data(format: PixelFormat, rowstride: number, data: Uint8Array | string, level: number): boolean;
     set_premultiplied(premultiplied: boolean): void;

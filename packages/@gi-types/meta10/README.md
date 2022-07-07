@@ -1,5 +1,5 @@
-# Clutter 8
+# Meta 10
 
-TypeScript definitions for Clutter. Generated from version 8.0.
+TypeScript definitions for Meta. Generated from version 10.0.
 
 Generated with [gi.ts](https://gitlab.gnome.org/ewlsh/gi.ts) and tracked in the [gi-ts Organization on GitHub](https://github.com/gi-ts).

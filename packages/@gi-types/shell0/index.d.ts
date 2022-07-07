@@ -8,16 +8,17 @@ import * as Atk from "@gi-types/atk1";
 import * as Gtk from "@gi-types/gtk3";
 import * as Gio from "@gi-types/gio2";
 import * as GObject from "@gi-types/gobject2";
-import * as Clutter from "@gi-types/clutter8";
-import * as Cogl from "@gi-types/cogl8";
-import * as NM from "@gi-types/nm1";
+import * as Clutter from "@gi-types/clutter10";
+import * as Cogl from "@gi-types/cogl10";
 import * as PolkitAgent from "@gi-types/polkitagent1";
 import * as St from "@gi-types/st1";
 import * as Gcr from "@gi-types/gcr3";
+import * as NM from "@gi-types/nm1";
 import * as cairo from "@gi-types/cairo1";
 import * as GdkPixbuf from "@gi-types/gdkpixbuf2";
-import * as Meta from "@gi-types/meta8";
+import * as Meta from "@gi-types/meta10";
 import * as GLib from "@gi-types/glib2";
+import * as Graphene from "@gi-types/graphene1";
 
 export const KEYRING_SK_TAG: string;
 export const KEYRING_SN_TAG: string;
@@ -42,10 +43,6 @@ export function util_create_pixbuf_from_data(
     height: number,
     rowstride: number
 ): GdkPixbuf.Pixbuf;
-export function util_get_content_for_window_actor(
-    window_actor: Meta.WindowActor,
-    window_rect: Meta.Rectangle
-): Clutter.Content | null;
 export function util_get_translated_folder_name(name: string): string | null;
 export function util_get_uid(): number;
 export function util_get_week_start(): number;
@@ -89,6 +86,18 @@ export function util_stop_systemd_unit(
     callback?: Gio.AsyncReadyCallback<string> | null
 ): Promise<boolean> | void;
 export function util_stop_systemd_unit_finish(res: Gio.AsyncResult): boolean;
+export function util_systemd_unit_exists(unit: string, cancellable?: Gio.Cancellable | null): Promise<boolean>;
+export function util_systemd_unit_exists(
+    unit: string,
+    cancellable: Gio.Cancellable | null,
+    callback: Gio.AsyncReadyCallback<string> | null
+): void;
+export function util_systemd_unit_exists(
+    unit: string,
+    cancellable?: Gio.Cancellable | null,
+    callback?: Gio.AsyncReadyCallback<string> | null
+): Promise<boolean> | void;
+export function util_systemd_unit_exists_finish(res: Gio.AsyncResult): boolean;
 export function util_touch_file_async(file: Gio.File): Promise<boolean>;
 export function util_touch_file_async(file: Gio.File, callback: Gio.AsyncReadyCallback<Gio.File> | null): void;
 export function util_touch_file_async(
@@ -354,12 +363,14 @@ export class GLSLEffect extends Clutter.OffscreenEffect {
     add_glsl_snippet(hook: SnippetHook, declarations: string, code: string, is_replace: boolean): void;
     get_uniform_location(name: string): number;
     set_uniform_float(uniform: number, n_components: number, value: number[]): void;
+    set_uniform_matrix(uniform: number, transpose: boolean, dimensions: number, value: number[]): void;
     vfunc_build_pipeline(): void;
 }
 export module Global {
     export interface ConstructorProperties extends GObject.Object.ConstructorProperties {
         [key: string]: any;
         backend: Meta.Backend;
+        context: Meta.Context;
         datadir: string;
         display: Meta.Display;
         focus_manager: St.FocusManager;
@@ -398,6 +409,7 @@ export class Global extends GObject.Object {
 
     // Properties
     get backend(): Meta.Backend;
+    get context(): Meta.Context;
     get datadir(): string;
     get display(): Meta.Display;
     get focus_manager(): St.FocusManager;
@@ -445,10 +457,8 @@ export class Global extends GObject.Object {
 
     // Members
 
-    begin_modal(timestamp: number, options: Meta.ModalOptions): boolean;
     begin_work(): void;
     create_app_launch_context(timestamp: number, workspace: number): Gio.AppLaunchContext;
-    end_modal(timestamp: number): void;
     end_work(): void;
     get_current_time(): number;
     get_display(): Meta.Display;
@@ -477,7 +487,8 @@ export module GtkEmbed {
 }
 export class GtkEmbed<A extends Clutter.Actor = Clutter.Actor>
     extends Clutter.Clone<A>
-    implements Atk.ImplementorIface, Clutter.Animatable, Clutter.Container<A>, Clutter.Scriptable {
+    implements Atk.ImplementorIface, Clutter.Animatable, Clutter.Container<A>, Clutter.Scriptable
+{
     static $gtype: GObject.GType<GtkEmbed>;
 
     constructor(properties?: Partial<GtkEmbed.ConstructorProperties<A>>, ...args: any[]);
@@ -502,13 +513,7 @@ export class GtkEmbed<A extends Clutter.Actor = Clutter.Actor>
     destroy_child_meta(actor: A): void;
     find_child_by_name(child_name: string): A;
     get_child_meta(actor: A): Clutter.ChildMeta;
-    get_children(): A[];
-    // Conflicted with Clutter.Actor.get_children
-    get_children(...args: never[]): any;
-    lower_child(actor: A, sibling?: A | null): void;
-    raise_child(actor: A, sibling?: A | null): void;
     remove_actor(actor: A): void;
-    sort_depth_order(): void;
     vfunc_actor_added(actor: A): void;
     vfunc_actor_removed(actor: A): void;
     vfunc_add(actor: A): void;
@@ -516,10 +521,7 @@ export class GtkEmbed<A extends Clutter.Actor = Clutter.Actor>
     vfunc_create_child_meta(actor: A): void;
     vfunc_destroy_child_meta(actor: A): void;
     vfunc_get_child_meta(actor: A): Clutter.ChildMeta;
-    vfunc_lower(actor: A, sibling?: A | null): void;
-    vfunc_raise(actor: A, sibling?: A | null): void;
     vfunc_remove(actor: A): void;
-    vfunc_sort_depth_order(): void;
 }
 export module InvertLightnessEffect {
     export interface ConstructorProperties extends Clutter.OffscreenEffect.ConstructorProperties {
@@ -938,6 +940,16 @@ export class Screenshot extends GObject.Object {
     ): Promise<[cairo.RectangleInt]> | void;
     screenshot_area_finish(result: Gio.AsyncResult): [boolean, cairo.RectangleInt];
     screenshot_finish(result: Gio.AsyncResult): [boolean, cairo.RectangleInt];
+    screenshot_stage_to_content(): Promise<
+        [Clutter.Content, number, Clutter.Content | null, Graphene.Point | null, number]
+    >;
+    screenshot_stage_to_content(callback: Gio.AsyncReadyCallback<this> | null): void;
+    screenshot_stage_to_content(
+        callback?: Gio.AsyncReadyCallback<this> | null
+    ): Promise<[Clutter.Content, number, Clutter.Content | null, Graphene.Point | null, number]> | void;
+    screenshot_stage_to_content_finish(
+        result: Gio.AsyncResult
+    ): [Clutter.Content, number, Clutter.Content | null, Graphene.Point | null, number];
     screenshot_window(
         include_frame: boolean,
         include_cursor: boolean,
@@ -956,6 +968,48 @@ export class Screenshot extends GObject.Object {
         callback?: Gio.AsyncReadyCallback<this> | null
     ): Promise<[cairo.RectangleInt]> | void;
     screenshot_window_finish(result: Gio.AsyncResult): [boolean, cairo.RectangleInt];
+    static composite_to_stream(
+        texture: Cogl.Texture,
+        x: number,
+        y: number,
+        width: number,
+        height: number,
+        scale: number,
+        cursor: Cogl.Texture | null,
+        cursor_x: number,
+        cursor_y: number,
+        cursor_scale: number,
+        stream: Gio.OutputStream
+    ): Promise<GdkPixbuf.Pixbuf | null>;
+    static composite_to_stream(
+        texture: Cogl.Texture,
+        x: number,
+        y: number,
+        width: number,
+        height: number,
+        scale: number,
+        cursor: Cogl.Texture | null,
+        cursor_x: number,
+        cursor_y: number,
+        cursor_scale: number,
+        stream: Gio.OutputStream,
+        callback: Gio.AsyncReadyCallback<Screenshot> | null
+    ): void;
+    static composite_to_stream(
+        texture: Cogl.Texture,
+        x: number,
+        y: number,
+        width: number,
+        height: number,
+        scale: number,
+        cursor: Cogl.Texture | null,
+        cursor_x: number,
+        cursor_y: number,
+        cursor_scale: number,
+        stream: Gio.OutputStream,
+        callback?: Gio.AsyncReadyCallback<Screenshot> | null
+    ): Promise<GdkPixbuf.Pixbuf | null> | void;
+    static composite_to_stream_finish(result: Gio.AsyncResult): GdkPixbuf.Pixbuf | null;
 }
 export module SecureTextBuffer {
     export interface ConstructorProperties extends Clutter.TextBuffer.ConstructorProperties {
@@ -980,7 +1034,8 @@ export module SquareBin {
 }
 export class SquareBin<A extends Clutter.Actor = Clutter.Actor>
     extends St.Bin<A>
-    implements Atk.ImplementorIface, Clutter.Animatable, Clutter.Container<A>, Clutter.Scriptable {
+    implements Atk.ImplementorIface, Clutter.Animatable, Clutter.Container<A>, Clutter.Scriptable
+{
     static $gtype: GObject.GType<SquareBin>;
 
     constructor(properties?: Partial<SquareBin.ConstructorProperties<A>>, ...args: any[]);
@@ -996,13 +1051,7 @@ export class SquareBin<A extends Clutter.Actor = Clutter.Actor>
     destroy_child_meta(actor: A): void;
     find_child_by_name(child_name: string): A;
     get_child_meta(actor: A): Clutter.ChildMeta;
-    get_children(): A[];
-    // Conflicted with Clutter.Actor.get_children
-    get_children(...args: never[]): any;
-    lower_child(actor: A, sibling?: A | null): void;
-    raise_child(actor: A, sibling?: A | null): void;
     remove_actor(actor: A): void;
-    sort_depth_order(): void;
     vfunc_actor_added(actor: A): void;
     vfunc_actor_removed(actor: A): void;
     vfunc_add(actor: A): void;
@@ -1010,10 +1059,7 @@ export class SquareBin<A extends Clutter.Actor = Clutter.Actor>
     vfunc_create_child_meta(actor: A): void;
     vfunc_destroy_child_meta(actor: A): void;
     vfunc_get_child_meta(actor: A): Clutter.ChildMeta;
-    vfunc_lower(actor: A, sibling?: A | null): void;
-    vfunc_raise(actor: A, sibling?: A | null): void;
     vfunc_remove(actor: A): void;
-    vfunc_sort_depth_order(): void;
 }
 export module Stack {
     export interface ConstructorProperties<A extends Clutter.Actor = Clutter.Actor>
@@ -1023,7 +1069,8 @@ export module Stack {
 }
 export class Stack<A extends Clutter.Actor = Clutter.Actor>
     extends St.Widget
-    implements Atk.ImplementorIface, Clutter.Animatable, Clutter.Container<A>, Clutter.Scriptable {
+    implements Atk.ImplementorIface, Clutter.Animatable, Clutter.Container<A>, Clutter.Scriptable
+{
     static $gtype: GObject.GType<Stack>;
 
     constructor(properties?: Partial<Stack.ConstructorProperties<A>>, ...args: any[]);
@@ -1039,13 +1086,7 @@ export class Stack<A extends Clutter.Actor = Clutter.Actor>
     destroy_child_meta(actor: A): void;
     find_child_by_name(child_name: string): A;
     get_child_meta(actor: A): Clutter.ChildMeta;
-    get_children(): A[];
-    // Conflicted with Clutter.Actor.get_children
-    get_children(...args: never[]): any;
-    lower_child(actor: A, sibling?: A | null): void;
-    raise_child(actor: A, sibling?: A | null): void;
     remove_actor(actor: A): void;
-    sort_depth_order(): void;
     vfunc_actor_added(actor: A): void;
     vfunc_actor_removed(actor: A): void;
     vfunc_add(actor: A): void;
@@ -1053,10 +1094,7 @@ export class Stack<A extends Clutter.Actor = Clutter.Actor>
     vfunc_create_child_meta(actor: A): void;
     vfunc_destroy_child_meta(actor: A): void;
     vfunc_get_child_meta(actor: A): Clutter.ChildMeta;
-    vfunc_lower(actor: A, sibling?: A | null): void;
-    vfunc_raise(actor: A, sibling?: A | null): void;
     vfunc_remove(actor: A): void;
-    vfunc_sort_depth_order(): void;
 }
 export module TrayIcon {
     export interface ConstructorProperties<A extends Clutter.Actor = Clutter.Actor>
@@ -1070,7 +1108,8 @@ export module TrayIcon {
 }
 export class TrayIcon<A extends Clutter.Actor = Clutter.Actor>
     extends GtkEmbed<A>
-    implements Atk.ImplementorIface, Clutter.Animatable, Clutter.Container<A>, Clutter.Scriptable {
+    implements Atk.ImplementorIface, Clutter.Animatable, Clutter.Container<A>, Clutter.Scriptable
+{
     static $gtype: GObject.GType<TrayIcon>;
 
     constructor(properties?: Partial<TrayIcon.ConstructorProperties<A>>, ...args: any[]);
@@ -1102,13 +1141,7 @@ export class TrayIcon<A extends Clutter.Actor = Clutter.Actor>
     destroy_child_meta(actor: A): void;
     find_child_by_name(child_name: string): A;
     get_child_meta(actor: A): Clutter.ChildMeta;
-    get_children(): A[];
-    // Conflicted with Clutter.Actor.get_children
-    get_children(...args: never[]): any;
-    lower_child(actor: A, sibling?: A | null): void;
-    raise_child(actor: A, sibling?: A | null): void;
     remove_actor(actor: A): void;
-    sort_depth_order(): void;
     vfunc_actor_added(actor: A): void;
     vfunc_actor_removed(actor: A): void;
     vfunc_add(actor: A): void;
@@ -1116,10 +1149,7 @@ export class TrayIcon<A extends Clutter.Actor = Clutter.Actor>
     vfunc_create_child_meta(actor: A): void;
     vfunc_destroy_child_meta(actor: A): void;
     vfunc_get_child_meta(actor: A): Clutter.ChildMeta;
-    vfunc_lower(actor: A, sibling?: A | null): void;
-    vfunc_raise(actor: A, sibling?: A | null): void;
     vfunc_remove(actor: A): void;
-    vfunc_sort_depth_order(): void;
 }
 export module TrayManager {
     export interface ConstructorProperties extends GObject.Object.ConstructorProperties {
@@ -1299,7 +1329,8 @@ export module WindowPreview {
 }
 export class WindowPreview<A extends Clutter.Actor = Clutter.Actor>
     extends St.Widget
-    implements Atk.ImplementorIface, Clutter.Animatable, Clutter.Container<A>, Clutter.Scriptable {
+    implements Atk.ImplementorIface, Clutter.Animatable, Clutter.Container<A>, Clutter.Scriptable
+{
     static $gtype: GObject.GType<WindowPreview>;
 
     constructor(properties?: Partial<WindowPreview.ConstructorProperties<A>>, ...args: any[]);
@@ -1321,13 +1352,7 @@ export class WindowPreview<A extends Clutter.Actor = Clutter.Actor>
     destroy_child_meta(actor: A): void;
     find_child_by_name(child_name: string): A;
     get_child_meta(actor: A): Clutter.ChildMeta;
-    get_children(): A[];
-    // Conflicted with Clutter.Actor.get_children
-    get_children(...args: never[]): any;
-    lower_child(actor: A, sibling?: A | null): void;
-    raise_child(actor: A, sibling?: A | null): void;
     remove_actor(actor: A): void;
-    sort_depth_order(): void;
     vfunc_actor_added(actor: A): void;
     vfunc_actor_removed(actor: A): void;
     vfunc_add(actor: A): void;
@@ -1335,10 +1360,7 @@ export class WindowPreview<A extends Clutter.Actor = Clutter.Actor>
     vfunc_create_child_meta(actor: A): void;
     vfunc_destroy_child_meta(actor: A): void;
     vfunc_get_child_meta(actor: A): Clutter.ChildMeta;
-    vfunc_lower(actor: A, sibling?: A | null): void;
-    vfunc_raise(actor: A, sibling?: A | null): void;
     vfunc_remove(actor: A): void;
-    vfunc_sort_depth_order(): void;
 }
 export module WindowPreviewLayout {
     export interface ConstructorProperties extends Clutter.LayoutManager.ConstructorProperties {

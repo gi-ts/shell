@@ -30,9 +30,10 @@
     },
     "scripts": {},
     "dependencies": {
-        "@gi-types/cairo1": "^1.0.0",
-        "@gi-types/gobject2": "^2.68.0",
-        "@gi-types/pango1": "^1.0.0"
+        "@gi-types/cairo1": "^1.0.1",
+        "@gi-types/glib2": "^2.72.1",
+        "@gi-types/gobject2": "^2.72.1",
+        "@gi-types/pango1": "^1.50.1"
     },
     "typeScriptVersion": "4.1",
     "gitHead": null

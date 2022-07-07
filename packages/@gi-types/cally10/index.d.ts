@@ -1,15 +1,16 @@
 /**
- * Cally 8
+ * Cally 10
  *
- * Generated from 8.0
+ * Generated from 10.0
  */
 
 import * as Atk from "@gi-types/atk1";
-import * as Clutter from "@gi-types/clutter8";
+import * as Clutter from "@gi-types/clutter10";
 import * as GObject from "@gi-types/gobject2";
 
 export function accessibility_init(): boolean;
 export function get_cally_initialized(): boolean;
+export function snoop_key_event(key: Clutter.KeyEvent): boolean;
 export type ActionCallback = (cally_actor: Actor) => void;
 export type ActionFunc = (cally_actor: Actor) => void;
 export module Actor {
@@ -68,11 +69,11 @@ export class Actor extends Atk.GObjectAccessible implements Atk.Action, Atk.Comp
     vfunc_set_description(...args: never[]): any;
     contains(x: number, y: number, coord_type: Atk.CoordType): boolean;
     get_alpha(): number;
-    get_extents(coord_type: Atk.CoordType): [number | null, number | null, number | null, number | null];
+    get_extents(coord_type: Atk.CoordType): [number, number, number, number];
     get_layer(): Atk.Layer;
     get_mdi_zorder(): number;
-    get_position(coord_type: Atk.CoordType): [number | null, number | null];
-    get_size(): [number | null, number | null];
+    get_position(coord_type: Atk.CoordType): [number, number];
+    get_size(): [number, number];
     grab_focus(): boolean;
     ref_accessible_at_point(x: number, y: number, coord_type: Atk.CoordType): Atk.Object | null;
     remove_focus_handler(handler_id: number): void;
@@ -84,11 +85,11 @@ export class Actor extends Atk.GObjectAccessible implements Atk.Action, Atk.Comp
     vfunc_bounds_changed(bounds: Atk.Rectangle): void;
     vfunc_contains(x: number, y: number, coord_type: Atk.CoordType): boolean;
     vfunc_get_alpha(): number;
-    vfunc_get_extents(coord_type: Atk.CoordType): [number | null, number | null, number | null, number | null];
+    vfunc_get_extents(coord_type: Atk.CoordType): [number, number, number, number];
     vfunc_get_layer(): Atk.Layer;
     vfunc_get_mdi_zorder(): number;
-    vfunc_get_position(coord_type: Atk.CoordType): [number | null, number | null];
-    vfunc_get_size(): [number | null, number | null];
+    vfunc_get_position(coord_type: Atk.CoordType): [number, number];
+    vfunc_get_size(): [number, number];
     vfunc_grab_focus(): boolean;
     vfunc_ref_accessible_at_point(x: number, y: number, coord_type: Atk.CoordType): Atk.Object | null;
     vfunc_remove_focus_handler(handler_id: number): void;
@@ -143,11 +144,11 @@ export class Clone extends Actor implements Atk.Action, Atk.Component {
     vfunc_set_description(...args: never[]): any;
     contains(x: number, y: number, coord_type: Atk.CoordType): boolean;
     get_alpha(): number;
-    get_extents(coord_type: Atk.CoordType): [number | null, number | null, number | null, number | null];
+    get_extents(coord_type: Atk.CoordType): [number, number, number, number];
     get_layer(): Atk.Layer;
     get_mdi_zorder(): number;
-    get_position(coord_type: Atk.CoordType): [number | null, number | null];
-    get_size(): [number | null, number | null];
+    get_position(coord_type: Atk.CoordType): [number, number];
+    get_size(): [number, number];
     grab_focus(): boolean;
     ref_accessible_at_point(x: number, y: number, coord_type: Atk.CoordType): Atk.Object | null;
     remove_focus_handler(handler_id: number): void;
@@ -159,11 +160,11 @@ export class Clone extends Actor implements Atk.Action, Atk.Component {
     vfunc_bounds_changed(bounds: Atk.Rectangle): void;
     vfunc_contains(x: number, y: number, coord_type: Atk.CoordType): boolean;
     vfunc_get_alpha(): number;
-    vfunc_get_extents(coord_type: Atk.CoordType): [number | null, number | null, number | null, number | null];
+    vfunc_get_extents(coord_type: Atk.CoordType): [number, number, number, number];
     vfunc_get_layer(): Atk.Layer;
     vfunc_get_mdi_zorder(): number;
-    vfunc_get_position(coord_type: Atk.CoordType): [number | null, number | null];
-    vfunc_get_size(): [number | null, number | null];
+    vfunc_get_position(coord_type: Atk.CoordType): [number, number];
+    vfunc_get_size(): [number, number];
     vfunc_grab_focus(): boolean;
     vfunc_ref_accessible_at_point(x: number, y: number, coord_type: Atk.CoordType): Atk.Object | null;
     vfunc_remove_focus_handler(handler_id: number): void;
@@ -233,11 +234,11 @@ export class Stage extends Actor implements Atk.Action, Atk.Component, Atk.Windo
     vfunc_set_description(...args: never[]): any;
     contains(x: number, y: number, coord_type: Atk.CoordType): boolean;
     get_alpha(): number;
-    get_extents(coord_type: Atk.CoordType): [number | null, number | null, number | null, number | null];
+    get_extents(coord_type: Atk.CoordType): [number, number, number, number];
     get_layer(): Atk.Layer;
     get_mdi_zorder(): number;
-    get_position(coord_type: Atk.CoordType): [number | null, number | null];
-    get_size(): [number | null, number | null];
+    get_position(coord_type: Atk.CoordType): [number, number];
+    get_size(): [number, number];
     grab_focus(): boolean;
     ref_accessible_at_point(x: number, y: number, coord_type: Atk.CoordType): Atk.Object | null;
     remove_focus_handler(handler_id: number): void;
@@ -249,11 +250,11 @@ export class Stage extends Actor implements Atk.Action, Atk.Component, Atk.Windo
     vfunc_bounds_changed(bounds: Atk.Rectangle): void;
     vfunc_contains(x: number, y: number, coord_type: Atk.CoordType): boolean;
     vfunc_get_alpha(): number;
-    vfunc_get_extents(coord_type: Atk.CoordType): [number | null, number | null, number | null, number | null];
+    vfunc_get_extents(coord_type: Atk.CoordType): [number, number, number, number];
     vfunc_get_layer(): Atk.Layer;
     vfunc_get_mdi_zorder(): number;
-    vfunc_get_position(coord_type: Atk.CoordType): [number | null, number | null];
-    vfunc_get_size(): [number | null, number | null];
+    vfunc_get_position(coord_type: Atk.CoordType): [number, number];
+    vfunc_get_size(): [number, number];
     vfunc_grab_focus(): boolean;
     vfunc_ref_accessible_at_point(x: number, y: number, coord_type: Atk.CoordType): Atk.Object | null;
     vfunc_remove_focus_handler(handler_id: number): void;
@@ -308,11 +309,11 @@ export class Text extends Actor implements Atk.Action, Atk.Component, Atk.Editab
     vfunc_set_description(...args: never[]): any;
     contains(x: number, y: number, coord_type: Atk.CoordType): boolean;
     get_alpha(): number;
-    get_extents(coord_type: Atk.CoordType): [number | null, number | null, number | null, number | null];
+    get_extents(coord_type: Atk.CoordType): [number, number, number, number];
     get_layer(): Atk.Layer;
     get_mdi_zorder(): number;
-    get_position(coord_type: Atk.CoordType): [number | null, number | null];
-    get_size(): [number | null, number | null];
+    get_position(coord_type: Atk.CoordType): [number, number];
+    get_size(): [number, number];
     grab_focus(): boolean;
     ref_accessible_at_point(x: number, y: number, coord_type: Atk.CoordType): Atk.Object | null;
     remove_focus_handler(handler_id: number): void;
@@ -324,11 +325,11 @@ export class Text extends Actor implements Atk.Action, Atk.Component, Atk.Editab
     vfunc_bounds_changed(bounds: Atk.Rectangle): void;
     vfunc_contains(x: number, y: number, coord_type: Atk.CoordType): boolean;
     vfunc_get_alpha(): number;
-    vfunc_get_extents(coord_type: Atk.CoordType): [number | null, number | null, number | null, number | null];
+    vfunc_get_extents(coord_type: Atk.CoordType): [number, number, number, number];
     vfunc_get_layer(): Atk.Layer;
     vfunc_get_mdi_zorder(): number;
-    vfunc_get_position(coord_type: Atk.CoordType): [number | null, number | null];
-    vfunc_get_size(): [number | null, number | null];
+    vfunc_get_position(coord_type: Atk.CoordType): [number, number];
+    vfunc_get_size(): [number, number];
     vfunc_grab_focus(): boolean;
     vfunc_ref_accessible_at_point(x: number, y: number, coord_type: Atk.CoordType): Atk.Object | null;
     vfunc_remove_focus_handler(handler_id: number): void;
@@ -361,10 +362,7 @@ export class Text extends Actor implements Atk.Action, Atk.Component, Atk.Editab
     get_caret_offset(): number;
     get_character_at_offset(offset: number): number;
     get_character_count(): number;
-    get_character_extents(
-        offset: number,
-        coords: Atk.CoordType
-    ): [number | null, number | null, number | null, number | null];
+    get_character_extents(offset: number, coords: Atk.CoordType): [number, number, number, number];
     get_default_attributes(): Atk.AttributeSet;
     get_n_selections(): number;
     get_offset_at_point(x: number, y: number, coords: Atk.CoordType): number;
@@ -397,10 +395,7 @@ export class Text extends Actor implements Atk.Action, Atk.Component, Atk.Editab
     vfunc_get_caret_offset(): number;
     vfunc_get_character_at_offset(offset: number): number;
     vfunc_get_character_count(): number;
-    vfunc_get_character_extents(
-        offset: number,
-        coords: Atk.CoordType
-    ): [number | null, number | null, number | null, number | null];
+    vfunc_get_character_extents(offset: number, coords: Atk.CoordType): [number, number, number, number];
     vfunc_get_default_attributes(): Atk.AttributeSet;
     vfunc_get_n_selections(): number;
     vfunc_get_offset_at_point(x: number, y: number, coords: Atk.CoordType): number;

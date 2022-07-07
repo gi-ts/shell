@@ -1,4 +1,9 @@
 {
+    "searchPath": [
+        "/usr/share/",
+        "/usr/share/gnome-shell/",
+        "/usr/lib/mutter-10/"
+    ],
     "options": {
         "outputFormat": "folder",
         "versionedOutput": true,
@@ -12,14 +17,13 @@
         "noInitTypes": true
     },
     "libraries": {
-        "Cally": "8",
-        "Clutter": "8",
-        "ClutterX11": "8",
-        "Cogl": "8",
-        "CoglPango": "8",
+        "Cally": "10",
+        "Clutter": "10",
+        "Cogl": "10",
+        "CoglPango": "10",
         "PangoCairo": "1.0",
         "Gvc": "1.0",
-        "Meta": "8",
+        "Meta": "10",
         "Shell": "0.1",
         "Shew": "0",
         "St": "1.0",
@@ -46,6 +50,7 @@
         "GObject": "2.0",
         "Polkit": "1.0",
         "PolkitAgent": "1.0",
-        "Pango": "1.0"
+        "Pango": "1.0",
+        "Shew": "0"
     }
 }

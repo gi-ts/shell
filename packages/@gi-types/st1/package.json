@@ -31,15 +31,15 @@
     "scripts": {},
     "dependencies": {
         "@gi-types/atk1": "^2.36.0",
-        "@gi-types/cairo1": "^1.0.0",
-        "@gi-types/cally8": "^8.0.0",
-        "@gi-types/clutter8": "^8.0.0",
-        "@gi-types/cogl8": "^8.0.0",
-        "@gi-types/gio2": "^2.68.0",
-        "@gi-types/glib2": "^2.68.0",
-        "@gi-types/gobject2": "^2.68.0",
-        "@gi-types/json1": "^1.6.0",
-        "@gi-types/pango1": "^1.0.0"
+        "@gi-types/cairo1": "^1.0.1",
+        "@gi-types/cally10": "^10.0.0",
+        "@gi-types/clutter10": "^10.0.0",
+        "@gi-types/cogl10": "^10.0.0",
+        "@gi-types/gio2": "^2.72.1",
+        "@gi-types/glib2": "^2.72.1",
+        "@gi-types/gobject2": "^2.72.1",
+        "@gi-types/json1": "^1.6.1",
+        "@gi-types/pango1": "^1.50.1"
     },
     "typeScriptVersion": "4.1",
     "gitHead": null
